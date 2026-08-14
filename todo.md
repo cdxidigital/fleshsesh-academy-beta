@@ -1,0 +1,16 @@
+- [x] Review automation, LLM, and project integration guidance for the AI lecturer scope.
+- [x] Prepare the supplied emblem and horizontal wordmark as deployable web assets.
+- [x] Integrate branded assets into the gateway, navigation, hero, curriculum, faculty, and footer surfaces.
+- [x] Upgrade the lecturer section into a safe automated AI guide experience with defined lecturer scopes and escalation states.
+- [x] Validate the branded desktop and mobile interfaces, then save the completed checkpoint.
+- [x] Translate the eCampus Curriculum Guide into an expanded level-based catalogue, learning outcomes, and support boundaries within the academy interface.
+- [x] Verify the supplied wordmark appears within the curriculum surface alongside the gateway, navigation, hero, faculty, and footer.
+- [x] Verify that safeguarded lecturer responses display an explicit human/clinic support route and that all automated lecturer tests pass.
+- [x] Remove the redundant academy-emblem image identified in the visual editor and verify the affected surface remains balanced.
+- [x] Surface explicit guide-derived learning outcomes in the curriculum atlas and re-verify the revised curriculum section across desktop and mobile.
+- [x] Refine global navigation and section wayfinding so the academy is faster and easier to navigate across desktop and mobile.
+- [x] Add restrained cinematic page and section fade transitions with reduced-motion support.
+- [x] Validate the polished navigational experience before the next checkpoint.
+- [x] Increase the prominent hero wordmark’s scale and visual impact, then verify it remains balanced across desktop and mobile.
+- [x] Verify the requested mobile-header text removal and ensure the icon-only brand control remains accessible and visually balanced.
+- [x] Add an accessible label to the icon-only mobile home control and suppress all non-essential cinematic motion for reduced-motion users.

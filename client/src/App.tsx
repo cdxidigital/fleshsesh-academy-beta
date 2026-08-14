@@ -10,8 +10,8 @@ import Home from "./pages/Home";
  * Rose Lacquer Learning House — dark editorial stage, restrained rose-gold detail,
  * and adult-learning clarity. Keep the global shell quiet so the learning content leads.
  */
-
 function Router() {
+  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path={"/"} component={Home} />

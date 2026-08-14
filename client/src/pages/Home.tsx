@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import { AIChatBox, type Message as LecturerMessage } from "@/components/AIChatBox";
+import { trpc } from "@/lib/trpc";
 import {
   ArrowDownRight,
   ArrowUpRight,
+  Bot,
   BookOpen,
   Check,
   ChevronRight,
@@ -25,6 +28,7 @@ import {
  */
 
 const emblem = "/manus-storage/fleshsesh-academy-emblem_79c8c72e.png";
+const wordmark = "/manus-storage/fleshsesh-academy-wordmark_f79fa930.png";
 
 const pathways = [
   { code: "01", title: "Body literacy", course: "FSH 101", hours: "12 hrs", copy: "Foundational anatomy, variation, life stages and help-seeking literacy.", accent: "from-[#b54464] via-[#ec779b] to-[#f5d9cb]", tag: "Foundations" },
@@ -33,15 +37,87 @@ const pathways = [
   { code: "04", title: "Digital safety", course: "FSH 206", hours: "10 hrs", copy: "Digital consent, privacy, incident response and practical online boundaries.", accent: "from-[#1e1a24] via-[#91536a] to-[#e7c487]", tag: "Applied" },
 ];
 
-const faculty = [
-  { initials: "MS", name: "Dr. Mira Sen", role: "Clinical Professor", focus: "Foundations & health literacy", color: "bg-[#d67693]" },
-  { initials: "AR", name: "Alex Rivera", role: "Peer Educator", focus: "Consent & communication", color: "bg-[#c69a56]" },
-  { initials: "JO", name: "Jo Vale", role: "Intimacy Tutor", focus: "Pleasure & self-knowledge", color: "bg-[#7f4355]" },
+const curriculumLevels = {
+  "101": {
+    label: "Foundation",
+    purpose: "Accurate vocabulary, body literacy, consent literacy and help-seeking confidence.",
+    outcome: "By completion, learners can explain core concepts in plain language, recognise reliable information and know when professional support is appropriate.",
+    courses: [
+      { code: "FSH 101", title: "Body Literacy", hours: "12 hrs", note: "Anatomy, variation, life stages and support boundaries." },
+      { code: "FSH 102", title: "Consent, Boundaries & Communication", hours: "10 hrs", note: "Clear requests, changing minds, capacity and respectful repair." },
+      { code: "FSH 103", title: "Sexual Health, Hygiene & Self-Care", hours: "8 hrs", note: "Preventive care, body-neutral hygiene and when to seek support." },
+      { code: "FSH 104", title: "Relationships, Identity & Respect", hours: "9 hrs", note: "Diverse relationships, inclusion, reciprocity and media literacy." },
+      { code: "FSH 105", title: "STI & HIV Prevention Essentials", hours: "10 hrs", note: "Prevention layers, testing literacy, stigma reduction and service navigation." },
+    ],
+  },
+  "201": {
+    label: "Applied practice",
+    purpose: "Communication, prevention, relationship and digital-safety skills for real-world decisions.",
+    outcome: "By completion, learners can apply concepts to realistic scenarios, rehearse respectful communication and compare safer, informed options.",
+    courses: [
+      { code: "FSH 201", title: "Contraception & Family Planning", hours: "14 hrs", note: "Method categories, access, questions for clinicians and life planning." },
+      { code: "FSH 202", title: "STI Testing, Treatment & Care Navigation", hours: "12 hrs", note: "Testing pathways, care navigation and partner communication principles." },
+      { code: "FSH 203", title: "Pleasure, Intimacy & Sexual Communication", hours: "12 hrs", note: "Desire diversity, non-pressured intimacy and inclusive conversation." },
+      { code: "FSH 204", title: "Relationship Dynamics & Conflict Repair", hours: "12 hrs", note: "Listening, repair, autonomy and recognition of coercive control." },
+      { code: "FSH 205", title: "LGBTQ+ Inclusive Sexual Health", hours: "11 hrs", note: "Affirming language, access and inclusive service design." },
+      { code: "FSH 206", title: "Digital Intimacy, Privacy & Safety", hours: "10 hrs", note: "Digital consent, image-based harm, scams and incident response." },
+      { code: "FSH 207", title: "Sexual Wellness & Mental Health", hours: "11 hrs", note: "Body image, stress, trauma-aware communication and care pathways." },
+    ],
+  },
+  "301": {
+    label: "Integration",
+    purpose: "Complex case analysis, inclusion, facilitation and health-system navigation.",
+    outcome: "By completion, learners can analyse complex cases, design bounded support responses and navigate inclusion, power and referral considerations.",
+    courses: [
+      { code: "FSH 301", title: "Reproductive Health, Fertility & Life Planning", hours: "14 hrs", note: "Fertility variation, life planning and clinical-referral boundaries." },
+      { code: "FSH 302", title: "Kink Education, Negotiation & Safety", hours: "14 hrs", note: "Adult-only, non-explicit consent, SSC/RACK and risk literacy." },
+      { code: "FSH 303", title: "Communication for Educators & Advocates", hours: "16 hrs", note: "Plain-language evidence, facilitation and referral awareness." },
+      { code: "FSH 304", title: "Sexual Rights, Ethics, Power & Social Context", hours: "13 hrs", note: "Rights, privacy, AI ethics, institutional power and advocacy." },
+      { code: "FSH 305", title: "Inclusive Service & Curriculum Design", hours: "15 hrs", note: "Needs analysis, universal design and safeguarded course building." },
+    ],
+  },
+  "401": {
+    label: "Advanced practice",
+    purpose: "Leadership, curriculum design, advocacy, evaluation and supervised capstone work.",
+    outcome: "By completion, learners can create evidence-informed educational or advocacy outputs while demonstrating ethical leadership and safeguarding awareness.",
+    courses: [
+      { code: "FSH 401", title: "Advanced Advocacy & Community Practice", hours: "18 hrs", note: "Community assessment, ethical partnerships and evaluation." },
+      { code: "FSH 402", title: "Advanced Consent & Relationship Facilitation", hours: "16 hrs", note: "Complex conversations, survivor-centred referral and supervised facilitation." },
+      { code: "FSH 403", title: "Evidence, Evaluation & AI in Sexual Education", hours: "18 hrs", note: "Evidence appraisal, AI bias, learner analytics and update governance." },
+      { code: "FSH 404", title: "Capstone: Sexual Wellness Education Portfolio", hours: "24 hrs", note: "A supervised portfolio integrating evidence, inclusion, ethics and implementation." },
+    ],
+  },
+} as const;
+
+const certificationTracks = [
+  { title: "Sexual Health Advocate", hours: "112 hrs", outcome: "Community education, service navigation and stigma-reduction practice." },
+  { title: "Consent Educator", hours: "112 hrs", outcome: "Accessible consent education, facilitation and referral practice." },
+  { title: "Pleasure-Positive Coach", hours: "106 hrs", outcome: "Bounded, non-clinical intimacy and communication education." },
+  { title: "Digital Intimacy Safety Specialist", hours: "93 hrs", outcome: "Privacy, digital consent, incident response and support pathways." },
+  { title: "Kink Safety Educator", hours: "100 hrs", outcome: "Non-explicit negotiation, SSC/RACK and ethical risk literacy." },
+  { title: "Sexual-Health Curriculum Designer", hours: "120 hrs", outcome: "Inclusive curriculum design, quality governance and evaluation." },
 ];
 
-function scrollToSection(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-}
+type CurriculumLevel = keyof typeof curriculumLevels;
+
+const faculty = [
+  { id: "mira", initials: "MS", name: "Dr. Mira Sen", role: "Clinical Professor", focus: "Foundations & health literacy", color: "bg-[#d67693]", prompts: ["What makes consent specific and ongoing?", "How should I assess health information online?", "Explain the difference between sexual health education and clinical care."] },
+  { id: "alex", initials: "AR", name: "Alex Rivera", role: "Peer Educator", focus: "Consent & communication", color: "bg-[#c69a56]", prompts: ["How can I phrase a boundary clearly?", "What does a respectful check-in sound like?", "How can I respond without pressure when someone changes their mind?"] },
+  { id: "rae", initials: "RO", name: "Rae Okafor", role: "Harm-Reduction Educator", focus: "Health literacy & stigma reduction", color: "bg-[#e59c5b]", prompts: ["How can I talk about testing without adding shame?", "What makes a source of health information credible?", "How can I prepare questions for a sexual-health appointment?"] },
+  { id: "jo", initials: "JO", name: "Jo Vale", role: "Intimacy Tutor", focus: "Pleasure & self-knowledge", color: "bg-[#7f4355]", prompts: ["How can I communicate preferences without pressure?", "What can help make a difficult conversation feel less confrontational?", "How does body image affect intimacy and communication?"] },
+  { id: "sam", initials: "SC", name: "Sam Chen", role: "Digital Safety Lecturer", focus: "Privacy & digital consent", color: "bg-[#9b7fca]", prompts: ["What are the principles of digital consent?", "How can I reduce privacy risk in digital communication?", "What should a general incident-response plan include?"] },
+  { id: "amara", initials: "AW", name: "Amara Williams", role: "Relationship Systems Lecturer", focus: "Conflict, repair & power", color: "bg-[#ba6175]", prompts: ["What does respectful repair after a misunderstanding involve?", "How can I recognise the difference between conflict and coercion?", "How can I make relationship expectations more explicit?"] },
+  { id: "niko", initials: "NH", name: "Niko Hart", role: "Kink Safety Facilitator", focus: "Adult-only risk literacy", color: "bg-[#dba55d]", prompts: ["What is the difference between SSC and RACK?", "What principles make a negotiation consent-centred?", "Why do capacity and aftercare matter in adult consent frameworks?"] },
+  { id: "taylor", initials: "TM", name: "Taylor Morgan", role: "Inclusive Practice Lecturer", focus: "Access & affirming language", color: "bg-[#73ae9b]", prompts: ["What makes health communication more inclusive?", "How can I use language without assuming someone’s identity?", "What does accessible adult education look like in practice?"] },
+  { id: "linh", initials: "LP", name: "Professor Linh Patel", role: "Assessment Coach", focus: "Evidence & study practice", color: "bg-[#819bd3]", prompts: ["How can I evaluate whether a health source is credible?", "What makes a reflection task useful without personal disclosure?", "How should I prepare for a scenario-based assessment?"] },
+] as const;
+
+const navigation = [
+  { id: "top", label: "Home", compact: "Home", icon: Sparkles },
+  { id: "curriculum", label: "Curriculum", compact: "Learn", icon: BookOpen },
+  { id: "faculty", label: "AI faculty", compact: "Guides", icon: GraduationCap },
+  { id: "care", label: "Support", compact: "Care", icon: HeartHandshake },
+] as const;
 
 export default function Home() {
   const previewMode = import.meta.env.DEV && new URLSearchParams(window.location.search).get("preview") === "academy";
@@ -50,12 +126,40 @@ export default function Home() {
   const [ageDeclined, setAgeDeclined] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
+  const [selectedLecturerId, setSelectedLecturerId] = useState<(typeof faculty)[number]["id"]>("mira");
+  const [lecturerMessages, setLecturerMessages] = useState<LecturerMessage[]>([]);
+  const [lecturerSafeguarded, setLecturerSafeguarded] = useState(false);
+  const [catalogueLevel, setCatalogueLevel] = useState<CurriculumLevel>("101");
+  const [activeSection, setActiveSection] = useState<(typeof navigation)[number]["id"]>("top");
+  const activeLecturer = faculty.find((person) => person.id === selectedLecturerId) ?? faculty[0];
+  const activeCurriculumLevel = curriculumLevels[catalogueLevel];
+  const lecturerMutation = trpc.lecturer.respond.useMutation({
+    onSuccess: (data) => {
+      setLecturerSafeguarded(data.safeguarded);
+      setLecturerMessages((current) => [...current, { role: "assistant", content: data.reply }]);
+    },
+    onError: (error) => setLecturerMessages((current) => [...current, { role: "assistant", content: `I’m unable to respond just now. ${error.message}` }]),
+  });
 
   useEffect(() => {
     if (!previewMode) {
       setAgeConfirmed(window.localStorage.getItem("fleshsesh_academy_age_confirmed_v1") === "true");
     }
   }, [previewMode]);
+
+  useEffect(() => {
+    const targets = navigation.map(({ id }) => document.getElementById(id)).filter((node): node is HTMLElement => Boolean(node));
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id as (typeof navigation)[number]["id"]);
+          entry.target.classList.add("is-cinematic-visible");
+        }
+      });
+    }, { rootMargin: "-24% 0px -62% 0px", threshold: 0.01 });
+    targets.forEach(target => observer.observe(target));
+    return () => observer.disconnect();
+  }, []);
 
   const grantAccess = () => {
     if (!ageChecked) return;
@@ -76,21 +180,36 @@ export default function Home() {
     window.setTimeout(() => setNotice(null), 3600);
   };
 
+  const jumpToSection = (id: (typeof navigation)[number]["id"] | "pathway") => {
+    setActiveSection(id === "pathway" ? "curriculum" : id);
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const chooseLecturer = (lecturerId: (typeof faculty)[number]["id"]) => {
+    setSelectedLecturerId(lecturerId);
+    setLecturerMessages([]);
+    setLecturerSafeguarded(false);
+  };
+
+  const askLecturer = (message: string) => {
+    if (!ageConfirmed || lecturerMutation.isPending) return;
+    setLecturerSafeguarded(false);
+    setLecturerMessages((current) => [...current, { role: "user", content: message }]);
+    lecturerMutation.mutate({ lecturerId: activeLecturer.id, message, ageConfirmed: true });
+  };
+
   return (
-    <div className="min-h-screen bg-[#0b090b] text-[#f6eee2] selection:bg-[#e86f98] selection:text-[#190d13]">
+    <div className="cinematic-shell min-h-screen bg-[#0b090b] text-[#f6eee2] selection:bg-[#e86f98] selection:text-[#190d13]">
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-[84px] flex-col items-center border-r border-white/10 bg-[#0a080a] lg:flex">
-        <button onClick={() => scrollToSection("top")} className="mt-6 h-12 w-12 overflow-hidden rounded-full ring-1 ring-[#e4bd78]/40 transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#ee6f9a]" aria-label="Back to top">
+        <button onClick={() => jumpToSection("top")} className="mt-6 h-12 w-12 overflow-hidden rounded-full ring-1 ring-[#e4bd78]/40 transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#ee6f9a]" aria-label="Back to top">
           <img src={emblem} alt="fleshsesh academy emblem" className="h-full w-full object-cover" />
         </button>
         <div className="mt-8 h-28 w-px bg-gradient-to-b from-[#e4bd78] via-[#e4bd78]/30 to-transparent" />
         <nav className="mt-6 flex flex-1 flex-col items-center gap-7" aria-label="Primary navigation">
-          {[
-            { label: "Curriculum", target: "curriculum", icon: BookOpen },
-            { label: "Faculty", target: "faculty", icon: GraduationCap },
-            { label: "Care", target: "care", icon: HeartHandshake },
-          ].map(({ label, target, icon: Icon }) => (
-            <button key={label} onClick={() => scrollToSection(target)} className="group relative text-[#a79b92] transition hover:text-[#f2c684] focus:outline-none focus:text-[#f2c684]" aria-label={label}>
+          {navigation.slice(1).map(({ label, id, icon: Icon }) => (
+            <button key={label} onClick={() => jumpToSection(id)} className={`group relative transition focus:outline-none ${activeSection === id ? "text-[#f2c684]" : "text-[#a79b92] hover:text-[#f2c684] focus:text-[#f2c684]"}`} aria-label={label}>
               <Icon className="h-[18px] w-[18px]" strokeWidth={1.6} />
+              {activeSection === id && <span className="absolute -left-4 top-1/2 h-5 w-px -translate-y-1/2 bg-[#ee7e9f]" />}
               <span className="pointer-events-none absolute left-9 top-1/2 hidden -translate-y-1/2 whitespace-nowrap border border-[#e4bd78]/20 bg-[#171115] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#f5e8d4] shadow-xl group-hover:block">{label}</span>
             </button>
           ))}
@@ -100,20 +219,16 @@ export default function Home() {
         </button>
       </aside>
 
-      <main className="lg:ml-[84px]">
+      <main className="pb-20 lg:ml-[84px] lg:pb-0">
         <header id="top" className="relative z-30 flex h-[72px] items-center justify-between border-b border-white/10 px-5 sm:px-8 lg:px-12">
-          <button onClick={() => scrollToSection("top")} className="flex items-center gap-3 text-left lg:hidden">
+          <button onClick={() => jumpToSection("top")} className="flex items-center gap-3 text-left lg:hidden" aria-label="Back to top">
             <img src={emblem} alt="fleshsesh academy" className="h-9 w-9 rounded-full object-cover ring-1 ring-[#e4bd78]/40" />
-            <span className="font-display text-2xl font-semibold tracking-tight">fleshsesh</span>
           </button>
-          <div className="hidden items-baseline gap-3 lg:flex">
-            <span className="font-display text-[29px] font-semibold tracking-tight">fleshsesh</span>
-            <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#d8b36d]">academy</span>
+          <div className="hidden items-center lg:flex">
+            <img src={wordmark} alt="fleshsesh academy" className="h-11 w-[185px] object-contain object-left" />
           </div>
           <nav className="hidden items-center gap-7 md:flex" aria-label="Main links">
-            <button onClick={() => scrollToSection("curriculum")} className="text-xs font-medium text-[#cbbfb6] transition hover:text-white">Curriculum</button>
-            <button onClick={() => scrollToSection("faculty")} className="text-xs font-medium text-[#cbbfb6] transition hover:text-white">Faculty</button>
-            <button onClick={() => scrollToSection("care")} className="text-xs font-medium text-[#cbbfb6] transition hover:text-white">Support</button>
+            {navigation.slice(1).map(({ id, label }) => <button key={id} onClick={() => jumpToSection(id)} className={`relative py-2 text-xs font-medium transition ${activeSection === id ? "text-[#f3d39a]" : "text-[#cbbfb6] hover:text-white"}`}>{label}{activeSection === id && <span className="absolute inset-x-0 -bottom-1 h-px bg-[#ee7e9f]" />}</button>)}
           </nav>
           <div className="hidden items-center gap-4 md:flex">
             <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#cabcae]"><ShieldCheck className="h-3.5 w-3.5 text-[#e7bd76]" /> 18+ learning space</span>
@@ -125,8 +240,8 @@ export default function Home() {
           {menuOpen && (
             <div className="absolute left-0 right-0 top-[71px] border-b border-white/10 bg-[#100c10] p-5 shadow-2xl md:hidden">
               <div className="grid gap-3 text-sm">
-                {[ ["Curriculum", "curriculum"], ["Faculty", "faculty"], ["Support", "care"] ].map(([label, target]) => (
-                  <button key={label} onClick={() => { scrollToSection(target); setMenuOpen(false); }} className="flex items-center justify-between border-b border-white/10 py-3 text-left text-[#f6eee2]">{label}<ChevronRight className="h-4 w-4 text-[#e4bd78]" /></button>
+                {navigation.slice(1).map(({ label, id }) => (
+                  <button key={label} onClick={() => { jumpToSection(id); setMenuOpen(false); }} className="flex items-center justify-between border-b border-white/10 py-3 text-left text-[#f6eee2]">{label}<ChevronRight className="h-4 w-4 text-[#e4bd78]" /></button>
                 ))}
                 <button onClick={() => { showNotice("Member access is being prepared for the next platform phase."); setMenuOpen(false); }} className="mt-2 bg-[#ed7299] px-4 py-3 text-left text-xs font-bold uppercase tracking-[0.13em] text-[#1a0d13]">Member access</button>
               </div>
@@ -134,7 +249,7 @@ export default function Home() {
           )}
         </header>
 
-        <section className="relative overflow-hidden px-5 pb-14 pt-12 sm:px-8 sm:pb-20 sm:pt-16 lg:min-h-[690px] lg:px-12 lg:pb-24 lg:pt-20">
+        <section data-cinematic-section className="relative overflow-hidden px-5 pb-14 pt-12 sm:px-8 sm:pb-20 sm:pt-16 lg:min-h-[690px] lg:px-12 lg:pb-24 lg:pt-20">
           <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
             <div className="absolute -right-[10%] top-[5%] h-[460px] w-[460px] rounded-full bg-[#bd365e]/20 blur-[120px]" />
             <div className="absolute right-[11%] top-[12%] h-[430px] w-[430px] rotate-[16deg] rounded-[42%_58%_48%_52%/58%_36%_64%_42%] border border-[#f0b5c4]/20 bg-gradient-to-br from-[#f3a1b7]/65 via-[#a21642]/40 to-transparent shadow-[0_0_150px_rgba(220,78,117,0.25)]" />
@@ -145,7 +260,8 @@ export default function Home() {
           </div>
           <div className="relative grid max-w-[1280px] gap-12 lg:grid-cols-[minmax(0,1fr)_290px] lg:items-end">
             <div className="max-w-[780px]">
-              <div className="rise-in inline-flex items-center gap-3 border-y border-[#e4bd78]/35 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#e9c987]">
+              <div className="rise-in relative h-[118px] w-full overflow-visible sm:h-[136px] lg:h-[154px]"><div className="pointer-events-none absolute -inset-x-10 -inset-y-7 max-w-[520px] bg-[#ee6f9a]/20 blur-3xl" /><img src={wordmark} alt="fleshsesh academy" className="relative h-[82px] w-[310px] origin-left scale-[1.42] object-contain object-left sm:h-[98px] sm:w-[380px] sm:scale-[1.48] lg:h-[112px] lg:w-[450px] lg:scale-[1.52]" /></div>
+              <div className="rise-in mt-6 inline-flex items-center gap-3 border-y border-[#e4bd78]/35 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#e9c987]">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#ee6f9a]" /> Adult-only learning house
               </div>
               <h1 className="rise-in-delay mt-7 font-display text-[clamp(3.5rem,8vw,7.5rem)] font-semibold leading-[0.83] tracking-[-0.052em] text-[#fbf5ec]">
@@ -155,16 +271,16 @@ export default function Home() {
                 Thoughtful, evidence-informed education for adult learners navigating bodies, boundaries, relationships and digital life — without shame, pressure or performance.
               </p>
               <div className="rise-in-delay mt-10 flex flex-wrap items-center gap-4">
-                <button onClick={() => scrollToSection("curriculum")} className="group inline-flex items-center gap-3 bg-[#ef779d] px-5 py-4 text-xs font-bold uppercase tracking-[0.14em] text-[#210d15] transition duration-200 hover:bg-[#f8a7be] active:scale-[0.97]">
+                <button onClick={() => jumpToSection("curriculum")} className="group inline-flex items-center gap-3 bg-[#ef779d] px-5 py-4 text-xs font-bold uppercase tracking-[0.14em] text-[#210d15] transition duration-200 hover:bg-[#f8a7be] active:scale-[0.97]">
                   Explore curriculum <ArrowDownRight className="h-4 w-4 transition group-hover:translate-y-0.5 group-hover:translate-x-0.5" />
                 </button>
-                <button onClick={() => scrollToSection("care")} className="inline-flex items-center gap-2 border-b border-[#e4bd78]/60 pb-1 text-xs font-semibold text-[#f1d494] transition hover:border-[#ee6f9a] hover:text-[#ee6f9a]">How the academy protects your space <ArrowUpRight className="h-3.5 w-3.5" /></button>
+                <button onClick={() => jumpToSection("care")} className="inline-flex items-center gap-2 border-b border-[#e4bd78]/60 pb-1 text-xs font-semibold text-[#f1d494] transition hover:border-[#ee6f9a] hover:text-[#ee6f9a]">How the academy protects your space <ArrowUpRight className="h-3.5 w-3.5" /></button>
               </div>
             </div>
             <div className="relative border-l border-[#e4bd78]/35 pl-5 lg:pb-2">
               <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#d7b979]">The 2026/27 guide</p>
               <p className="mt-3 font-display text-3xl leading-[0.95] text-[#f5ece2]">A complete curriculum for clarity, care and connection.</p>
-              <button onClick={() => scrollToSection("pathway")} className="mt-6 inline-flex items-center gap-2 text-xs font-semibold text-[#f18aab] transition hover:text-[#f5d09a]">See the learning architecture <ChevronRight className="h-4 w-4" /></button>
+              <button onClick={() => jumpToSection("pathway")} className="mt-6 inline-flex items-center gap-2 text-xs font-semibold text-[#f18aab] transition hover:text-[#f5d09a]">See the learning architecture <ChevronRight className="h-4 w-4" /></button>
             </div>
           </div>
           <div className="relative mt-16 grid max-w-[770px] grid-cols-3 border-y border-white/10 py-5 sm:mt-20">
@@ -177,7 +293,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="pathway" className="border-y border-[#e4bd78]/20 bg-[#f1e7d8] px-5 py-10 text-[#1c1517] sm:px-8 lg:px-12 lg:py-14">
+        <section id="pathway" data-cinematic-section className="border-y border-[#e4bd78]/20 bg-[#f1e7d8] px-5 py-10 text-[#1c1517] sm:px-8 lg:px-12 lg:py-14">
           <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-center">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#8a4b5c]">A structured pathway</p>
@@ -195,7 +311,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="curriculum" className="bg-[#110d10] px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
+        <section id="curriculum" data-cinematic-section className="bg-[#110d10] px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
           <div className="mx-auto max-w-[1280px]">
             <div className="grid gap-7 border-b border-[#e4bd78]/25 pb-10 lg:grid-cols-[1fr_auto] lg:items-end">
               <div className="max-w-2xl">
@@ -230,35 +346,71 @@ export default function Home() {
               <p className="max-w-xl text-xs leading-5 text-[#91827a]">The course guide is designed for adult learners and contains educational, non-diagnostic content. Some modules may provide a content note or an alternative route.</p>
               <button onClick={() => showNotice("The full 2026/27 course catalogue is being staged for member access.")} className="inline-flex shrink-0 items-center gap-2 border-b border-[#e4bd78]/60 pb-1 text-xs font-semibold text-[#f3d49b] transition hover:border-[#ee6f9a] hover:text-[#ee6f9a]">Open complete course catalogue <ChevronRight className="h-4 w-4" /></button>
             </div>
+            <div className="relative mt-16 overflow-hidden border border-[#e4bd78]/25 bg-[#150e13] p-5 sm:p-8 lg:p-10">
+              <img src={wordmark} alt="" className="pointer-events-none absolute -right-20 -top-12 hidden h-32 w-[380px] rotate-[-8deg] object-contain opacity-10 lg:block" />
+              <div className="relative flex flex-col justify-between gap-6 border-b border-[#e4bd78]/20 pb-7 lg:flex-row lg:items-end">
+                <div className="max-w-2xl"><p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#e4bd78]">2026 / 27 course atlas</p><h3 className="mt-3 font-display text-4xl leading-[0.9] text-[#fff9f2] sm:text-5xl">Find a route through the<br /><em className="text-[#f08eac]">whole curriculum.</em></h3></div>
+                <p className="max-w-sm text-xs leading-5 text-[#bcaea4]">All courses use orientation, guided modules, a knowledge check, practical activity, reflection and clear help-seeking information. A learner can pause, skip a reflective prompt or choose an alternative route.</p>
+              </div>
+              <div className="relative mt-7 grid gap-7 lg:grid-cols-[230px_1fr]">
+                <div className="grid gap-2 sm:grid-cols-4 lg:grid-cols-1" role="tablist" aria-label="Curriculum level">
+                  {(Object.keys(curriculumLevels) as CurriculumLevel[]).map((level) => <button key={level} role="tab" aria-selected={catalogueLevel === level} onClick={() => setCatalogueLevel(level)} className={`border px-4 py-3 text-left transition ${catalogueLevel === level ? "border-[#ed91ac] bg-[#3a1724] text-[#fff7ee]" : "border-white/10 bg-[#100b0f] text-[#bbaaa1] hover:border-[#e4bd78]/50 hover:text-[#f4e6d5]"}`}><span className="font-display text-2xl text-[#e4bd78]">{level}</span><span className="ml-3 text-[10px] font-bold uppercase tracking-[0.13em]">{curriculumLevels[level].label}</span></button>)}
+                </div>
+                <div>
+                  <div className="flex flex-col justify-between gap-3 border-b border-white/10 pb-5 sm:flex-row sm:items-end"><div><p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#ed91ac]">Level {catalogueLevel}</p><h4 className="mt-2 font-display text-4xl leading-none text-[#fff8ee]">{activeCurriculumLevel.label}</h4></div><p className="max-w-sm text-xs leading-5 text-[#bbaaa1]">{activeCurriculumLevel.purpose}</p></div>
+                  <div className="mt-5 border-l-2 border-[#ef90ac] bg-[#2c1721] px-4 py-3"><p className="text-[9px] font-bold uppercase tracking-[0.18em] text-[#e9c481]">Learning outcome</p><p className="mt-1.5 max-w-3xl text-xs leading-5 text-[#f0ded4]">{activeCurriculumLevel.outcome}</p></div>
+                  <div className="grid divide-y divide-white/10">{activeCurriculumLevel.courses.map((course) => <article key={course.code} className="group grid gap-3 py-5 sm:grid-cols-[92px_1fr_auto] sm:items-center"><div><p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#e4bd78]">{course.code}</p><p className="mt-1 text-[10px] text-[#9f8f87]">{course.hours}</p></div><div><h5 className="font-display text-2xl leading-none text-[#fff8ee] transition group-hover:text-[#f19bb6]">{course.title}</h5><p className="mt-2 text-xs leading-5 text-[#bcaea4]">{course.note}</p></div><button onClick={() => showNotice(`${course.code} is mapped in the course atlas. Member enrolment opens with the learner dashboard.`)} className="mt-1 inline-flex items-center gap-1 text-left text-[10px] font-bold uppercase tracking-[0.12em] text-[#f0ce92] transition hover:text-[#f18eab] sm:mt-0">Route details <ChevronRight className="h-3.5 w-3.5" /></button></article>)}</div>
+                </div>
+              </div>
+            </div>
+            <div className="mt-10 grid gap-5 border-t border-white/10 pt-10 lg:grid-cols-[0.68fr_1.32fr]">
+              <div><p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#e4bd78]">Certification pathways</p><h3 className="mt-3 font-display text-4xl leading-[0.9] text-[#fff8ee]">Study with a<br /><em className="text-[#f08eac]">clear outcome.</em></h3><p className="mt-5 max-w-sm text-xs leading-5 text-[#aa9a91]">Badges recognise demonstrated competency, not clinical licensure. Formal accreditation is not represented until it is granted.</p></div>
+              <div className="grid gap-px border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-3">{certificationTracks.map((track) => <article key={track.title} className="bg-[#161014] p-5"><p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#e4bd78]">{track.hours}</p><h4 className="mt-4 font-display text-2xl leading-[0.92] text-[#fff8ee]">{track.title}</h4><p className="mt-3 text-[11px] leading-5 text-[#bcaea4]">{track.outcome}</p></article>)}</div>
+            </div>
           </div>
         </section>
 
-        <section id="faculty" className="relative overflow-hidden bg-[#d77d98] px-5 py-16 text-[#251016] sm:px-8 lg:px-12 lg:py-24">
+        <section id="faculty" data-cinematic-section className="relative overflow-hidden bg-[#d77d98] px-5 py-16 text-[#251016] sm:px-8 lg:px-12 lg:py-24">
           <div className="pointer-events-none absolute -left-20 bottom-0 h-80 w-80 rounded-full border-[55px] border-[#f3bea9]/45 blur-[2px]" />
           <div className="pointer-events-none absolute right-[10%] top-0 h-[340px] w-[340px] rounded-full bg-[#fbdbc1]/40 blur-[80px]" />
-          <div className="relative mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+          <img src={wordmark} alt="" className="pointer-events-none absolute right-[-60px] top-[-24px] hidden h-36 w-[420px] rotate-[-8deg] object-contain opacity-20 lg:block" />
+          <div className="relative mx-auto max-w-[1280px]">
+            <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#743348]">Guidance without assumption</p>
-              <h2 className="mt-4 max-w-md font-display text-5xl font-semibold leading-[0.9] tracking-[-0.045em] sm:text-6xl">Learn with<br /><em>specialist voices.</em></h2>
-              <p className="mt-7 max-w-md text-sm leading-6 text-[#512638]">AI lecturers are instructional personas with defined scopes, clear boundaries and human escalation routes. They are never presented as a substitute for individual clinical care.</p>
-              <button onClick={() => showNotice("Faculty profiles and office-hour formats are being prepared for the next release.")} className="mt-8 inline-flex items-center gap-2 border-b border-[#5a2940]/60 pb-1 text-xs font-bold text-[#452033] transition hover:border-[#f8e0af] hover:text-[#f8e0af]">Meet the faculty <ArrowUpRight className="h-3.5 w-3.5" /></button>
+              <p className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#743348]"><Bot className="h-3.5 w-3.5" /> Automated faculty studio</p>
+              <h2 className="mt-4 max-w-md font-display text-5xl font-semibold leading-[0.9] tracking-[-0.045em] sm:text-6xl">Guidance that<br /><em>meets you here.</em></h2>
+              <p className="mt-7 max-w-md text-sm leading-6 text-[#512638]">Each AI lecturer responds automatically within a defined teaching scope. Questions that indicate a health, safety or crisis concern are routed away from general AI guidance and toward appropriate professional support.</p>
+              <div className="mt-8 border-y border-[#6c3448]/25 py-4 text-[11px] leading-5 text-[#56283a]"><strong className="font-semibold">Private by design:</strong> the studio does not ask for sexual history, intimate images or identifying details. Each question is handled as an educational interaction.</div>
             </div>
             <div className="grid gap-3 sm:grid-cols-3">
               {faculty.map((person) => (
-                <article key={person.name} className="group min-h-[280px] border border-[#633248]/30 bg-[#2a121c]/95 p-5 text-[#f8eee6] transition duration-200 hover:-translate-y-1 hover:bg-[#351521]">
+                <button key={person.name} onClick={() => chooseLecturer(person.id)} className={`group min-h-[280px] border p-5 text-left text-[#f8eee6] transition duration-200 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-[#ffe6a9] ${selectedLecturerId === person.id ? "border-[#ffe2a3] bg-[#3a1724] shadow-[0_16px_30px_rgba(76,18,38,.22)]" : "border-[#633248]/30 bg-[#2a121c]/95 hover:bg-[#351521]"}`} aria-pressed={selectedLecturerId === person.id}>
                   <div className={`flex h-12 w-12 items-center justify-center rounded-full ${person.color} font-display text-lg font-semibold text-[#2a0e18] ring-4 ring-[#2a121c]`}>{person.initials}</div>
                   <div className="mt-24">
                     <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-[#e9bf79]">{person.role}</p>
                     <h3 className="mt-2 font-display text-3xl leading-[0.92]">{person.name}</h3>
                     <p className="mt-3 text-[11px] leading-5 text-[#d7c2b8]">{person.focus}</p>
                   </div>
-                </article>
+                </button>
               ))}
+            </div>
+            </div>
+            <div className="mt-10 grid overflow-hidden border border-[#643246]/35 bg-[#251019] text-[#f8eee6] lg:grid-cols-[0.7fr_1.3fr]">
+              <aside className="border-b border-[#e4bd78]/20 p-6 lg:border-b-0 lg:border-r lg:p-8">
+                <img src={wordmark} alt="fleshsesh academy" className="h-12 w-[190px] object-contain object-left" />
+                <div className="mt-8 flex items-center gap-3"><div className={`flex h-10 w-10 items-center justify-center rounded-full ${activeLecturer.color} font-display text-sm font-semibold text-[#2a0e18]`}>{activeLecturer.initials}</div><div><p className="font-display text-2xl leading-none">{activeLecturer.name}</p><p className="mt-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[#e7bd76]">{activeLecturer.role}</p></div></div>
+                <p className="mt-6 text-xs leading-5 text-[#cbb8af]">{activeLecturer.focus}. Automated educational replies use the selected lecturer’s scope and are not personal clinical advice.</p>
+                <div className="mt-7 border-t border-white/10 pt-5"><p className="text-[9px] font-bold uppercase tracking-[0.18em] text-[#e7bd76]">How this guide works</p><p className="mt-2 text-[11px] leading-5 text-[#baa89f]">Ask a general learning question. The guide provides a concise response and a next learning step. It pauses and redirects sensitive health, safety and crisis topics.</p></div>
+              </aside>
+              <div className="min-w-0 p-3 sm:p-5">
+                <AIChatBox messages={lecturerMessages} onSendMessage={askLecturer} isLoading={lecturerMutation.isPending} height="470px" placeholder={`Ask ${activeLecturer.name} an educational question…`} emptyStateMessage={`Start with ${activeLecturer.name}’s teaching scope`} suggestedPrompts={[...activeLecturer.prompts]} className="rounded-none border-[#e4bd78]/25 bg-[#1a1116] shadow-none" />
+                {lecturerSafeguarded && <div className="mt-3 flex items-start gap-3 border border-[#e4bd78]/35 bg-[#2e1b16] px-4 py-3 text-xs leading-5 text-[#f4dfc0]"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#f0ca85]" /><p><strong>Support route activated.</strong> This conversation has reached a topic where direct personal care or specialist support is more appropriate than general educational AI guidance. If you are in immediate danger, contact local emergency services.</p></div>}
+              </div>
             </div>
           </div>
         </section>
 
-        <section id="care" className="bg-[#f1e7d8] px-5 py-16 text-[#201619] sm:px-8 lg:px-12 lg:py-24">
+        <section id="care" data-cinematic-section className="bg-[#f1e7d8] px-5 py-16 text-[#201619] sm:px-8 lg:px-12 lg:py-24">
           <div className="mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[1fr_1.1fr]">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#93435b]">The care layer</p>
@@ -290,11 +442,15 @@ export default function Home() {
 
         <footer className="border-t border-white/10 bg-[#0a080a] px-5 py-8 sm:px-8 lg:px-12">
           <div className="mx-auto flex max-w-[1280px] flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-3"><img src={emblem} alt="fleshsesh academy emblem" className="h-8 w-8 rounded-full object-cover opacity-90" /><p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#c3b5aa]">fleshsesh academy <span className="ml-2 text-[#806d66]">© 2026</span></p></div>
+            <div className="flex items-center gap-3"><img src={wordmark} alt="fleshsesh academy" className="h-7 w-[116px] object-contain object-left" /><p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#c3b5aa]"><span className="text-[#806d66]">© 2026</span></p></div>
             <div className="flex flex-wrap gap-x-5 gap-y-2 text-[10px] font-semibold text-[#91827a]"><button onClick={() => showNotice("The learner agreement will be published with member access.")} className="transition hover:text-[#e4bd78]">Learner agreement</button><button onClick={() => showNotice("Accessibility preferences will be available in the member learning space.")} className="transition hover:text-[#e4bd78]">Accessibility</button><button onClick={resetAgeGate} className="transition hover:text-[#e4bd78]">Age verification</button></div>
           </div>
         </footer>
       </main>
+
+      <nav className="fixed inset-x-3 bottom-3 z-50 grid grid-cols-4 border border-[#e4bd78]/25 bg-[#130c11]/95 p-1 shadow-[0_16px_40px_rgba(0,0,0,.45)] backdrop-blur-xl lg:hidden" aria-label="Quick navigation">
+        {navigation.map(({ id, compact, icon: Icon }) => <button key={id} onClick={() => jumpToSection(id)} className={`flex min-h-12 flex-col items-center justify-center gap-1 text-[9px] font-bold uppercase tracking-[0.1em] transition ${activeSection === id ? "bg-[#ef789d] text-[#260e17]" : "text-[#c8b8ae] hover:text-[#f3d49a]"}`}><Icon className="h-3.5 w-3.5" strokeWidth={1.8} />{compact}</button>)}
+      </nav>
 
       {!ageConfirmed && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-[#060506]/95 p-4 backdrop-blur-xl sm:p-8" role="dialog" aria-modal="true" aria-labelledby="age-gate-title">
@@ -305,7 +461,7 @@ export default function Home() {
               <p className="absolute bottom-8 left-8 max-w-[230px] font-display text-3xl leading-[0.9] text-[#faeee6]">A private threshold for adult learning.</p>
             </div>
             <div className="relative max-w-[520px] p-7 sm:p-11">
-              <img src={emblem} alt="fleshsesh academy emblem" className="h-14 w-14 rounded-full object-cover ring-1 ring-[#e4bd78]/50" />
+              <img src={wordmark} alt="fleshsesh academy" className="h-[64px] w-[230px] object-contain object-left" />
               {!ageDeclined ? (
                 <>
                   <p className="mt-7 text-[10px] font-bold uppercase tracking-[0.22em] text-[#e4bd78]">Age verification</p>
