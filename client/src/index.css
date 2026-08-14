@@ -2,8 +2,9 @@
 @import "tw-animate-css";
 
 /*
- * Rose Lacquer Learning House — obsidian privacy, lacquer-rose actions, champagne-gold indexing.
- * The editorial surface is sparse and asymmetric; never substitute generic rounded-card UI.
+ * Midnight Lagoon Learning House — calm blue-black privacy, restrained blush-coral actions,
+ * soft gold indexing, and sage progress feedback. Preserve the editorial structure while
+ * keeping the learning experience open, contemporary, and broadly welcoming.
  */
 @custom-variant dark (&:is(.dark *));
 
@@ -162,6 +163,30 @@
   to { opacity: 1; }
 }
 
+@keyframes ecampus-frame-fade {
+  0%, 22% { opacity: 0; transform: scale(1.04) translate3d(1.5%, 0, 0); }
+  30%, 54% { opacity: 0.68; transform: scale(1) translate3d(0, 0, 0); }
+  62%, 100% { opacity: 0; transform: scale(1.02) translate3d(-1%, 0, 0); }
+}
+
+.ecampus-fade-frame {
+  position: absolute;
+  inset: 7% 7% 9% 48%;
+  border: 1px solid rgb(216 189 130 / 0.3);
+  opacity: 0;
+  transform-origin: center;
+  mix-blend-mode: screen;
+  filter: saturate(0.8) contrast(1.1);
+}
+.ecampus-fade-frame-one { background: radial-gradient(circle at 30% 36%, rgb(223 137 151 / 0.72), transparent 19%), linear-gradient(134deg, rgb(15 35 48 / 0.3), rgb(78 49 66 / 0.72)); animation: ecampus-frame-fade 16s 0s infinite cubic-bezier(0.23, 1, 0.32, 1); }
+.ecampus-fade-frame-two { background: radial-gradient(circle at 65% 48%, rgb(216 189 130 / 0.5), transparent 18%), linear-gradient(122deg, rgb(16 39 52 / 0.25), rgb(49 79 85 / 0.75)); animation: ecampus-frame-fade 16s 5.3s infinite cubic-bezier(0.23, 1, 0.32, 1); }
+.ecampus-fade-frame-three { background: radial-gradient(circle at 42% 58%, rgb(132 185 168 / 0.52), transparent 20%), linear-gradient(140deg, rgb(19 43 57 / 0.25), rgb(89 45 65 / 0.68)); animation: ecampus-frame-fade 16s 10.6s infinite cubic-bezier(0.23, 1, 0.32, 1); }
+
+@media (max-width: 1023px) {
+  .ecampus-fade-frame { inset: 13% -15% 45% 48%; opacity: 0.24; animation: none; }
+  .ecampus-fade-frame-two, .ecampus-fade-frame-three { display: none; }
+}
+
 [data-cinematic-section] { scroll-margin-top: 92px; }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -177,3 +202,43 @@
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .ecampus-fade-frame { animation: none !important; opacity: 0.18; transform: none; }
+  .ecampus-fade-frame-two, .ecampus-fade-frame-three { display: none; }
+}
+
+/* Inclusive visual-system override: gentler contrast relationships without losing brand identity. */
+:root, .dark {
+  --background: oklch(0.14 0.025 250);
+  --foreground: oklch(0.94 0.012 190);
+  --card: oklch(0.19 0.03 245);
+  --card-foreground: oklch(0.94 0.012 190);
+  --popover: oklch(0.19 0.03 245);
+  --popover-foreground: oklch(0.94 0.012 190);
+  --secondary: oklch(0.24 0.035 245);
+  --secondary-foreground: oklch(0.86 0.018 190);
+  --muted: oklch(0.23 0.025 245);
+  --muted-foreground: oklch(0.72 0.028 205);
+  --accent: oklch(0.79 0.09 14);
+  --accent-foreground: oklch(0.2 0.02 250);
+  --primary: oklch(0.72 0.12 14);
+  --primary-foreground: oklch(0.2 0.02 250);
+  --border: oklch(0.88 0.02 190 / 16%);
+  --input: oklch(0.88 0.02 190 / 18%);
+  --ring: oklch(0.72 0.1 14);
+}
+
+/* Bridge the original arbitrary-colour utilities into the inclusive learning palette. */
+[class~="bg-[#0b090b]"], [class~="bg-[#110d10]"], [class~="bg-[#100b0f]"] { background-color: #0d1822 !important; }
+[class~="bg-[#120d11]"], [class~="bg-[#160e13]"], [class~="bg-[#150e13]"], [class~="bg-[#1a1116]"] { background-color: #152532 !important; }
+[class~="bg-[#130c11]"], [class~="bg-[#171115]"] { background-color: #101f2b !important; }
+[class~="bg-[#351824]"], [class~="bg-[#3a1724]"], [class~="bg-[#2c1520]"] { background-color: #2a3a49 !important; }
+[class~="bg-[#2e1b16]"], [class~="bg-[#21131a]"] { background-color: #263b40 !important; }
+[class~="bg-[#ef779d]"] { background-color: #df8997 !important; }
+[class~="bg-[#f1e7d8]"] { background-color: #e9f0ec !important; }
+[class~="text-[#f6eee2]"], [class~="text-[#fff8ef]"], [class~="text-[#fff8ee]"], [class~="text-[#fff9f2]"] { color: #f3f7f4 !important; }
+[class~="text-[#cbbab1]"], [class~="text-[#bcaea4]"], [class~="text-[#bbaaa1]"], [class~="text-[#b9aaa1]"] { color: #bccbca !important; }
+[class~="text-[#e4bd78]"], [class~="text-[#e7c888]"], [class~="text-[#e7bd76]"] { color: #d8bd82 !important; }
+[class~="text-[#f18dac]"], [class~="text-[#f18eab]"], [class~="text-[#f19bb6]"] { color: #ec9aa6 !important; }
+[class~="border-[#e4bd78]/25"], [class~="border-[#e4bd78]/20"], [class~="border-[#e4bd78]/35"] { border-color: rgb(216 189 130 / 0.28) !important; }

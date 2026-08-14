@@ -1,7 +1,9 @@
 import { and, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, learnerProgress, users } from "../drizzle/schema";
+import { courseEnrollments, InsertUser, learnerBadges, learnerProgress, learnerRewards, lessonCompletions, users } from "../drizzle/schema";
+import { getCourse } from "@shared/courseCatalog";
 import { normalizeLearnerProgress, type LearnerProgressStatus } from "./learningProgress";
+import { buildLessonRewards, shouldIssueCompetencyBadge } from "./rewards";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -114,4 +116,66 @@ export async function saveLearnerProgress(input: { userId: number; courseCode: s
   });
   const result = await db.select().from(learnerProgress).where(and(eq(learnerProgress.userId, input.userId), eq(learnerProgress.courseCode, input.courseCode))).limit(1);
   return result[0];
+}
+
+export async function listCourseEnrollments(userId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is unavailable");
+  return db.select().from(courseEnrollments).where(eq(courseEnrollments.userId, userId));
+}
+
+export async function recordPendingEnrollment(input: { userId: number; courseCode: string; stripeCheckoutSessionId: string }) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is unavailable");
+  await db.insert(courseEnrollments).values({ ...input, status: "pending" }).onDuplicateKeyUpdate({ set: { status: "pending", stripeCheckoutSessionId: input.stripeCheckoutSessionId } });
+}
+
+export async function activateCourseEnrollment(input: { userId: number; courseCode: string; stripeCheckoutSessionId: string; stripePaymentIntentId?: string }) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is unavailable");
+  const now = new Date();
+  await db.insert(courseEnrollments).values({ ...input, status: "active", enrolledAt: now }).onDuplicateKeyUpdate({ set: { status: "active", stripeCheckoutSessionId: input.stripeCheckoutSessionId, stripePaymentIntentId: input.stripePaymentIntentId, enrolledAt: now } });
+}
+
+export async function listLessonCompletions(userId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is unavailable");
+  return db.select().from(lessonCompletions).where(eq(lessonCompletions.userId, userId));
+}
+
+export async function getLearnerRewards(userId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is unavailable");
+  const result = await db.select().from(learnerRewards).where(eq(learnerRewards.userId, userId)).limit(1);
+  return result[0] ?? { userId, xp: 0, level: 1, currentStreak: 0, longestStreak: 0, lastLearningDay: null };
+}
+
+export async function listLearnerBadges(userId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is unavailable");
+  return db.select().from(learnerBadges).where(eq(learnerBadges.userId, userId));
+}
+
+function isoDay(date = new Date()) { return date.toISOString().slice(0, 10); }
+
+export async function completeLesson(input: { userId: number; courseCode: string; lessonId: string; xp: number }) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is unavailable");
+  const existing = await db.select().from(lessonCompletions).where(and(eq(lessonCompletions.userId, input.userId), eq(lessonCompletions.lessonId, input.lessonId))).limit(1);
+  if (existing[0]) return { completion: existing[0], alreadyCompleted: true, rewards: await getLearnerRewards(input.userId) };
+  const now = new Date();
+  await db.insert(lessonCompletions).values({ ...input, xpAwarded: input.xp, completedAt: now });
+  const current = await getLearnerRewards(input.userId);
+  const today = isoDay(now);
+  const rewards = buildLessonRewards(current, input.xp, today);
+  await db.insert(learnerRewards).values({ userId: input.userId, ...rewards }).onDuplicateKeyUpdate({ set: rewards });
+  const course = getCourse(input.courseCode);
+  const completions = await db.select().from(lessonCompletions).where(and(eq(lessonCompletions.userId, input.userId), eq(lessonCompletions.courseCode, input.courseCode)));
+  if (course && shouldIssueCompetencyBadge(completions.length, course.modules.length)) {
+    await db.insert(learnerBadges).values({ userId: input.userId, badgeCode: course.badgeCode, sourceCourseCode: course.code }).onDuplicateKeyUpdate({ set: { sourceCourseCode: course.code } });
+    await saveLearnerProgress({ userId: input.userId, courseCode: course.code, progressPercent: 100, status: "completed" });
+  } else if (course) {
+    await saveLearnerProgress({ userId: input.userId, courseCode: course.code, progressPercent: Math.round((completions.length / course.modules.length) * 100) });
+  }
+  return { completion: { ...input, completedAt: now }, alreadyCompleted: false, rewards };
 }

@@ -25,3 +25,25 @@
 - [x] Document the user-authenticated OAuth save-and-reload check as a post-launch verification that requires a real consenting member session.
 - [x] Polish the final member-flow messaging, dashboard loading state, and responsive detail hierarchy before the final production checkpoint.
 - [x] Record the real-account OAuth progress round trip as a post-launch verification that requires an active member session and does not use synthetic learner data.
+- [x] Define the full unit catalogue, lesson sequences, learning activities, and mastery criteria from the academy curriculum guide.
+- [x] Create the commerce and enrolment data model for paid units/classes with enrolment-gated access.
+- [x] Set up the payment integration and a member-facing checkout entry point for unit/class enrolment.
+- [x] Build protected lesson-player experiences and connect completed activities to course progress.
+- [x] Add ethical gamification with XP, badges, streak-safe milestones, and learner reward feedback.
+- [ ] Validate paid enrolment, access control, lesson completion, and rewards flows before checkpointing.
+- [x] Refine the academy colour system toward a more broadly welcoming, calm, and accessible visual balance while retaining fleshsesh brand recognisability.
+- [x] Validate the refined palette across the adult gateway, course catalogue, paid enrolment, lesson player, and member experience.
+- [x] Visually verify the refined palette on the adult age gateway, paid selected-unit enrolment, protected lesson player, member dashboard, and key interactive states before checkpointing.
+- [x] Use a development-only lesson preview to inspect the protected teaching palette without creating synthetic learner data or weakening production enrolment gates.
+- [x] Replace legacy member-dashboard progress actions with enrolment-aware class access controls so the interface matches server-side paid access rules.
+- [ ] Complete a real Stripe sandbox checkout and verify webhook-driven course-enrolment activation after the sandbox is claimed.
+- [ ] Verify an authenticated learner can complete an enrolled lesson and see progress, rewards, and badge state update without synthetic learner data.
+- [x] Add automated coverage for checkout fulfilment and learner lesson-completion/reward procedures.
+- [x] Standardize all written brand references to "fleshsesh | academy" across page titles, alt text, aria labels, footer copy, and interface messaging.
+- [x] Redesign the public entry experience as a cinematic "Welcome to eCampus" sequence with clear adult-learning orientation.
+- [x] Build layered hero video and fading-image media treatments with resilient fallbacks and reduced-motion support.
+- [x] Refine eCampus wayfinding so visitors can move directly from welcome to catalogue, member learning, and support routes.
+- [x] Validate the cinematic eCampus experience across desktop and mobile before checkpointing.
+- [x] Add a Stripe webhook fulfilment test that verifies completed checkout activation of the linked enrolment without duplicating payment data.
+- [x] Add reward and badge fulfilment tests covering repeat lesson completion and full-unit competency issuance.
+- [x] Explicitly set and verify page/document metadata and accessibility brand references to "fleshsesh | academy".

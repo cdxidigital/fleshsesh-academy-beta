@@ -41,3 +41,53 @@ export const learnerProgress = mysqlTable("learnerProgress", {
 
 export type LearnerProgress = typeof learnerProgress.$inferSelect;
 export type InsertLearnerProgress = typeof learnerProgress.$inferInsert;
+
+/** Local fulfilment records: course access is business-specific while payment details remain in Stripe. */
+export const courseEnrollments = mysqlTable("courseEnrollments", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  courseCode: varchar("courseCode", { length: 32 }).notNull(),
+  status: mysqlEnum("status", ["pending", "active", "refunded"]).default("pending").notNull(),
+  stripeCheckoutSessionId: varchar("stripeCheckoutSessionId", { length: 255 }).unique(),
+  stripePaymentIntentId: varchar("stripePaymentIntentId", { length: 255 }),
+  enrolledAt: timestamp("enrolledAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+}, table => ({
+  userCourseUnique: uniqueIndex("courseEnrollments_user_course_unique").on(table.userId, table.courseCode),
+}));
+
+/** Records an earned module completion without collecting intimate learner responses. */
+export const lessonCompletions = mysqlTable("lessonCompletions", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  courseCode: varchar("courseCode", { length: 32 }).notNull(),
+  lessonId: varchar("lessonId", { length: 96 }).notNull(),
+  xpAwarded: int("xpAwarded").default(0).notNull(),
+  completedAt: timestamp("completedAt").defaultNow().notNull(),
+}, table => ({
+  userLessonUnique: uniqueIndex("lessonCompletions_user_lesson_unique").on(table.userId, table.lessonId),
+}));
+
+/** Stores aggregate, non-sensitive reward state used for learner-facing progress feedback. */
+export const learnerRewards = mysqlTable("learnerRewards", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }).unique(),
+  xp: int("xp").default(0).notNull(),
+  level: int("level").default(1).notNull(),
+  currentStreak: int("currentStreak").default(0).notNull(),
+  longestStreak: int("longestStreak").default(0).notNull(),
+  lastLearningDay: varchar("lastLearningDay", { length: 10 }),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+/** Competency badges are earned from defined course completion, not engagement manipulation. */
+export const learnerBadges = mysqlTable("learnerBadges", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  badgeCode: varchar("badgeCode", { length: 64 }).notNull(),
+  sourceCourseCode: varchar("sourceCourseCode", { length: 32 }).notNull(),
+  awardedAt: timestamp("awardedAt").defaultNow().notNull(),
+}, table => ({
+  userBadgeUnique: uniqueIndex("learnerBadges_user_badge_unique").on(table.userId, table.badgeCode),
+}));

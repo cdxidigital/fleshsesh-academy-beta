@@ -160,7 +160,7 @@ export async function getLecturerResponse(input: { lecturerId: LecturerId; messa
     messages: [
       {
         role: "system",
-        content: `You are ${lecturer.name}, an AI instructional persona for fleshsesh academy, an adult-only educational service. Your scope is: ${lecturer.scope} Teaching style: ${lecturer.style}
+        content: `You are ${lecturer.name}, an AI instructional persona for fleshsesh | academy, an adult-only educational service. Your scope is: ${lecturer.scope} Teaching style: ${lecturer.style}
 
 Operational rules:
 - Deliver concise, inclusive, non-judgmental adult education in plain language.

@@ -216,6 +216,14 @@ export default function Home() {
     startLogin();
   };
 
+  const openLearningCatalogue = () => {
+    if (!ageConfirmed) {
+      resetAgeGate();
+      return;
+    }
+    setLocation("/learn");
+  };
+
   const saveCourseStep = (courseCode: string) => {
     if (!isAuthenticated) {
       startLogin();
@@ -241,7 +249,7 @@ export default function Home() {
     <div className="cinematic-shell min-h-screen bg-[#0b090b] text-[#f6eee2] selection:bg-[#e86f98] selection:text-[#190d13]">
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-[84px] flex-col items-center border-r border-white/10 bg-[#0a080a] lg:flex">
         <button onClick={() => jumpToSection("top")} className="mt-6 h-12 w-12 overflow-hidden rounded-full ring-1 ring-[#e4bd78]/40 transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#ee6f9a]" aria-label="Back to top">
-          <img src={emblem} alt="fleshsesh academy emblem" className="h-full w-full object-cover" />
+          <img src={emblem} alt="fleshsesh | academy emblem" className="h-full w-full object-cover" />
         </button>
         <div className="mt-8 h-28 w-px bg-gradient-to-b from-[#e4bd78] via-[#e4bd78]/30 to-transparent" />
         <nav className="mt-6 flex flex-1 flex-col items-center gap-7" aria-label="Primary navigation">
@@ -261,10 +269,10 @@ export default function Home() {
       <main className="pb-20 lg:ml-[84px] lg:pb-0">
         <header id="top" className="relative z-30 flex h-[72px] items-center justify-between border-b border-white/10 px-5 sm:px-8 lg:px-12">
           <button onClick={() => jumpToSection("top")} className="flex items-center gap-3 text-left lg:hidden" aria-label="Back to top">
-            <img src={emblem} alt="fleshsesh academy" className="h-9 w-9 rounded-full object-cover ring-1 ring-[#e4bd78]/40" />
+            <img src={emblem} alt="fleshsesh | academy" className="h-9 w-9 rounded-full object-cover ring-1 ring-[#e4bd78]/40" />
           </button>
           <div className="hidden items-center lg:flex">
-            <img src={wordmark} alt="fleshsesh academy" className="h-11 w-[185px] object-contain object-left" />
+            <img src={wordmark} alt="fleshsesh | academy" className="h-11 w-[185px] object-contain object-left" />
           </div>
           <nav className="hidden items-center gap-7 md:flex" aria-label="Main links">
             {navigation.slice(1).map(({ id, label }) => <button key={id} onClick={() => jumpToSection(id)} className={`relative py-2 text-xs font-medium transition ${activeSection === id ? "text-[#f3d39a]" : "text-[#cbbfb6] hover:text-white"}`}>{label}{activeSection === id && <span className="absolute inset-x-0 -bottom-1 h-px bg-[#ee7e9f]" />}</button>)}
@@ -288,42 +296,45 @@ export default function Home() {
           )}
         </header>
 
-        <section data-cinematic-section className="relative overflow-hidden px-5 pb-14 pt-12 sm:px-8 sm:pb-20 sm:pt-16 lg:min-h-[690px] lg:px-12 lg:pb-24 lg:pt-20">
+        <section data-cinematic-section className="ecampus-hero relative overflow-hidden px-5 pb-14 pt-10 sm:px-8 sm:pb-20 sm:pt-14 lg:min-h-[760px] lg:px-12 lg:pb-24 lg:pt-16">
           <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-            {ageConfirmed && filmAvailable && filmPlaying && <video autoPlay loop muted playsInline preload="metadata" onError={() => setFilmAvailable(false)} className="absolute inset-0 h-full w-full object-cover object-[62%_center] opacity-[0.36] saturate-[0.72] contrast-[1.08]"><source src={academyFilm} type="video/mp4" /></video>}
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,#0b090b_5%,rgba(11,9,11,0.92)_39%,rgba(11,9,11,0.48)_70%,#0b090b_100%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_25%,rgba(228,189,120,0.11),transparent_25%),radial-gradient(circle_at_78%_48%,rgba(215,63,109,0.16),transparent_35%)]" />
-            <div className="absolute right-[8%] top-[20%] h-[2px] w-[42%] -rotate-[5deg] bg-gradient-to-r from-transparent via-[#e4bd78]/70 to-transparent shadow-[0_0_15px_rgba(228,189,120,0.45)]" />
+            {ageConfirmed && filmAvailable && filmPlaying && <video autoPlay loop muted playsInline preload="metadata" onError={() => setFilmAvailable(false)} className="absolute inset-0 h-full w-full object-cover object-[62%_center] opacity-[0.46] saturate-[0.7] contrast-[1.06]"><source src={academyFilm} type="video/mp4" /></video>}
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,#0d1822_4%,rgba(13,24,34,0.92)_37%,rgba(13,24,34,0.36)_72%,#0d1822_100%)]" />
+            <div className="ecampus-fade-frame ecampus-fade-frame-one" />
+            <div className="ecampus-fade-frame ecampus-fade-frame-two" />
+            <div className="ecampus-fade-frame ecampus-fade-frame-three" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(216,189,130,0.13),transparent_26%),radial-gradient(circle_at_78%_44%,rgba(223,137,151,0.18),transparent_33%)]" />
+            <div className="absolute right-[8%] top-[20%] h-[2px] w-[42%] -rotate-[5deg] bg-gradient-to-r from-transparent via-[#d8bd82]/70 to-transparent shadow-[0_0_15px_rgba(216,189,130,0.45)]" />
             <div className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(rgba(255,255,255,.2)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.2)_1px,transparent_1px)] [background-size:40px_40px]" />
           </div>
           <div className="relative grid max-w-[1280px] gap-12 lg:grid-cols-[minmax(0,1fr)_290px] lg:items-end">
             <div className="max-w-[780px]">
-              <div className="rise-in relative h-[118px] w-full overflow-visible sm:h-[136px] lg:h-[154px]"><div className="pointer-events-none absolute -inset-x-10 -inset-y-7 max-w-[520px] bg-[#ee6f9a]/20 blur-3xl" /><img src={wordmark} alt="fleshsesh academy" className="relative h-[82px] w-[310px] origin-left scale-[1.42] object-contain object-left sm:h-[98px] sm:w-[380px] sm:scale-[1.48] lg:h-[112px] lg:w-[450px] lg:scale-[1.52]" /></div>
-              <div className="rise-in mt-6 inline-flex items-center gap-3 border-y border-[#e4bd78]/35 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#e9c987]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#ee6f9a]" /> Adult-only learning house
+              <div className="rise-in relative h-[112px] w-full overflow-visible sm:h-[130px] lg:h-[148px]"><div className="pointer-events-none absolute -inset-x-10 -inset-y-7 max-w-[520px] bg-[#df8997]/20 blur-3xl" /><img src={wordmark} alt="fleshsesh | academy" className="relative h-[78px] w-[300px] origin-left scale-[1.42] object-contain object-left sm:h-[94px] sm:w-[370px] sm:scale-[1.48] lg:h-[108px] lg:w-[440px] lg:scale-[1.52]" /></div>
+              <div className="rise-in mt-5 inline-flex items-center gap-3 border-y border-[#d8bd82]/35 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#e4ce9d]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#df8997]" /> Welcome to eCampus · adult learning, reimagined
               </div>
-              <h1 className="rise-in-delay mt-7 font-display text-[clamp(3.5rem,8vw,7.5rem)] font-semibold leading-[0.83] tracking-[-0.052em] text-[#fbf5ec]">
-                Learn the language<br />of <em className="font-display font-medium text-[#f18aab]">your agency.</em>
+              <h1 className="rise-in-delay mt-7 font-display text-[clamp(3.5rem,8vw,7.5rem)] font-semibold leading-[0.83] tracking-[-0.052em] text-[#f3f7f4]">
+                Learn in your<br /><em className="font-display font-medium text-[#ec9aa6]">own atmosphere.</em>
               </h1>
-              <p className="rise-in-delay mt-8 max-w-xl text-base leading-7 text-[#cfc2b8] sm:text-lg">
-                Thoughtful, evidence-informed education for adult learners navigating bodies, boundaries, relationships and digital life — without shame, pressure or performance.
+              <p className="rise-in-delay mt-8 max-w-xl text-base leading-7 text-[#c5d3d2] sm:text-lg">
+                A cinematic, self-paced eCampus for adult learners. Move through bodies, boundaries, relationships and digital life with evidence, privacy and room to pause.
               </p>
               <div className="rise-in-delay mt-10 flex flex-wrap items-center gap-4">
-                <button onClick={() => jumpToSection("curriculum")} className="group inline-flex items-center gap-3 bg-[#ef779d] px-5 py-4 text-xs font-bold uppercase tracking-[0.14em] text-[#210d15] transition duration-200 hover:bg-[#f8a7be] active:scale-[0.97]">
-                  Explore curriculum <ArrowDownRight className="h-4 w-4 transition group-hover:translate-y-0.5 group-hover:translate-x-0.5" />
+                <button onClick={openLearningCatalogue} className="group inline-flex items-center gap-3 bg-[#df8997] px-5 py-4 text-xs font-bold uppercase tracking-[0.14em] text-[#182631] transition duration-200 hover:bg-[#eea6b1] active:scale-[0.97]">
+                  Enter eCampus <ArrowDownRight className="h-4 w-4 transition group-hover:translate-y-0.5 group-hover:translate-x-0.5" />
                 </button>
-                <button onClick={() => jumpToSection("care")} className="inline-flex items-center gap-2 border-b border-[#e4bd78]/60 pb-1 text-xs font-semibold text-[#f1d494] transition hover:border-[#ee6f9a] hover:text-[#ee6f9a]">How the academy protects your space <ArrowUpRight className="h-3.5 w-3.5" /></button>
+                <button onClick={() => jumpToSection("care")} className="inline-flex items-center gap-2 border-b border-[#d8bd82]/60 pb-1 text-xs font-semibold text-[#e3cc96] transition hover:border-[#df8997] hover:text-[#ec9aa6]">How eCampus protects your space <ArrowUpRight className="h-3.5 w-3.5" /></button>
               </div>
             </div>
-            <div className="relative border-l border-[#e4bd78]/35 pl-5 lg:pb-2">
-              <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#d7b979]">The 2026/27 guide</p>
-              <p className="mt-3 font-display text-3xl leading-[0.95] text-[#f5ece2]">A complete curriculum for clarity, care and connection.</p>
-              <button onClick={() => jumpToSection("pathway")} className="mt-6 inline-flex items-center gap-2 text-xs font-semibold text-[#f18aab] transition hover:text-[#f5d09a]">See the learning architecture <ChevronRight className="h-4 w-4" /></button>
-              {filmAvailable && <button onClick={() => setFilmPlaying(playing => !playing)} className="mt-5 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.15em] text-[#cabcae] transition hover:text-[#f2d498]">{filmPlaying ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5 fill-current" />}{filmPlaying ? "Pause academy film" : "Play academy film"}</button>}
+            <div className="relative overflow-hidden border border-[#d8bd82]/30 bg-[#101f2b]/75 p-5 backdrop-blur-sm lg:mb-3 lg:p-6">
+              <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#d8bd82]">eCampus welcome sequence</p>
+              <p className="mt-4 font-display text-3xl leading-[0.92] text-[#f3f7f4]">Begin with orientation.<br /><em className="text-[#ec9aa6]">Choose your next scene.</em></p>
+              <div className="mt-6 grid grid-cols-3 gap-px border border-white/10 bg-white/10"><button onClick={openLearningCatalogue} className="bg-[#152532] px-2 py-3 text-left text-[9px] font-bold uppercase tracking-[.12em] text-[#d8bd82] hover:bg-[#2a3a49]">Explore</button><button onClick={openMemberSpace} className="bg-[#152532] px-2 py-3 text-left text-[9px] font-bold uppercase tracking-[.12em] text-[#d8bd82] hover:bg-[#2a3a49]">Continue</button><button onClick={() => jumpToSection("care")} className="bg-[#152532] px-2 py-3 text-left text-[9px] font-bold uppercase tracking-[.12em] text-[#d8bd82] hover:bg-[#2a3a49]">Support</button></div>
+              {filmAvailable && <button onClick={() => setFilmPlaying(playing => !playing)} className="mt-5 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.15em] text-[#b9c9c8] transition hover:text-[#e3cc96]">{filmPlaying ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5 fill-current" />}{filmPlaying ? "Pause welcome film" : "Play welcome film"}</button>}
             </div>
           </div>
           <div className="relative mt-16 grid max-w-[770px] grid-cols-3 border-y border-white/10 py-5 sm:mt-20">
-            {[ ["21", "Courses across four levels"], ["18+", "Adult access verified"], ["100%", "Self-paced learning routes"] ].map(([value, label]) => (
+            {[ ["21", "Classes across four levels"], ["18+", "Adult access and care"], ["06", "Scenes in every unit"] ].map(([value, label]) => (
               <div key={value} className="border-r border-white/10 px-3 first:pl-0 last:border-0 sm:px-5">
                 <p className="font-display text-3xl font-semibold text-[#f1d494] sm:text-4xl">{value}</p>
                 <p className="mt-1.5 max-w-[110px] text-[10px] leading-4 text-[#a89b93] sm:text-[11px]">{label}</p>
@@ -383,7 +394,7 @@ export default function Home() {
             </div>
             <div className="mt-8 flex flex-col justify-between gap-5 border-t border-white/10 pt-7 sm:flex-row sm:items-center">
               <p className="max-w-xl text-xs leading-5 text-[#91827a]">The course guide is designed for adult learners and contains educational, non-diagnostic content. Some modules may provide a content note or an alternative route.</p>
-              <button onClick={() => showNotice("The full 2026/27 course catalogue is being staged for member access.")} className="inline-flex shrink-0 items-center gap-2 border-b border-[#e4bd78]/60 pb-1 text-xs font-semibold text-[#f3d49b] transition hover:border-[#ee6f9a] hover:text-[#ee6f9a]">Open complete course catalogue <ChevronRight className="h-4 w-4" /></button>
+              <button onClick={openLearningCatalogue} className="inline-flex shrink-0 items-center gap-2 border-b border-[#e4bd78]/60 pb-1 text-xs font-semibold text-[#f3d49b] transition hover:border-[#ee6f9a] hover:text-[#ee6f9a]">Explore paid learning catalogue <ChevronRight className="h-4 w-4" /></button>
             </div>
             <div className="relative mt-16 overflow-hidden border border-[#e4bd78]/25 bg-[#150e13] p-5 sm:p-8 lg:p-10">
               <img src={wordmark} alt="" className="pointer-events-none absolute -right-20 -top-12 hidden h-32 w-[380px] rotate-[-8deg] object-contain opacity-10 lg:block" />
@@ -436,7 +447,7 @@ export default function Home() {
             </div>
             <div className="mt-10 grid overflow-hidden border border-[#643246]/35 bg-[#251019] text-[#f8eee6] lg:grid-cols-[0.7fr_1.3fr]">
               <aside className="border-b border-[#e4bd78]/20 p-6 lg:border-b-0 lg:border-r lg:p-8">
-                <img src={wordmark} alt="fleshsesh academy" className="h-12 w-[190px] object-contain object-left" />
+                <img src={wordmark} alt="fleshsesh | academy" className="h-12 w-[190px] object-contain object-left" />
                 <div className="mt-8 flex items-center gap-3"><div className={`flex h-10 w-10 items-center justify-center rounded-full ${activeLecturer.color} font-display text-sm font-semibold text-[#2a0e18]`}>{activeLecturer.initials}</div><div><p className="font-display text-2xl leading-none">{activeLecturer.name}</p><p className="mt-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[#e7bd76]">{activeLecturer.role}</p></div></div>
                 <p className="mt-6 text-xs leading-5 text-[#cbb8af]">{activeLecturer.focus}. Automated educational replies use the selected lecturer’s scope and are not personal clinical advice.</p>
                 <div className="mt-7 border-t border-white/10 pt-5"><p className="text-[9px] font-bold uppercase tracking-[0.18em] text-[#e7bd76]">How this guide works</p><p className="mt-2 text-[11px] leading-5 text-[#baa89f]">Ask a general learning question. The guide provides a concise response and a next learning step. It pauses and redirects sensitive health, safety and crisis topics.</p></div>
@@ -454,7 +465,7 @@ export default function Home() {
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#93435b]">The care layer</p>
               <h2 className="mt-4 max-w-lg font-display text-5xl font-semibold leading-[0.88] tracking-[-0.045em] sm:text-6xl">Private learning deserves<br /><em>clear safeguards.</em></h2>
-              <p className="mt-7 max-w-lg text-sm leading-6 text-[#625251]">fleshsesh academy is designed for learning. It does not provide diagnosis, crisis support, individualized treatment or erotic interaction. Sensitive routes always make space to pause, skip or seek appropriate care.</p>
+              <p className="mt-7 max-w-lg text-sm leading-6 text-[#625251]">fleshsesh | academy is designed for learning. It does not provide diagnosis, crisis support, individualized treatment or erotic interaction. Sensitive routes always make space to pause, skip or seek appropriate care.</p>
             </div>
             <div className="grid gap-px border border-[#8f6f60]/30 bg-[#8f6f60]/30 sm:grid-cols-2">
               {[ [ShieldCheck, "Consent-centred by design", "Age controls, content notes and clear reporting routes are built into the learning experience."], [Eye, "Privacy without pressure", "Learning does not require intimate disclosure. Display names and quiet self-directed routes are supported."], [CircleHelp, "Support beyond the screen", "The health and referral layer distinguishes general education from individual medical or mental-health care."], [FileText, "Evidence with boundaries", "Faculty materials are source-led, inclusion-aware and explicit about uncertainty and jurisdiction." ] ].map(([Icon, title, copy]) => {
@@ -481,7 +492,7 @@ export default function Home() {
 
         <footer className="border-t border-white/10 bg-[#0a080a] px-5 py-8 sm:px-8 lg:px-12">
           <div className="mx-auto flex max-w-[1280px] flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-3"><img src={wordmark} alt="fleshsesh academy" className="h-7 w-[116px] object-contain object-left" /><p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#c3b5aa]"><span className="text-[#806d66]">© 2026</span></p></div>
+            <div className="flex items-center gap-3"><img src={wordmark} alt="fleshsesh | academy" className="h-7 w-[116px] object-contain object-left" /><p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#c3b5aa]"><span className="text-[#806d66]">© 2026</span></p></div>
             <div className="flex flex-wrap gap-x-5 gap-y-2 text-[10px] font-semibold text-[#91827a]"><button onClick={() => showNotice("The learner agreement will be published with member access.")} className="transition hover:text-[#e4bd78]">Learner agreement</button><button onClick={() => showNotice("Accessibility preferences will be available in the member learning space.")} className="transition hover:text-[#e4bd78]">Accessibility</button><button onClick={resetAgeGate} className="transition hover:text-[#e4bd78]">Age verification</button></div>
           </div>
         </footer>
@@ -500,12 +511,12 @@ export default function Home() {
               <p className="absolute bottom-8 left-8 max-w-[230px] font-display text-3xl leading-[0.9] text-[#faeee6]">A private threshold for adult learning.</p>
             </div>
             <div className="relative max-w-[520px] p-7 sm:p-11">
-              <img src={wordmark} alt="fleshsesh academy" className="h-[64px] w-[230px] object-contain object-left" />
+              <img src={wordmark} alt="fleshsesh | academy" className="h-[64px] w-[230px] object-contain object-left" />
               {!ageDeclined ? (
                 <>
                   <p className="mt-7 text-[10px] font-bold uppercase tracking-[0.22em] text-[#e4bd78]">Age verification</p>
                   <h2 id="age-gate-title" className="mt-4 font-display text-5xl font-semibold leading-[0.86] tracking-[-0.04em] text-[#fff8ee] sm:text-6xl">This is a space<br />for <em className="text-[#f38eac]">adults.</em></h2>
-                  <p className="mt-6 max-w-md text-sm leading-6 text-[#cdbdb2]">fleshsesh academy provides evidence-informed sexual-wellness education for learners aged 18 and over. Entering means you confirm you meet the age requirement in your location. The age check is required before the member space and academy film are available.</p>
+                  <p className="mt-6 max-w-md text-sm leading-6 text-[#cdbdb2]">fleshsesh | academy provides evidence-informed sexual-wellness education for learners aged 18 and over. Entering means you confirm you meet the age requirement in your location. The age check is required before the member space and academy film are available.</p>
                   <label className="mt-8 flex cursor-pointer items-start gap-3 border-y border-white/10 py-4 text-sm leading-5 text-[#eee2d6]">
                     <input type="checkbox" checked={ageChecked} onChange={(event) => setAgeChecked(event.target.checked)} className="mt-0.5 h-4 w-4 accent-[#ee6f9a]" />
                     <span>I confirm that I am <strong>18 years of age or older</strong> and understand that this is an educational, adult-only platform.</span>

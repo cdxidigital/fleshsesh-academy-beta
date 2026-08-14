@@ -1,11 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { listLearnerProgress, saveLearnerProgress } = vi.hoisted(() => ({
+const { listCourseEnrollments, listLearnerProgress, saveLearnerProgress } = vi.hoisted(() => ({
+  listCourseEnrollments: vi.fn(),
   listLearnerProgress: vi.fn(),
   saveLearnerProgress: vi.fn(),
 }));
 
-vi.mock("./db", () => ({ listLearnerProgress, saveLearnerProgress }));
+vi.mock("./db", () => ({ listCourseEnrollments, listLearnerProgress, saveLearnerProgress }));
 
 import { appRouter } from "./routers";
 import type { TrpcContext } from "./_core/context";
@@ -40,10 +41,19 @@ describe("learningProgress router", () => {
   });
 
   it("saves an authenticated member’s course step", async () => {
+    listCourseEnrollments.mockResolvedValue([{ courseCode: "FSH 206", status: "active" }]);
     saveLearnerProgress.mockResolvedValue({ courseCode: "FSH 206", progressPercent: 10, status: "in_progress" });
     const caller = appRouter.createCaller(createAuthenticatedContext());
 
     await expect(caller.learningProgress.upsert({ courseCode: "FSH 206", progressPercent: 10, status: "in_progress" })).resolves.toMatchObject({ courseCode: "FSH 206" });
     expect(saveLearnerProgress).toHaveBeenCalledWith({ userId: 42, courseCode: "FSH 206", progressPercent: 10, status: "in_progress" });
+  });
+
+  it("rejects progress writes for a course without active enrolment", async () => {
+    listCourseEnrollments.mockResolvedValue([]);
+    const caller = appRouter.createCaller(createAuthenticatedContext());
+
+    await expect(caller.learningProgress.upsert({ courseCode: "FSH 206", progressPercent: 10 })).rejects.toMatchObject({ code: "FORBIDDEN" });
+    expect(saveLearnerProgress).not.toHaveBeenCalled();
   });
 });
