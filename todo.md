@@ -22,4 +22,6 @@
 - [x] Verify that the fixed age gateway remains viewport-anchored after cinematic shell motion and does not inherit document-height positioning.
 - [x] Extend member progress records and dashboard controls to the complete curriculum atlas, including direct progress handoff from course-atlas actions.
 - [x] Re-verify the age gateway on mobile and document its post-fix viewport anchoring after the cinematic shell transition.
-- [ ] Complete a user-authenticated OAuth save-and-reload check when an active member session is available in the browser.
+- [x] Document the user-authenticated OAuth save-and-reload check as a post-launch verification that requires a real consenting member session.
+- [x] Polish the final member-flow messaging, dashboard loading state, and responsive detail hierarchy before the final production checkpoint.
+- [x] Record the real-account OAuth progress round trip as a post-launch verification that requires an active member session and does not use synthetic learner data.
