@@ -1,4 +1,4 @@
-import { int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { int, mysqlEnum, mysqlTable, text, timestamp, uniqueIndex, varchar } from "drizzle-orm/mysql-core";
 
 /**
  * Core user table backing auth flow.
@@ -25,4 +25,19 @@ export const users = mysqlTable("users", {
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
-// TODO: Add your tables here
+export const learnerProgress = mysqlTable("learnerProgress", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  courseCode: varchar("courseCode", { length: 32 }).notNull(),
+  progressPercent: int("progressPercent").default(0).notNull(),
+  status: mysqlEnum("status", ["not_started", "in_progress", "completed"]).default("not_started").notNull(),
+  lastOpenedAt: timestamp("lastOpenedAt"),
+  completedAt: timestamp("completedAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+}, table => ({
+  userCourseUnique: uniqueIndex("learnerProgress_user_course_unique").on(table.userId, table.courseCode),
+}));
+
+export type LearnerProgress = typeof learnerProgress.$inferSelect;
+export type InsertLearnerProgress = typeof learnerProgress.$inferInsert;

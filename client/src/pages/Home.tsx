@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import { useAuth } from "@/_core/hooks/useAuth";
+import { startLogin } from "@/const";
 import { AIChatBox, type Message as LecturerMessage } from "@/components/AIChatBox";
 import { trpc } from "@/lib/trpc";
+import { useLocation } from "wouter";
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -16,6 +19,7 @@ import {
   GraduationCap,
   HeartHandshake,
   Menu,
+  Pause,
   Play,
   ShieldCheck,
   Sparkles,
@@ -29,6 +33,9 @@ import {
 
 const emblem = "/manus-storage/fleshsesh-academy-emblem_79c8c72e.png";
 const wordmark = "/manus-storage/fleshsesh-academy-wordmark_f79fa930.png";
+const academyFilm = "/manus-storage/fleshsesh-academy-ambient-film_52e77d54.mp4";
+const ageStorageKey = "fleshsesh_academy_age_confirmed_v2";
+const ageStorageDateKey = "fleshsesh_academy_age_confirmed_at";
 
 const pathways = [
   { code: "01", title: "Body literacy", course: "FSH 101", hours: "12 hrs", copy: "Foundational anatomy, variation, life stages and help-seeking literacy.", accent: "from-[#b54464] via-[#ec779b] to-[#f5d9cb]", tag: "Foundations" },
@@ -120,7 +127,9 @@ const navigation = [
 ] as const;
 
 export default function Home() {
-  const previewMode = import.meta.env.DEV && new URLSearchParams(window.location.search).get("preview") === "academy";
+  const previewToken = new URLSearchParams(window.location.search).get("preview");
+  const previewMode = import.meta.env.DEV && previewToken === "academy";
+  const forceAgeGatePreview = import.meta.env.DEV && previewToken === "age-gate";
   const [ageConfirmed, setAgeConfirmed] = useState(previewMode);
   const [ageChecked, setAgeChecked] = useState(false);
   const [ageDeclined, setAgeDeclined] = useState(false);
@@ -131,6 +140,10 @@ export default function Home() {
   const [lecturerSafeguarded, setLecturerSafeguarded] = useState(false);
   const [catalogueLevel, setCatalogueLevel] = useState<CurriculumLevel>("101");
   const [activeSection, setActiveSection] = useState<(typeof navigation)[number]["id"]>("top");
+  const [filmPlaying, setFilmPlaying] = useState(true);
+  const [filmAvailable, setFilmAvailable] = useState(true);
+  const [, setLocation] = useLocation();
+  const { user, isAuthenticated } = useAuth();
   const activeLecturer = faculty.find((person) => person.id === selectedLecturerId) ?? faculty[0];
   const activeCurriculumLevel = curriculumLevels[catalogueLevel];
   const lecturerMutation = trpc.lecturer.respond.useMutation({
@@ -140,12 +153,16 @@ export default function Home() {
     },
     onError: (error) => setLecturerMessages((current) => [...current, { role: "assistant", content: `I’m unable to respond just now. ${error.message}` }]),
   });
+  const courseProgressMutation = trpc.learningProgress.upsert.useMutation({
+    onSuccess: () => setLocation("/member"),
+    onError: () => showNotice("Your course step could not be saved just now. Please try again from the member space."),
+  });
 
   useEffect(() => {
-    if (!previewMode) {
-      setAgeConfirmed(window.localStorage.getItem("fleshsesh_academy_age_confirmed_v1") === "true");
+    if (!previewMode && !forceAgeGatePreview) {
+      setAgeConfirmed(window.localStorage.getItem(ageStorageKey) === "true");
     }
-  }, [previewMode]);
+  }, [forceAgeGatePreview, previewMode]);
 
   useEffect(() => {
     const targets = navigation.map(({ id }) => document.getElementById(id)).filter((node): node is HTMLElement => Boolean(node));
@@ -163,13 +180,15 @@ export default function Home() {
 
   const grantAccess = () => {
     if (!ageChecked) return;
-    window.localStorage.setItem("fleshsesh_academy_age_confirmed_v1", "true");
+    window.localStorage.setItem(ageStorageKey, "true");
+    window.localStorage.setItem(ageStorageDateKey, new Date().toISOString());
     setAgeConfirmed(true);
     setAgeDeclined(false);
   };
 
   const resetAgeGate = () => {
-    window.localStorage.removeItem("fleshsesh_academy_age_confirmed_v1");
+    window.localStorage.removeItem(ageStorageKey);
+    window.localStorage.removeItem(ageStorageDateKey);
     setAgeChecked(false);
     setAgeConfirmed(false);
     setAgeDeclined(false);
@@ -183,6 +202,26 @@ export default function Home() {
   const jumpToSection = (id: (typeof navigation)[number]["id"] | "pathway") => {
     setActiveSection(id === "pathway" ? "curriculum" : id);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const openMemberSpace = () => {
+    if (!ageConfirmed) {
+      resetAgeGate();
+      return;
+    }
+    if (isAuthenticated) {
+      setLocation("/member");
+      return;
+    }
+    startLogin();
+  };
+
+  const saveCourseStep = (courseCode: string) => {
+    if (!isAuthenticated) {
+      startLogin();
+      return;
+    }
+    courseProgressMutation.mutate({ courseCode, progressPercent: 10, status: "in_progress" });
   };
 
   const chooseLecturer = (lecturerId: (typeof faculty)[number]["id"]) => {
@@ -232,7 +271,7 @@ export default function Home() {
           </nav>
           <div className="hidden items-center gap-4 md:flex">
             <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#cabcae]"><ShieldCheck className="h-3.5 w-3.5 text-[#e7bd76]" /> 18+ learning space</span>
-            <button onClick={() => showNotice("Member access is being prepared for the next platform phase.")} className="border-b border-[#e4bd78]/80 pb-1 text-xs font-semibold text-[#f1d494] transition hover:border-[#ee6f9a] hover:text-[#ee6f9a]">Member access</button>
+            <button onClick={openMemberSpace} className="border-b border-[#e4bd78]/80 pb-1 text-xs font-semibold text-[#f1d494] transition hover:border-[#ee6f9a] hover:text-[#ee6f9a]">{isAuthenticated ? `Welcome back, ${user?.name?.split(" ")[0] || "member"}` : "Member sign in"}</button>
           </div>
           <button onClick={() => setMenuOpen((open) => !open)} className="inline-flex h-10 w-10 items-center justify-center border border-white/15 text-[#f6eee2] md:hidden" aria-label="Toggle navigation" aria-expanded={menuOpen}>
             {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -243,7 +282,7 @@ export default function Home() {
                 {navigation.slice(1).map(({ label, id }) => (
                   <button key={label} onClick={() => { jumpToSection(id); setMenuOpen(false); }} className="flex items-center justify-between border-b border-white/10 py-3 text-left text-[#f6eee2]">{label}<ChevronRight className="h-4 w-4 text-[#e4bd78]" /></button>
                 ))}
-                <button onClick={() => { showNotice("Member access is being prepared for the next platform phase."); setMenuOpen(false); }} className="mt-2 bg-[#ed7299] px-4 py-3 text-left text-xs font-bold uppercase tracking-[0.13em] text-[#1a0d13]">Member access</button>
+                <button onClick={() => { openMemberSpace(); setMenuOpen(false); }} className="mt-2 bg-[#ed7299] px-4 py-3 text-left text-xs font-bold uppercase tracking-[0.13em] text-[#1a0d13]">{isAuthenticated ? "Open member space" : "Member sign in"}</button>
               </div>
             </div>
           )}
@@ -251,12 +290,11 @@ export default function Home() {
 
         <section data-cinematic-section className="relative overflow-hidden px-5 pb-14 pt-12 sm:px-8 sm:pb-20 sm:pt-16 lg:min-h-[690px] lg:px-12 lg:pb-24 lg:pt-20">
           <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-            <div className="absolute -right-[10%] top-[5%] h-[460px] w-[460px] rounded-full bg-[#bd365e]/20 blur-[120px]" />
-            <div className="absolute right-[11%] top-[12%] h-[430px] w-[430px] rotate-[16deg] rounded-[42%_58%_48%_52%/58%_36%_64%_42%] border border-[#f0b5c4]/20 bg-gradient-to-br from-[#f3a1b7]/65 via-[#a21642]/40 to-transparent shadow-[0_0_150px_rgba(220,78,117,0.25)]" />
-            <div className="absolute right-[28%] top-[42%] h-64 w-64 rotate-[-25deg] rounded-[52%_48%_57%_43%/45%_57%_43%_55%] border border-[#f6d6df]/20 bg-gradient-to-tl from-[#460617]/80 via-[#dc5478]/40 to-[#f5c5d0]/20 blur-[1px]" />
-            <div className="absolute right-[5%] top-[30%] h-[2px] w-[44%] rotate-[-4deg] bg-gradient-to-r from-transparent via-[#e4bd78]/80 to-transparent shadow-[0_0_15px_rgba(228,189,120,0.7)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_30%,rgba(228,189,120,0.08),transparent_22%),linear-gradient(90deg,#0b090b_10%,rgba(11,9,11,0.9)_46%,rgba(11,9,11,0.16)_100%)]" />
-            <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,.2)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.2)_1px,transparent_1px)] [background-size:40px_40px]" />
+            {ageConfirmed && filmAvailable && filmPlaying && <video autoPlay loop muted playsInline preload="metadata" onError={() => setFilmAvailable(false)} className="absolute inset-0 h-full w-full object-cover object-[62%_center] opacity-[0.36] saturate-[0.72] contrast-[1.08]"><source src={academyFilm} type="video/mp4" /></video>}
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,#0b090b_5%,rgba(11,9,11,0.92)_39%,rgba(11,9,11,0.48)_70%,#0b090b_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_25%,rgba(228,189,120,0.11),transparent_25%),radial-gradient(circle_at_78%_48%,rgba(215,63,109,0.16),transparent_35%)]" />
+            <div className="absolute right-[8%] top-[20%] h-[2px] w-[42%] -rotate-[5deg] bg-gradient-to-r from-transparent via-[#e4bd78]/70 to-transparent shadow-[0_0_15px_rgba(228,189,120,0.45)]" />
+            <div className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(rgba(255,255,255,.2)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.2)_1px,transparent_1px)] [background-size:40px_40px]" />
           </div>
           <div className="relative grid max-w-[1280px] gap-12 lg:grid-cols-[minmax(0,1fr)_290px] lg:items-end">
             <div className="max-w-[780px]">
@@ -281,6 +319,7 @@ export default function Home() {
               <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#d7b979]">The 2026/27 guide</p>
               <p className="mt-3 font-display text-3xl leading-[0.95] text-[#f5ece2]">A complete curriculum for clarity, care and connection.</p>
               <button onClick={() => jumpToSection("pathway")} className="mt-6 inline-flex items-center gap-2 text-xs font-semibold text-[#f18aab] transition hover:text-[#f5d09a]">See the learning architecture <ChevronRight className="h-4 w-4" /></button>
+              {filmAvailable && <button onClick={() => setFilmPlaying(playing => !playing)} className="mt-5 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.15em] text-[#cabcae] transition hover:text-[#f2d498]">{filmPlaying ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5 fill-current" />}{filmPlaying ? "Pause academy film" : "Play academy film"}</button>}
             </div>
           </div>
           <div className="relative mt-16 grid max-w-[770px] grid-cols-3 border-y border-white/10 py-5 sm:mt-20">
@@ -336,7 +375,7 @@ export default function Home() {
                     </div>
                     <div className="mt-auto flex items-center justify-between pt-7">
                       <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-[#bfae9f]"><Clock3 className="h-3.5 w-3.5" /> {course.hours}</span>
-                      <button onClick={() => showNotice(`${course.course} preview materials will be available in the member learning space.`)} className="inline-flex items-center gap-2 text-xs font-semibold text-[#f3d49b] transition hover:text-[#ee80a3]">View route <ArrowUpRight className="h-3.5 w-3.5" /></button>
+                      <button onClick={() => saveCourseStep(course.course)} disabled={courseProgressMutation.isPending} className="inline-flex items-center gap-2 text-xs font-semibold text-[#f3d49b] transition hover:text-[#ee80a3] disabled:cursor-not-allowed disabled:opacity-50">{isAuthenticated ? "Begin & save" : "Sign in to save"} <ArrowUpRight className="h-3.5 w-3.5" /></button>
                     </div>
                   </div>
                 </article>
@@ -359,7 +398,7 @@ export default function Home() {
                 <div>
                   <div className="flex flex-col justify-between gap-3 border-b border-white/10 pb-5 sm:flex-row sm:items-end"><div><p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#ed91ac]">Level {catalogueLevel}</p><h4 className="mt-2 font-display text-4xl leading-none text-[#fff8ee]">{activeCurriculumLevel.label}</h4></div><p className="max-w-sm text-xs leading-5 text-[#bbaaa1]">{activeCurriculumLevel.purpose}</p></div>
                   <div className="mt-5 border-l-2 border-[#ef90ac] bg-[#2c1721] px-4 py-3"><p className="text-[9px] font-bold uppercase tracking-[0.18em] text-[#e9c481]">Learning outcome</p><p className="mt-1.5 max-w-3xl text-xs leading-5 text-[#f0ded4]">{activeCurriculumLevel.outcome}</p></div>
-                  <div className="grid divide-y divide-white/10">{activeCurriculumLevel.courses.map((course) => <article key={course.code} className="group grid gap-3 py-5 sm:grid-cols-[92px_1fr_auto] sm:items-center"><div><p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#e4bd78]">{course.code}</p><p className="mt-1 text-[10px] text-[#9f8f87]">{course.hours}</p></div><div><h5 className="font-display text-2xl leading-none text-[#fff8ee] transition group-hover:text-[#f19bb6]">{course.title}</h5><p className="mt-2 text-xs leading-5 text-[#bcaea4]">{course.note}</p></div><button onClick={() => showNotice(`${course.code} is mapped in the course atlas. Member enrolment opens with the learner dashboard.`)} className="mt-1 inline-flex items-center gap-1 text-left text-[10px] font-bold uppercase tracking-[0.12em] text-[#f0ce92] transition hover:text-[#f18eab] sm:mt-0">Route details <ChevronRight className="h-3.5 w-3.5" /></button></article>)}</div>
+                  <div className="grid divide-y divide-white/10">{activeCurriculumLevel.courses.map((course) => <article key={course.code} className="group grid gap-3 py-5 sm:grid-cols-[92px_1fr_auto] sm:items-center"><div><p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#e4bd78]">{course.code}</p><p className="mt-1 text-[10px] text-[#9f8f87]">{course.hours}</p></div><div><h5 className="font-display text-2xl leading-none text-[#fff8ee] transition group-hover:text-[#f19bb6]">{course.title}</h5><p className="mt-2 text-xs leading-5 text-[#bcaea4]">{course.note}</p></div><button onClick={() => saveCourseStep(course.code)} disabled={courseProgressMutation.isPending} className="mt-1 inline-flex items-center gap-1 text-left text-[10px] font-bold uppercase tracking-[0.12em] text-[#f0ce92] transition hover:text-[#f18eab] disabled:cursor-not-allowed disabled:opacity-50 sm:mt-0">{isAuthenticated ? "Begin & save" : "Sign in to save"} <ChevronRight className="h-3.5 w-3.5" /></button></article>)}</div>
                 </div>
               </div>
             </div>
@@ -431,11 +470,11 @@ export default function Home() {
             <div>
               <p className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#e2bc78]"><Sparkles className="h-3.5 w-3.5 text-[#ef779d]" /> Your learning route</p>
               <h2 className="mt-5 max-w-xl font-display text-5xl font-semibold leading-[0.9] tracking-[-0.04em] text-[#fff8ef] sm:text-6xl">Begin with the<br /><em className="text-[#f18dac]">right questions.</em></h2>
-              <p className="mt-6 max-w-xl text-sm leading-6 text-[#cbbab1]">Take a quiet self-placement route, explore foundations, or return when the academy is ready to open its member learning environment.</p>
+              <p className="mt-6 max-w-xl text-sm leading-6 text-[#cbbab1]">Take a quiet self-placement route, explore foundations, and save course steps privately to your member record when you sign in.</p>
             </div>
             <div className="flex flex-col justify-end gap-3">
-              <button onClick={() => showNotice("The self-placement experience is part of the next member-space release.")} className="group flex items-center justify-between bg-[#ef779d] px-5 py-4 text-left text-xs font-bold uppercase tracking-[0.14em] text-[#260e17] transition hover:bg-[#f6a3b9] active:scale-[0.97]">Find your starting point <Compass className="h-4 w-4 transition group-hover:rotate-12" /></button>
-              <button onClick={() => showNotice("This video introduction will be available in the academy launch sequence.")} className="group flex items-center justify-between border border-white/15 px-5 py-4 text-left text-xs font-bold uppercase tracking-[0.14em] text-[#f6eee2] transition hover:border-[#e4bd78] hover:text-[#f1d494] active:scale-[0.97]">Watch the academy introduction <Play className="h-4 w-4 fill-current" /></button>
+              <button onClick={openMemberSpace} className="group flex items-center justify-between bg-[#ef779d] px-5 py-4 text-left text-xs font-bold uppercase tracking-[0.14em] text-[#260e17] transition hover:bg-[#f6a3b9] active:scale-[0.97]">{isAuthenticated ? "Open my learning record" : "Sign in to save progress"}<Compass className="h-4 w-4 transition group-hover:rotate-12" /></button>
+              <button onClick={() => setFilmPlaying(playing => !playing)} className="group flex items-center justify-between border border-white/15 px-5 py-4 text-left text-xs font-bold uppercase tracking-[0.14em] text-[#f6eee2] transition hover:border-[#e4bd78] hover:text-[#f1d494] active:scale-[0.97]">{filmPlaying ? "Pause the academy film" : "Play the academy film"}{filmPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4 fill-current" />}</button>
             </div>
           </div>
         </section>
@@ -466,7 +505,7 @@ export default function Home() {
                 <>
                   <p className="mt-7 text-[10px] font-bold uppercase tracking-[0.22em] text-[#e4bd78]">Age verification</p>
                   <h2 id="age-gate-title" className="mt-4 font-display text-5xl font-semibold leading-[0.86] tracking-[-0.04em] text-[#fff8ee] sm:text-6xl">This is a space<br />for <em className="text-[#f38eac]">adults.</em></h2>
-                  <p className="mt-6 max-w-md text-sm leading-6 text-[#cdbdb2]">fleshsesh academy provides evidence-informed sexual-wellness education for learners aged 18 and over. Entering means you confirm you meet the age requirement in your location.</p>
+                  <p className="mt-6 max-w-md text-sm leading-6 text-[#cdbdb2]">fleshsesh academy provides evidence-informed sexual-wellness education for learners aged 18 and over. Entering means you confirm you meet the age requirement in your location. The age check is required before the member space and academy film are available.</p>
                   <label className="mt-8 flex cursor-pointer items-start gap-3 border-y border-white/10 py-4 text-sm leading-5 text-[#eee2d6]">
                     <input type="checkbox" checked={ageChecked} onChange={(event) => setAgeChecked(event.target.checked)} className="mt-0.5 h-4 w-4 accent-[#ee6f9a]" />
                     <span>I confirm that I am <strong>18 years of age or older</strong> and understand that this is an educational, adult-only platform.</span>
@@ -475,7 +514,7 @@ export default function Home() {
                     <button onClick={grantAccess} disabled={!ageChecked} className="inline-flex min-h-12 items-center justify-center gap-2 bg-[#ef779d] px-5 text-xs font-bold uppercase tracking-[0.14em] text-[#250d16] transition enabled:hover:bg-[#f7a4bb] enabled:active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-35">Enter the academy <ArrowUpRight className="h-4 w-4" /></button>
                     <button onClick={() => setAgeDeclined(true)} className="min-h-12 px-3 text-xs font-semibold text-[#baaaa0] transition hover:text-[#f0cc8d]">I am not 18+ / leave this space</button>
                   </div>
-                  <p className="mt-6 flex items-start gap-2 text-[10px] leading-4 text-[#93827a]"><ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#d6af68]" /> Your selection is saved locally in this browser. No identity document is requested by this introductory gateway.</p>
+                  <p className="mt-6 flex items-start gap-2 text-[10px] leading-4 text-[#93827a]"><ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#d6af68]" /> Your selection is saved locally in this browser so returning learners see the same private entry. Reconfirm or clear it at any time from the age-verification control. No identity document is requested by this introductory gateway.</p>
                 </>
               ) : (
                 <div className="mt-7 max-w-md">

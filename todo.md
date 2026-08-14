@@ -14,3 +14,12 @@
 - [x] Increase the prominent hero wordmark’s scale and visual impact, then verify it remains balanced across desktop and mobile.
 - [x] Verify the requested mobile-header text removal and ensure the icon-only brand control remains accessible and visually balanced.
 - [x] Add an accessible label to the icon-only mobile home control and suppress all non-essential cinematic motion for reduced-motion users.
+- [x] Audit and clean up hero imagery and video treatment for a focused cinematic opening scene.
+- [x] Strengthen the adult age-gateway flow, including the persistence and return path for verified members.
+- [x] Add the member sign-in entry point using the configured OAuth flow.
+- [x] Create persistent learner-progress records and member-facing progress controls for curriculum courses.
+- [x] Validate the age gateway, sign-in, and learning-progress flows across desktop and mobile before checkpointing.
+- [x] Verify that the fixed age gateway remains viewport-anchored after cinematic shell motion and does not inherit document-height positioning.
+- [x] Extend member progress records and dashboard controls to the complete curriculum atlas, including direct progress handoff from course-atlas actions.
+- [x] Re-verify the age gateway on mobile and document its post-fix viewport anchoring after the cinematic shell transition.
+- [ ] Complete a user-authenticated OAuth save-and-reload check when an active member session is available in the browser.

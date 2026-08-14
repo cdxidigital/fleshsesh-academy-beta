@@ -1,6 +1,7 @@
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { InsertUser, learnerProgress, users } from "../drizzle/schema";
+import { normalizeLearnerProgress, type LearnerProgressStatus } from "./learningProgress";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -89,4 +90,28 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-// TODO: add feature queries here as your schema grows.
+export async function listLearnerProgress(userId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is unavailable");
+  return db.select().from(learnerProgress).where(eq(learnerProgress.userId, userId));
+}
+
+export async function saveLearnerProgress(input: { userId: number; courseCode: string; progressPercent: number; status?: LearnerProgressStatus }) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is unavailable");
+  const normalized = normalizeLearnerProgress(input.progressPercent, input.status);
+  const now = new Date();
+  const completedAt = normalized.status === "completed" ? now : null;
+  await db.insert(learnerProgress).values({
+    userId: input.userId,
+    courseCode: input.courseCode,
+    progressPercent: normalized.progressPercent,
+    status: normalized.status,
+    lastOpenedAt: now,
+    completedAt,
+  }).onDuplicateKeyUpdate({
+    set: { progressPercent: normalized.progressPercent, status: normalized.status, lastOpenedAt: now, completedAt },
+  });
+  const result = await db.select().from(learnerProgress).where(and(eq(learnerProgress.userId, input.userId), eq(learnerProgress.courseCode, input.courseCode))).limit(1);
+  return result[0];
+}

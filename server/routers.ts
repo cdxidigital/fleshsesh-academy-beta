@@ -3,8 +3,10 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
+import * as db from "./db";
 import { getLecturerResponse, lecturers, type LecturerId } from "./lecturer";
-import { publicProcedure, router } from "./_core/trpc";
+import { learnerProgressStatuses } from "./learningProgress";
+import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -41,6 +43,14 @@ export const appRouter = router({
           throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "The lecturer is unavailable right now. Please try again shortly." });
         }
       }),
+  }),
+  learningProgress: router({
+    list: protectedProcedure.query(({ ctx }) => db.listLearnerProgress(ctx.user.id)),
+    upsert: protectedProcedure.input(z.object({
+      courseCode: z.string().trim().regex(/^FSH\s\d{3}$/),
+      progressPercent: z.number().finite().min(0).max(100),
+      status: z.enum(learnerProgressStatuses).optional(),
+    })).mutation(({ ctx, input }) => db.saveLearnerProgress({ ...input, userId: ctx.user.id })),
   }),
 
 });
