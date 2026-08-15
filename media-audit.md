@@ -26,3 +26,7 @@ The individual room redesign now uses each facility image as a full-bleed destin
 The rebuilt learning catalogue now renders as a media-backed atlas with visible course imagery on every unit card, a large learning-stage hero, and a protected, preview-safe entry state. An initial blank preview was traced to waiting on an unauthenticated member session; the development-only academy preview now renders independently without changing production enrolment guards. The repaired desktop capture confirms the complete 21-unit visual catalogue is present.
 
 The protected member space now carries the same visual system through its authenticated dashboard, with a large media-backed return-point hero, private-record summary, and visually legible enrolment-aware unit cards. Desktop and 390px mobile captures confirm that the responsive course filters, progress status, and per-unit paths remain available without weakening authenticated data boundaries.
+
+## Production Propagation
+
+The first production reads immediately after the visual-overhaul checkpoint still returned the pre-redesign homepage. A fresh auto-publish checkpoint completed successfully, after which the production domain served the replacement adult gateway with the media-backed, two-panel “Enter the learning house” composition and the Residence Life visual panel. This confirms that the live domain is now serving the visual-overhaul release rather than the previous interface.

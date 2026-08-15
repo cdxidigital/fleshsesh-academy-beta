@@ -34,6 +34,10 @@ The Esports Arena room now offers a direct handoff to the pre-existing, non-live
 
 The redesigned protected unit view was checked through the existing development-only lesson preview at desktop and 390px mobile widths. The teaching sequence, current module, non-disclosure practice, knowledge check, completion action, unit progress, and reward boundary are visible without creating learner data or weakening production enrolment gates.
 
+The redesigned adult gateway was also checked at desktop and 390px mobile widths through the development-only age-gate preview. The desktop form pairs the clear adult-learning confirmation with an editorial Residence Life visual panel; the mobile layout keeps the same confirmation and explanatory copy in a readable single-column form, with both confirmation and leave actions reachable.
+
 The development-only member-workspace preview was checked at desktop and 390px mobile widths. It clearly labels itself as having no account data, no identity, no saved progress, no enrolments, no rewards, and no completions; its unit cards retain their real catalogue metadata but require member sign-in. This verifies the protected dashboard visual system without fabricating learner records.
 
 The final `preview=member-auth` route renders the authenticated dashboard layout at desktop and 390px mobile widths while explicitly showing no identity, progress, enrolment, reward, or completion data. This provides a production-structure visual check without manufacturing a learner record; a real member session remains required for the separate live progress round-trip already tracked in the project checklist.
+
+The redesigned desktop pathway was rechecked end-to-end in development-only academy preview: homepage → Campus hub → eClinic room → eClinic mapped learning collection. The room carried its selected visual identity, non-disclosure learning posture, and safety boundary into the filtered catalogue, which correctly displayed FSH 103, FSH 105, FSH 202, and FSH 301. The separate true mobile-width click-through remains pending because the interactive browser cannot resize its viewport.
