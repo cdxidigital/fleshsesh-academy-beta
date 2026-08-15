@@ -46,6 +46,12 @@ function SkipToMainContent() {
   return <a href="#main-content" className="sr-only fixed left-4 top-4 z-[100] border border-[#e6c887] bg-[#061018] px-4 py-3 text-[10px] font-bold uppercase tracking-[.14em] text-[#f1dca4] shadow-[0_16px_36px_rgba(0,0,0,.5)] outline-none focus:not-sr-only focus:ring-2 focus:ring-[#e49aa9] focus:ring-offset-2 focus:ring-offset-[#061018]">Skip to main content</a>;
 }
 
+function RouteAnnouncement() {
+  const [location] = useLocation();
+  const label = location === "/" ? "eCampus home" : location === "/orientation" ? "course orientation" : location === "/learn" ? "learning atlas" : location === "/member" ? "member workspace" : location === "/member/achievements" ? "achievement archive" : location === "/campus/esports/readiness" ? "Arena connector readiness" : location === "/campus" ? "campus hub" : location.startsWith("/campus/") ? "campus facility room" : "fleshsesh academy";
+  return <p className="sr-only" aria-live="polite" aria-atomic="true">Navigated to {label}</p>;
+}
+
 // NOTE: About Theme
 // - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
 //   to keep consistent foreground/background color across components
@@ -60,6 +66,7 @@ function App() {
       >
         <TooltipProvider>
           <SkipToMainContent />
+          <RouteAnnouncement />
           <Toaster />
           <Router />
         </TooltipProvider>

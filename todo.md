@@ -136,3 +136,8 @@
 - [x] Verify desktop skip-link focus and main landmark targeting on the no-data member workspace preview.
 - [x] Verify desktop skip-link focus and main landmark targeting on the learning atlas.
 - [ ] Verify skip-link focus visibility and main landmark targeting at the mobile breakpoint.
+- [x] Define non-disclosive accessible route-announcement labels that never expose learner, enrolment, progress, reward, payment, or device data.
+- [x] Add a polite screen-reader route-change announcement to the application shell.
+- [x] Validate route-announcement text and visual invisibility across public, learning, member-preview, and Arena routes.
+- [x] Validate static route-announcement text for the Arena readiness and no-data member preview routes.
+- [x] Validate static route-announcement text for the public orientation and learning atlas routes.

@@ -90,6 +90,10 @@ The no-data member workspace preview was checked on desktop as well. Its keyboar
 
 Mobile rendered checks at 390px confirm that the global accessibility shell does not displace the orientation’s privacy-first hero or the learning atlas’s private shelf panel. The skip control remains intentionally hidden until keyboard focus, so true mobile focus interaction remains separately pending rather than inferred from these layout screenshots.
 
+The application shell now provides a visually hidden, polite route-change announcement made only from static destination labels. Development checks confirmed “Navigated to Arena connector readiness” on the non-live reference and “Navigated to member workspace” on the no-data member preview. Neither announcement contains learner identity, enrolment, progress, reward, payment, device, or participation information.
+
+The public orientation and learning atlas routes were also checked. They announce the fixed labels “Navigated to course orientation” and “Navigated to learning atlas” respectively, while their rendered editorial interfaces remain unchanged. The announcements contain no selected route, shelf, course, or learning-record content.
+
 The development-only member-workspace preview was checked at desktop and 390px mobile widths. It clearly labels itself as having no account data, no identity, no saved progress, no enrolments, no rewards, and no completions; its unit cards retain their real catalogue metadata but require member sign-in. This verifies the protected dashboard visual system without fabricating learner records.
 
 The final `preview=member-auth` route renders the authenticated dashboard layout at desktop and 390px mobile widths while explicitly showing no identity, progress, enrolment, reward, or completion data. This provides a production-structure visual check without manufacturing a learner record; a real member session remains required for the separate live progress round-trip already tracked in the project checklist.
