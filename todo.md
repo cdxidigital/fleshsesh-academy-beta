@@ -97,3 +97,12 @@
 - [ ] Interactively verify the reverse shelf flow from orientation to the learning catalogue on desktop.
 - [ ] Repeat cross-page shelf persistence validation at an interactive mobile width when that environment is available.
 - [ ] Validate syllabus-shelf behavior and responsive presentation before checkpointing.
+- [x] Define a certificate-readiness model that derives status only from existing enrolment and lesson-completion records.
+- [x] Add a safeguarded certificate-readiness panel to the member learning surface without fabricating learner data or issuing credentials prematurely.
+- [x] Provide clear certificate boundary language distinguishing course-completion recognition from clinical, legal, professional, or accredited qualifications.
+- [x] Add automated coverage for the certificate-readiness calculation using lesson-completion and enrolment scenarios.
+- [ ] Validate certificate-readiness visual states at desktop and mobile breakpoints without synthetic learner records.
+- [x] Validate the no-data certificate-readiness preview at desktop and mobile without creating learner data.
+- [ ] Validate the certificate-readiness empty or no-enrolment state with a consenting real member session.
+- [ ] Validate the in-progress certificate-readiness state with a consenting real enrolled learner session.
+- [ ] Validate the recognition-ready certificate-readiness state with a consenting real completed learner session.
