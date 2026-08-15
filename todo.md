@@ -81,3 +81,8 @@
 - [x] Add a development-only, non-synthetic member-workspace preview that shows no personal progress or enrolment data.
 - [x] Add an explicitly authenticated-layout development preview that uses no learner identity, progress, enrolment, reward, or completion data.
 - [x] Verify that the published production domain serves the latest visual-overhaul checkpoint rather than the previous homepage implementation.
+- [x] Add a visual, non-disclosive course-discovery experience that helps visitors choose an eCampus starting route without collecting personal history.
+- [x] Connect each course-discovery route to its mapped facility and filtered learning collection.
+- [ ] Validate the route-discovery interaction across desktop and mobile before checkpointing.
+- [ ] Re-verify the desktop orientation selection and mapped-units handoff through direct UI clicks without console assistance.
+- [ ] Validate the orientation selection and mapped-units handoff on a true interactive mobile viewport.

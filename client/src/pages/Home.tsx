@@ -137,7 +137,7 @@ export default function Home() {
     if (isAuthenticated) return setLocation(routeWithPreview("/member", previewMode));
     startLogin();
   };
-  const openLearning = () => ageConfirmed ? setLocation(routeWithPreview("/learn", previewMode)) : resetAgeGate();
+  const openLearning = () => ageConfirmed ? setLocation(routeWithPreview("/orientation", previewMode)) : resetAgeGate();
   const openCourse = (course: AcademyCourse) => ageConfirmed ? setLocation(routeWithPreview(`/learn?course=${encodeURIComponent(course.code)}`, previewMode)) : resetAgeGate();
   const chooseLecturer = (id: FacultyId) => {
     setSelectedLecturerId(id);
