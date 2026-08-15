@@ -1,0 +1,25 @@
+import { useAuth } from "@/_core/hooks/useAuth";
+import { startLogin } from "@/const";
+import { trpc } from "@/lib/trpc";
+import { ArrowLeft, Award, ShieldCheck } from "lucide-react";
+import { useEffect, useMemo } from "react";
+import { useLocation } from "wouter";
+import { buildAchievementArchive } from "@shared/achievementArchive";
+
+const wordmark = "/manus-storage/fleshsesh-academy-wordmark_f79fa930.png";
+const scene = "/manus-storage/fleshsesh-law-library-editorial_d61126d2.jpg";
+const ageStorageKey = "fleshsesh_academy_age_confirmed_v2";
+
+export default function AchievementArchive() {
+  const [, setLocation] = useLocation();
+  const { isAuthenticated } = useAuth();
+  const previewHost = typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname.endsWith(".manus.computer"));
+  const preview = previewHost && new URLSearchParams(window.location.search).get("preview") === "member-auth";
+  const ageVerified = preview || (typeof window !== "undefined" && window.localStorage.getItem(ageStorageKey) === "true");
+  const learning = trpc.academy.myLearning.useQuery(undefined, { enabled: isAuthenticated && ageVerified });
+  const archive = useMemo(() => buildAchievementArchive(learning.data?.badges ?? []), [learning.data?.badges]);
+  useEffect(() => { if (!ageVerified) setLocation("/"); }, [ageVerified, setLocation]);
+  if (!ageVerified) return null;
+  if (!isAuthenticated && !preview) return <main className="grid min-h-screen place-items-center bg-[#061018] px-5 text-[#eff4f1]"><section className="max-w-xl border border-white/15 bg-[#071720] p-8"><p className="text-[10px] font-bold uppercase tracking-[.2em] text-[#e6c887]">Private achievement archive</p><h1 className="mt-5 font-display text-6xl leading-[.8]">Sign in to read<br /><em className="text-[#e49aa9]">your record.</em></h1><p className="mt-6 text-sm leading-6 text-[#c7d6d2]">Only your existing earned course-completion badges appear here.</p><button onClick={startLogin} className="mt-8 bg-[#e49aa9] px-5 py-4 text-xs font-bold uppercase tracking-[.13em] text-[#061018]">Member sign in</button></section></main>;
+  return <main className="min-h-screen bg-[#061018] text-[#eff4f1]"><header className="sticky top-0 z-40 border-b border-white/10 bg-[#061018]/90 backdrop-blur-xl"><div className="mx-auto flex h-[74px] max-w-[1400px] items-center justify-between px-5 sm:px-8 lg:px-12"><button onClick={() => setLocation(preview ? "/member?preview=member-auth" : "/member")} className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[.14em] text-[#f1dca4]"><ArrowLeft className="h-4 w-4" /> Member record</button><img src={wordmark} alt="fleshsesh | academy" className="h-8 w-[145px] object-contain" /><span className="text-[9px] font-bold uppercase tracking-[.14em] text-[#e6c887]">{preview ? "No-data preview" : "Private archive"}</span></div></header><section className="relative overflow-hidden px-5 py-20 sm:px-8 lg:px-12"><img src={scene} alt="" className="absolute inset-0 h-full w-full object-cover opacity-30" /><div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,13,20,.98),rgba(4,13,20,.72))]" /><div className="relative mx-auto max-w-[1400px]"><p className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[.2em] text-[#e6c887]"><Award className="h-3.5 w-3.5" /> Course-completion archive</p><h1 className="mt-6 font-display text-[clamp(4.5rem,9vw,8rem)] leading-[.72]">Learning<br /><em className="text-[#e49aa9]">recognised.</em></h1><p className="mt-7 max-w-xl text-sm leading-6 text-[#d1ded9]">This is a private record of existing course-completion badges only. It cannot issue credentials and does not create or change learner data.</p></div></section><section className="px-5 py-16 sm:px-8 lg:px-12"><div className="mx-auto max-w-[1400px]"><div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">{preview ? <div className="col-span-full flex min-h-40 items-center gap-3 border border-white/15 bg-[#071720] p-6 text-sm text-[#c7d6d2]"><ShieldCheck className="h-5 w-5 shrink-0 text-[#e6c887]" />No badges are simulated in this preview. A signed-in member sees only their own existing badge records.</div> : archive.length ? archive.map((item) => <article key={`${item.courseCode}-${item.badgeCode}`} className="border border-[#e6c887]/30 bg-[#0b1c26] p-6"><p className="text-[9px] font-bold uppercase tracking-[.15em] text-[#e6c887]">{item.courseCode}</p><h2 className="mt-4 font-display text-4xl leading-[.82]">{item.courseTitle}</h2><p className="mt-4 text-xs font-bold uppercase tracking-[.13em] text-[#f0b1bb]">{item.label}</p><p className="mt-5 text-xs leading-5 text-[#c7d6d2]">{item.boundary}</p></article>) : <div className="col-span-full flex min-h-40 items-center gap-3 border border-white/15 bg-[#071720] p-6 text-sm text-[#c7d6d2]"><ShieldCheck className="h-5 w-5 shrink-0 text-[#e6c887]" />No earned course-completion badge is recorded yet. Badges appear automatically after completing an enrolled course’s required learning steps.</div>}</div></div></section></main>;
+}
