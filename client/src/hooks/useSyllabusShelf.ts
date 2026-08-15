@@ -30,5 +30,9 @@ export function useSyllabusShelf() {
     window.localStorage.setItem(syllabusShelfStorageKey, JSON.stringify(next));
     return next;
   });
-  return [shelfCodes, toggleShelf] as const;
+  const clearShelf = () => {
+    window.localStorage.removeItem(syllabusShelfStorageKey);
+    setShelfCodes([]);
+  };
+  return [shelfCodes, toggleShelf, clearShelf] as const;
 }

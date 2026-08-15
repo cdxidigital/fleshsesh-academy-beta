@@ -39,5 +39,10 @@ export function useRecentlyViewedCourses() {
     });
   }, []);
 
-  return [courseCodes, recordCourse] as const;
+  const clearRecentlyViewed = useCallback(() => {
+    window.localStorage.removeItem(recentlyViewedStorageKey);
+    setCourseCodes([]);
+  }, []);
+
+  return [courseCodes, recordCourse, clearRecentlyViewed] as const;
 }

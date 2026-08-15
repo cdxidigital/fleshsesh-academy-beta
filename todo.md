@@ -154,3 +154,6 @@
 - [x] Define privacy-safe, topic-based faculty conversation starters that do not solicit learner disclosures.
 - [x] Add contextual conversation-starter controls to the AI faculty studio.
 - [x] Add automated coverage and validate the enhanced faculty studio at desktop and mobile breakpoints.
+- [x] Define a clear browser-local reset boundary for private shelf and recently viewed course codes.
+- [x] Add explicit local-only clear controls without changing member, enrolment, progress, reward, payment, or device data.
+- [x] Add automated coverage and validate the privacy-reset controls at desktop and mobile breakpoints.
