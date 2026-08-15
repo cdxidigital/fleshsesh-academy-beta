@@ -66,6 +66,8 @@ The private achievement archive route was checked in the no-data authenticated-l
 
 The member-header archive entry point is gated to an authenticated, non-preview workspace only. Both preview forms were rendered after this control was added: desktop `preview=member-auth` and mobile `preview=member` each omit the archive action and retain their explicit no-saved-data label. A real signed-in member-session check remains required to exercise the visible member entry point itself.
 
+The published production domain remains reachable and presents the adult-only access gateway as its first surface. The live gateway visibly retains its explicit age-confirmation checkbox, Enter eCampus action, exit route, educational-purpose framing, and browser-local—not identity-document—boundary before any protected campus content can be accessed.
+
 The development-only member-workspace preview was checked at desktop and 390px mobile widths. It clearly labels itself as having no account data, no identity, no saved progress, no enrolments, no rewards, and no completions; its unit cards retain their real catalogue metadata but require member sign-in. This verifies the protected dashboard visual system without fabricating learner records.
 
 The final `preview=member-auth` route renders the authenticated dashboard layout at desktop and 390px mobile widths while explicitly showing no identity, progress, enrolment, reward, or completion data. This provides a production-structure visual check without manufacturing a learner record; a real member session remains required for the separate live progress round-trip already tracked in the project checklist.
