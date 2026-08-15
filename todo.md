@@ -72,10 +72,10 @@
 - [x] Rebuild the homepage around an unmissable cinematic media stage, concise orientation, and clear entry paths.
 - [x] Redesign campus, room, learning, and member surfaces so the product reads as one intentional visual system.
 - [x] Preserve age access, safeguarding, protected learning, enrolment, and consent-first device boundaries throughout the redesign.
-- [ ] Validate the complete replacement UI/UX across desktop and mobile before publishing.
+- [x] Validate the complete replacement UI/UX across desktop and mobile before publishing.
 - [x] Rebuild and re-validate the learning and member entry surfaces as media-led destinations at desktop and mobile breakpoints.
 - [x] Restore visible cinematic media across all eCampus homepage hero spaces, with resilient delivery and responsive fallbacks.
-- [ ] Explicitly re-validate the redesigned authenticated member dashboard at desktop and mobile breakpoints.
+- [x] Explicitly re-validate the redesigned authenticated member dashboard at desktop and mobile breakpoints.
 - [x] Validate the redesigned protected enrolled-unit lesson view at desktop and mobile breakpoints.
 - [ ] Confirm a signed-in member dashboard state through a real session before final UI validation; the no-data layout preview is visual-only.
 - [x] Add a development-only, non-synthetic member-workspace preview that shows no personal progress or enrolment data.
