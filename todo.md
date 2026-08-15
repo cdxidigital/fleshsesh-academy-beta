@@ -141,3 +141,6 @@
 - [x] Validate route-announcement text and visual invisibility across public, learning, member-preview, and Arena routes.
 - [x] Validate static route-announcement text for the Arena readiness and no-data member preview routes.
 - [x] Validate static route-announcement text for the public orientation and learning atlas routes.
+- [x] Define a global keyboard-only focus-visible treatment with sufficient contrast against dark editorial surfaces.
+- [x] Apply the focus-visible treatment to interactive controls without changing learner, payment, shelf, or device data.
+- [ ] Validate focus visibility on public, learning, member-preview, and Arena controls at desktop and mobile layouts.

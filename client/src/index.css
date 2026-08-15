@@ -124,6 +124,11 @@
   select:not(:disabled),
   input[type="checkbox"]:not(:disabled),
   input[type="radio"]:not(:disabled) { @apply cursor-pointer; }
+  :focus-visible {
+    outline: 2px solid #e6c887;
+    outline-offset: 4px;
+    box-shadow: 0 0 0 5px rgb(228 154 169 / 0.28);
+  }
 }
 
 @layer components {
