@@ -9,13 +9,18 @@ export function parseSyllabusShelfStorage(raw: string | null): string[] {
   }
 }
 
+export function parseSyllabusShelfStorageEvent(key: string | null, newValue: string | null): string[] | null {
+  return key === syllabusShelfStorageKey ? parseSyllabusShelfStorage(newValue) : null;
+}
+
 export function useSyllabusShelf() {
   const [shelfCodes, setShelfCodes] = useState<string[]>([]);
   useEffect(() => {
     const sync = (raw: string | null) => setShelfCodes(parseSyllabusShelfStorage(raw));
     sync(window.localStorage.getItem(syllabusShelfStorageKey));
     const onStorage = (event: StorageEvent) => {
-      if (event.key === syllabusShelfStorageKey) sync(event.newValue);
+      const next = parseSyllabusShelfStorageEvent(event.key, event.newValue);
+      if (next) setShelfCodes(next);
     };
     window.addEventListener("storage", onStorage);
     return () => window.removeEventListener("storage", onStorage);

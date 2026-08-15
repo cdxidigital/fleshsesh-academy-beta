@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { normalizeSyllabusShelf, toggleSyllabusCourse } from "./syllabusShelf";
-import { parseSyllabusShelfStorage } from "@/hooks/useSyllabusShelf";
+import { parseSyllabusShelfStorage, parseSyllabusShelfStorageEvent } from "@/hooks/useSyllabusShelf";
 
 describe("browser-local syllabus shelf", () => {
   it("retains only unique, valid course codes", () => {
@@ -15,5 +15,10 @@ describe("browser-local syllabus shelf", () => {
   it("normalizes valid external browser-storage payloads and rejects malformed values", () => {
     expect(parseSyllabusShelfStorage('["FSH 101","FSH 101","nope"]')).toEqual(["FSH 101"]);
     expect(parseSyllabusShelfStorage("not-json")).toEqual([]);
+  });
+
+  it("accepts only shelf storage events and normalizes their course-code payload", () => {
+    expect(parseSyllabusShelfStorageEvent("unrelated_key", '["FSH 101"]')).toBeNull();
+    expect(parseSyllabusShelfStorageEvent("fleshsesh_academy_syllabus_shelf_v1", '["FSH 206","invalid"]')).toEqual(["FSH 206"]);
   });
 });
