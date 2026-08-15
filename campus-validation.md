@@ -27,3 +27,5 @@ The Law Library room validated at desktop size as a complete editorial learning 
 Each mapped course card now opens its precise unit detail while preserving the facility filter in the learning route. The Law Library’s FSH 102 deep link was verified at desktop size: it opens the correct enrolment-gated unit and its return control remains labelled “Law Library pathway.”
 
 Facility faculty handoffs now carry the selected lecturer into the existing AI faculty studio. The Residence Life Amara Williams handoff was verified with `faculty=amara`: the faculty view presented Amara’s selected scope, teaching prompts, and correctly labelled educational question field rather than defaulting to another lecturer.
+
+The Esports Arena room now offers a direct handoff to the pre-existing, non-live tournament lobby. The anchored route selected Esports as the active facility and settled on the consent-first session protocol, including its four acknowledgements, emergency stop, pause and disconnect controls, and the explicit notice that no provider or personal device is connected.

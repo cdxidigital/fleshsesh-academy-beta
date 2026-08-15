@@ -58,6 +58,16 @@ export default function Campus() {
   useEffect(() => {
     if (!previewMode) setAgeConfirmed(window.localStorage.getItem(ageStorageKey) === "true");
     setAgeChecked(true);
+    if (window.location.hash === "#arena-lobby") {
+      setSelectedFacility("esports");
+      const frame = window.requestAnimationFrame(() => {
+        Array.from(document.querySelectorAll("h2"))
+          .find((heading) => heading.textContent?.includes("Tournament culture"))
+          ?.closest("section")
+          ?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      return () => window.cancelAnimationFrame(frame);
+    }
   }, [previewMode]);
 
   const activeFacility = useMemo(
