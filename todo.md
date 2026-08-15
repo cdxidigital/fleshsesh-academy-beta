@@ -144,3 +144,6 @@
 - [x] Define a global keyboard-only focus-visible treatment with sufficient contrast against dark editorial surfaces.
 - [x] Apply the focus-visible treatment to interactive controls without changing learner, payment, shelf, or device data.
 - [ ] Validate focus visibility on public, learning, member-preview, and Arena controls at desktop and mobile layouts.
+- [x] Define a browser-local recently viewed course contract that stores only validated course codes and no learner, account, enrolment, or progress data.
+- [x] Add a private recently viewed course thread to the learning experience with an explicit local-data boundary.
+- [x] Add automated coverage and validate the recently viewed thread at desktop and mobile breakpoints.
