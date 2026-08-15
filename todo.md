@@ -108,5 +108,8 @@
 - [ ] Validate the recognition-ready certificate-readiness state with a consenting real completed learner session.
 - [x] Define a read-only achievement archive that surfaces existing earned badges without implying professional credentials or creating new learner data.
 - [ ] Add the achievement archive to the authenticated member workspace and keep it unavailable in no-data preview states.
+- [x] Add an authenticated-only achievement archive entry point in the member workspace header.
+- [x] Verify that the achievement archive entry point is omitted from both no-data workspace preview states.
+- [ ] Verify the authenticated member entry point with a consenting real member session.
 - [x] Add automated coverage for the achievement archive’s badge-to-course mapping and recognition boundaries.
 - [x] Validate achievement archive rendering at desktop and mobile breakpoints without synthetic learner data.

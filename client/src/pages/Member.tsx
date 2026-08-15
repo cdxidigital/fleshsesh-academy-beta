@@ -42,6 +42,18 @@ export default function Member() {
   const learningPath = (previewMode || workspacePreview) ? "/learn?preview=academy" : "/learn";
 
   useEffect(() => { if (!ageVerified) setLocation("/"); }, [ageVerified, setLocation]);
+  useEffect(() => {
+    if (!isAuthenticated || workspacePreview) return;
+    const headerRow = document.querySelector("header > div");
+    if (!headerRow || document.getElementById("achievement-archive-link")) return;
+    const link = document.createElement("a");
+    link.id = "achievement-archive-link";
+    link.href = "/member/achievements";
+    link.textContent = "Achievement archive";
+    link.className = "hidden text-[9px] font-bold uppercase tracking-[.13em] text-[#e6c887] transition hover:text-[#f0b1bb] md:inline-block";
+    headerRow.append(link);
+    return () => link.remove();
+  }, [isAuthenticated, workspacePreview]);
   if (!ageVerified) return null;
   if (loading && !previewMode && !workspacePreview) return <div className="grid min-h-screen place-items-center bg-[#061018] text-[#e6c887]"><span className="text-[10px] font-bold uppercase tracking-[.22em]">Opening your learning record</span></div>;
   if (!isAuthenticated && !workspacePreview) return <main className="relative grid min-h-screen place-items-center overflow-hidden bg-[#061018] px-5 py-8 text-[#eff4f1]"><img src={lawLibraryScene} alt="" className="absolute inset-0 h-full w-full object-cover opacity-35" /><div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,13,20,.96),rgba(4,13,20,.72),rgba(4,13,20,.92))]" /><section className="relative w-full max-w-3xl border border-white/15 bg-[#071720]/86 p-8 shadow-[0_30px_100px_rgba(0,0,0,.58)] backdrop-blur-sm sm:p-12"><img src={wordmark} alt="fleshsesh | academy" className="h-12 w-[210px] object-contain object-left" /><p className="mt-12 text-[10px] font-bold uppercase tracking-[.22em] text-[#e6c887]">Private learning record</p><h1 className="mt-5 max-w-xl font-display text-7xl leading-[.75] tracking-[-.06em]">Keep your<br /><em className="text-[#e49aa9]">place in the story.</em></h1><p className="mt-8 max-w-xl text-sm leading-6 text-[#c9d8d4]">Sign in to connect confirmed enrolments, completion steps, and competency recognition to your private member record. The academy does not ask for intimate disclosure to use this space.</p><div className="mt-9 flex flex-wrap gap-3"><button onClick={startLogin} className="inline-flex items-center gap-2 bg-[#e49aa9] px-5 py-4 text-xs font-bold uppercase tracking-[.14em] text-[#061018]">Member sign in <ArrowUpRight className="h-4 w-4" /></button><button onClick={() => setLocation(homePath)} className="inline-flex items-center gap-2 border border-white/20 px-5 py-4 text-xs font-bold uppercase tracking-[.14em] text-[#f1dca4]">Return to eCampus <ArrowLeft className="h-4 w-4" /></button></div></section></main>;
