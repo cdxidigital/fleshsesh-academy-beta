@@ -87,3 +87,6 @@
 - [ ] Re-verify the desktop orientation selection and mapped-units handoff through direct UI clicks without console assistance.
 - [ ] Validate the orientation selection and mapped-units handoff on a true interactive mobile viewport.
 - [x] Make orientation-route selection URL-addressable so direct UI clicks retain the chosen visual route without relying on transient client state.
+- [x] Add a browser-local syllabus shelf that saves only course codes on the current device and never creates an account, profile, or disclosure record.
+- [ ] Add clear save and remove controls in the course-discovery and learning views with visible privacy messaging.
+- [ ] Validate syllabus-shelf behavior and responsive presentation before checkpointing.

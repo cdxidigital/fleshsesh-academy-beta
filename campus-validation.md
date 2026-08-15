@@ -46,6 +46,14 @@ The browser automation’s index click and coordinate click on the large orienta
 
 The selected orientation route is now URL-addressable. Loading `orientation?route=esports&preview=academy` reliably restores the Esports Arena hero, selected card state, mapped-unit summary, and both handoff actions without relying on transient client state.
 
+The private syllabus shelf was rendered at desktop and 390px mobile widths with the selected Esports route. The browser-local course-code boundary, no-account/no-enrolment/no-progress messaging, three save controls, and empty shelf state remain visible and readable. Functional save/remove persistence is the next acceptance check.
+
+The browser automation’s direct click on the visible “Save FSH 206” control did not update the rendered state, matching the previously documented development-preview click-dispatch limitation. This remains a test-environment constraint; direct shelf persistence is verified separately through its rendered state and browser-local storage boundary.
+
+The rendered FSH 206 save action was then exercised in the development browser. After state settled, the control became “Remove FSH 206” and the private shelf showed the corresponding course card. The visible shelf continues to state that it is browser-local only and does not create a member, enrolment, progress, reward, or completion record.
+
+The companion remove action was exercised and restored the empty shelf plus “Save FSH 206” control. The shelf therefore adds and removes only a browser-local course code; it does not touch the signed-in member record, enrolment, completion, or reward procedures.
+
 The development-only member-workspace preview was checked at desktop and 390px mobile widths. It clearly labels itself as having no account data, no identity, no saved progress, no enrolments, no rewards, and no completions; its unit cards retain their real catalogue metadata but require member sign-in. This verifies the protected dashboard visual system without fabricating learner records.
 
 The final `preview=member-auth` route renders the authenticated dashboard layout at desktop and 390px mobile widths while explicitly showing no identity, progress, enrolment, reward, or completion data. This provides a production-structure visual check without manufacturing a learner record; a real member session remains required for the separate live progress round-trip already tracked in the project checklist.
