@@ -47,3 +47,9 @@
 - [x] Add a Stripe webhook fulfilment test that verifies completed checkout activation of the linked enrolment without duplicating payment data.
 - [x] Add reward and badge fulfilment tests covering repeat lesson completion and full-unit competency issuance.
 - [x] Explicitly set and verify page/document metadata and accessibility brand references to "fleshsesh | academy".
+- [ ] Define the adults-only eCampus facility worlds for the eClinic, law library, residence life, and esports arena, with distinct course and safety roles.
+- [ ] Create a cohesive set of non-explicit cinematic media assets for each facility and integrate them into facility navigation.
+- [ ] Build the eClinic, law library, residence-life, and esports facility experiences with relevant class/course pathways.
+- [ ] Add an opt-in device-connectivity architecture for compatible personal devices with privacy, consent, emergency-stop, and tournament-control boundaries.
+- [ ] Validate facility navigation, device-consent controls, and responsive media treatment before checkpointing.
+- [x] Restore visible cinematic media across all eCampus homepage hero spaces, with resilient delivery and responsive fallbacks.

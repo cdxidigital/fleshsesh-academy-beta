@@ -34,6 +34,11 @@ import {
 const emblem = "/manus-storage/fleshsesh-academy-emblem_79c8c72e.png";
 const wordmark = "/manus-storage/fleshsesh-academy-wordmark_f79fa930.png";
 const academyFilm = "/manus-storage/fleshsesh-academy-ambient-film_52e77d54.mp4";
+const heroStillOne = "/manus-storage/fleshsesh-ecampus-hero-still-01_6a3a19e5.jpg";
+const heroStillTwo = "/manus-storage/fleshsesh-ecampus-hero-still-02_19efd390.jpg";
+const lawLibraryScene = "/manus-storage/fleshsesh-law-library-editorial_d61126d2.jpg";
+const residenceLifeScene = "/manus-storage/fleshsesh-residence-life-editorial_70ee9870.jpg";
+const esportsScene = "/manus-storage/fleshsesh-esports-editorial_7a22e23b.jpg";
 const ageStorageKey = "fleshsesh_academy_age_confirmed_v2";
 const ageStorageDateKey = "fleshsesh_academy_age_confirmed_at";
 
@@ -298,8 +303,9 @@ export default function Home() {
 
         <section data-cinematic-section className="ecampus-hero relative overflow-hidden px-5 pb-14 pt-10 sm:px-8 sm:pb-20 sm:pt-14 lg:min-h-[760px] lg:px-12 lg:pb-24 lg:pt-16">
           <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-            {ageConfirmed && filmAvailable && filmPlaying && <video autoPlay loop muted playsInline preload="metadata" onError={() => setFilmAvailable(false)} className="absolute inset-0 h-full w-full object-cover object-[62%_center] opacity-[0.46] saturate-[0.7] contrast-[1.06]"><source src={academyFilm} type="video/mp4" /></video>}
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,#0d1822_4%,rgba(13,24,34,0.92)_37%,rgba(13,24,34,0.36)_72%,#0d1822_100%)]" />
+            {filmAvailable && filmPlaying && <video autoPlay loop muted playsInline preload="auto" poster={heroStillOne} onError={() => setFilmAvailable(false)} className="absolute inset-0 h-full w-full object-cover object-[62%_center] opacity-[0.74] saturate-[0.78] contrast-[1.06]"><source src={academyFilm} type="video/mp4" /></video>}
+            {!filmAvailable && <img src={heroStillOne} alt="" className="absolute inset-0 h-full w-full object-cover object-[62%_center] opacity-80" />}
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,#0d1822_2%,rgba(13,24,34,0.91)_38%,rgba(13,24,34,0.28)_74%,rgba(13,24,34,0.52)_100%)]" />
             <div className="ecampus-fade-frame ecampus-fade-frame-one" />
             <div className="ecampus-fade-frame ecampus-fade-frame-two" />
             <div className="ecampus-fade-frame ecampus-fade-frame-three" />
@@ -326,11 +332,14 @@ export default function Home() {
                 <button onClick={() => jumpToSection("care")} className="inline-flex items-center gap-2 border-b border-[#d8bd82]/60 pb-1 text-xs font-semibold text-[#e3cc96] transition hover:border-[#df8997] hover:text-[#ec9aa6]">How eCampus protects your space <ArrowUpRight className="h-3.5 w-3.5" /></button>
               </div>
             </div>
-            <div className="relative overflow-hidden border border-[#d8bd82]/30 bg-[#101f2b]/75 p-5 backdrop-blur-sm lg:mb-3 lg:p-6">
-              <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#d8bd82]">eCampus welcome sequence</p>
-              <p className="mt-4 font-display text-3xl leading-[0.92] text-[#f3f7f4]">Begin with orientation.<br /><em className="text-[#ec9aa6]">Choose your next scene.</em></p>
-              <div className="mt-6 grid grid-cols-3 gap-px border border-white/10 bg-white/10"><button onClick={openLearningCatalogue} className="bg-[#152532] px-2 py-3 text-left text-[9px] font-bold uppercase tracking-[.12em] text-[#d8bd82] hover:bg-[#2a3a49]">Explore</button><button onClick={openMemberSpace} className="bg-[#152532] px-2 py-3 text-left text-[9px] font-bold uppercase tracking-[.12em] text-[#d8bd82] hover:bg-[#2a3a49]">Continue</button><button onClick={() => jumpToSection("care")} className="bg-[#152532] px-2 py-3 text-left text-[9px] font-bold uppercase tracking-[.12em] text-[#d8bd82] hover:bg-[#2a3a49]">Support</button></div>
-              {filmAvailable && <button onClick={() => setFilmPlaying(playing => !playing)} className="mt-5 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.15em] text-[#b9c9c8] transition hover:text-[#e3cc96]">{filmPlaying ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5 fill-current" />}{filmPlaying ? "Pause welcome film" : "Play welcome film"}</button>}
+            <div className="relative overflow-hidden border border-[#d8bd82]/35 bg-[#101f2b]/70 p-3 shadow-[0_22px_80px_rgba(3,12,20,0.38)] backdrop-blur-sm lg:mb-3 lg:p-4">
+              <div className="relative aspect-[4/5] overflow-hidden border border-white/10 bg-[#0d1822]">
+                <img src={lawLibraryScene} alt="Warmly lit eCampus law library" className="h-full w-full object-cover object-center opacity-100 saturate-[0.88] contrast-[1.04]" />
+                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(8,22,32,0.02),rgba(8,22,32,0.28)_58%,rgba(8,22,32,0.88))]" />
+                <div className="absolute inset-x-0 bottom-0 p-4 lg:p-5"><p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#d8bd82]">Campus after dark · 01</p><p className="mt-2 font-display text-2xl leading-[0.9] text-[#f3f7f4]">Read the room.<br /><em className="text-[#ec9aa6]">Set the pace.</em></p></div>
+              </div>
+              <div className="mt-3 grid grid-cols-3 gap-px border border-white/10 bg-white/10"><button onClick={openLearningCatalogue} className="bg-[#152532] px-2 py-3 text-left text-[9px] font-bold uppercase tracking-[.12em] text-[#d8bd82] transition hover:bg-[#2a3a49]">Explore</button><button onClick={openMemberSpace} className="bg-[#152532] px-2 py-3 text-left text-[9px] font-bold uppercase tracking-[.12em] text-[#d8bd82] transition hover:bg-[#2a3a49]">Continue</button><button onClick={() => jumpToSection("care")} className="bg-[#152532] px-2 py-3 text-left text-[9px] font-bold uppercase tracking-[.12em] text-[#d8bd82] transition hover:bg-[#2a3a49]">Support</button></div>
+              {filmAvailable && <button onClick={() => setFilmPlaying(playing => !playing)} className="mt-4 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.15em] text-[#b9c9c8] transition hover:text-[#e3cc96]">{filmPlaying ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5 fill-current" />}{filmPlaying ? "Pause welcome film" : "Play welcome film"}</button>}
             </div>
           </div>
           <div className="relative mt-16 grid max-w-[770px] grid-cols-3 border-y border-white/10 py-5 sm:mt-20">
@@ -339,6 +348,14 @@ export default function Home() {
                 <p className="font-display text-3xl font-semibold text-[#f1d494] sm:text-4xl">{value}</p>
                 <p className="mt-1.5 max-w-[110px] text-[10px] leading-4 text-[#a89b93] sm:text-[11px]">{label}</p>
               </div>
+            ))}
+          </div>
+          <div className="relative mt-6 grid max-w-[770px] grid-cols-[1.45fr_1fr_1fr] gap-2 sm:mt-8">
+            {[{ src: lawLibraryScene, label: "law library" }, { src: residenceLifeScene, label: "residence life" }, { src: esportsScene, label: "esports" }].map((frame, index) => (
+              <figure key={frame.label} className={`group relative overflow-hidden border border-white/10 bg-[#101f2b] ${index === 0 ? "aspect-[1.45/0.72]" : "aspect-square"}`}>
+                <img src={frame.src} alt={`eCampus welcome-film frame: ${frame.label}`} className="h-full w-full object-cover opacity-75 grayscale-[0.12] transition duration-500 group-hover:scale-[1.04] group-hover:opacity-100" />
+                <figcaption className="absolute inset-x-0 bottom-0 bg-[linear-gradient(transparent,rgba(8,22,32,0.92))] px-3 pb-2 pt-6 text-[8px] font-bold uppercase tracking-[0.18em] text-[#f4e7cb]">Scene 0{index + 1} · {frame.label}</figcaption>
+              </figure>
             ))}
           </div>
         </section>
