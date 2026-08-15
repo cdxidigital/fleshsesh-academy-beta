@@ -26,6 +26,19 @@ export default function Orientation() {
     setAgeReady(true);
   }, [previewMode]);
 
+  useEffect(() => {
+    const requestedRoute = new URLSearchParams(window.location.search).get("route");
+    if (campusFacilities.some((facility) => facility.id === requestedRoute)) setSelectedId(requestedRoute as FacilityId);
+  }, []);
+
+  useEffect(() => {
+    if (!selectedId) return;
+    const url = new URL(window.location.href);
+    if (url.searchParams.get("route") === selectedId) return;
+    url.searchParams.set("route", selectedId);
+    window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+  }, [selectedId]);
+
   const selected = useMemo(() => campusFacilities.find((facility) => facility.id === selectedId) ?? null, [selectedId]);
   const previewQuery = previewMode ? "?preview=academy" : "";
   const withPreview = (path: string) => previewMode ? `${path}${path.includes("?") ? "&" : "?"}preview=academy` : path;

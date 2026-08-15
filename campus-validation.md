@@ -44,6 +44,8 @@ The corrected route-discovery interaction was then exercised with the digital-co
 
 The browser automation’s index click and coordinate click on the large orientation cards did not dispatch the expected state update, although the same rendered button handler updated state when invoked by the browser DOM. This is documented as an automation-control limitation rather than accepted direct-click validation; the actual user-facing route remains visually and structurally intact, and true mobile click-through remains an explicit pending acceptance check.
 
+The selected orientation route is now URL-addressable. Loading `orientation?route=esports&preview=academy` reliably restores the Esports Arena hero, selected card state, mapped-unit summary, and both handoff actions without relying on transient client state.
+
 The development-only member-workspace preview was checked at desktop and 390px mobile widths. It clearly labels itself as having no account data, no identity, no saved progress, no enrolments, no rewards, and no completions; its unit cards retain their real catalogue metadata but require member sign-in. This verifies the protected dashboard visual system without fabricating learner records.
 
 The final `preview=member-auth` route renders the authenticated dashboard layout at desktop and 390px mobile widths while explicitly showing no identity, progress, enrolment, reward, or completion data. This provides a production-structure visual check without manufacturing a learner record; a real member session remains required for the separate live progress round-trip already tracked in the project checklist.

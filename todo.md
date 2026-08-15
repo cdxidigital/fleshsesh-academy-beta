@@ -86,3 +86,4 @@
 - [ ] Validate the route-discovery interaction across desktop and mobile before checkpointing.
 - [ ] Re-verify the desktop orientation selection and mapped-units handoff through direct UI clicks without console assistance.
 - [ ] Validate the orientation selection and mapped-units handoff on a true interactive mobile viewport.
+- [x] Make orientation-route selection URL-addressable so direct UI clicks retain the chosen visual route without relying on transient client state.
