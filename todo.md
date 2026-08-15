@@ -64,4 +64,19 @@
 - [x] Link each facility-room course card directly to its mapped unit detail while preserving the facility-pathway return route.
 - [x] Make each facility-room faculty handoff open the assigned AI lecturer directly in the academy faculty studio.
 - [x] Add a direct Esports Arena room handoff to the existing non-live, consent-first tournament lobby without exposing a live device control.
+- [x] Audit why the rendered eCampus homepage hero does not visibly present its intended video and image media.
+- [x] Rebuild the main homepage hero as a clearly media-led cinematic stage with visible video, substantive imagery, and robust visual fallbacks.
+- [x] Add prominent, varied visual media moments through the facility and room journeys rather than relying on text-led sections.
+- [x] Validate highly visible hero and facility media at desktop and mobile breakpoints before checkpointing.
+- [x] Replace the current visual language with a coherent, immersive, media-first eCampus design system and navigation model.
+- [x] Rebuild the homepage around an unmissable cinematic media stage, concise orientation, and clear entry paths.
+- [x] Redesign campus, room, learning, and member surfaces so the product reads as one intentional visual system.
+- [x] Preserve age access, safeguarding, protected learning, enrolment, and consent-first device boundaries throughout the redesign.
+- [ ] Validate the complete replacement UI/UX across desktop and mobile before publishing.
+- [x] Rebuild and re-validate the learning and member entry surfaces as media-led destinations at desktop and mobile breakpoints.
 - [x] Restore visible cinematic media across all eCampus homepage hero spaces, with resilient delivery and responsive fallbacks.
+- [ ] Explicitly re-validate the redesigned authenticated member dashboard at desktop and mobile breakpoints.
+- [x] Validate the redesigned protected enrolled-unit lesson view at desktop and mobile breakpoints.
+- [ ] Confirm a signed-in member dashboard state through a real session before final UI validation; the no-data layout preview is visual-only.
+- [x] Add a development-only, non-synthetic member-workspace preview that shows no personal progress or enrolment data.
+- [x] Add an explicitly authenticated-layout development preview that uses no learner identity, progress, enrolment, reward, or completion data.
