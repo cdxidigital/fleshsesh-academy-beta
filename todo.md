@@ -96,18 +96,18 @@
 - [ ] Interactively verify that saving or removing a catalogue course updates its shelf count and persists to orientation on desktop.
 - [ ] Interactively verify the reverse shelf flow from orientation to the learning catalogue on desktop.
 - [ ] Repeat cross-page shelf persistence validation at an interactive mobile width when that environment is available.
-- [ ] Validate syllabus-shelf behavior and responsive presentation before checkpointing.
+- [ ] Validate the remaining interactive syllabus-shelf persistence behavior before checkpointing.
 - [x] Define a certificate-readiness model that derives status only from existing enrolment and lesson-completion records.
 - [x] Add a safeguarded certificate-readiness panel to the member learning surface without fabricating learner data or issuing credentials prematurely.
 - [x] Provide clear certificate boundary language distinguishing course-completion recognition from clinical, legal, professional, or accredited qualifications.
 - [x] Add automated coverage for the certificate-readiness calculation using lesson-completion and enrolment scenarios.
-- [ ] Validate certificate-readiness visual states at desktop and mobile breakpoints without synthetic learner records.
+- [ ] Validate the remaining certificate-readiness learner states at desktop and mobile breakpoints with consenting real sessions.
 - [x] Validate the no-data certificate-readiness preview at desktop and mobile without creating learner data.
 - [ ] Validate the certificate-readiness empty or no-enrolment state with a consenting real member session.
 - [ ] Validate the in-progress certificate-readiness state with a consenting real enrolled learner session.
 - [ ] Validate the recognition-ready certificate-readiness state with a consenting real completed learner session.
 - [x] Define a read-only achievement archive that surfaces existing earned badges without implying professional credentials or creating new learner data.
-- [ ] Add the achievement archive to the authenticated member workspace and keep it unavailable in no-data preview states.
+- [ ] Verify the achievement archive entry point in an authenticated real member workspace session.
 - [x] Add an authenticated-only achievement archive entry point in the member workspace header.
 - [x] Verify that the achievement archive entry point is omitted from both no-data workspace preview states.
 - [ ] Verify the authenticated member entry point with a consenting real member session.
@@ -116,7 +116,7 @@
 - [x] Define a provider-neutral device-connector readiness specification that permits no live device discovery, pairing, telemetry, or control.
 - [x] Surface the non-live connector readiness requirements within the Arena learning experience with privacy, consent, and emergency-stop boundaries.
 - [x] Add a direct Esports Arena handoff to the non-live connector readiness reference.
-- [ ] Validate the Esports Arena-to-readiness handoff at desktop and mobile breakpoints.
+- [ ] Validate the remaining interactive Esports Arena-to-readiness handoff acceptance checks.
 - [x] Validate the Esports Arena-to-readiness handoff at desktop.
 - [ ] Interactively verify the Esports Arena-to-readiness handoff on a mobile-width viewport when available.
 - [x] Add automated coverage for the non-live connector readiness rules.
@@ -129,3 +129,10 @@
 - [x] Add a hook-level test that dispatches the designated browser StorageEvent and confirms the shelf state updates.
 - [x] Add a hook-level test proving unrelated browser storage keys cannot update the shelf state.
 - [x] Validate shared shelf rendering at desktop and mobile breakpoints without account, enrolment, progress, reward, or disclosure data.
+- [x] Add an accessible skip-to-main-content control to the public learning, orientation, and private member navigation surfaces.
+- [x] Ensure the skip control is keyboard-visible, points to a unique main landmark, and preserves the dark editorial visual system.
+- [ ] Validate skip-link focus visibility and main-content targets at desktop and mobile breakpoints.
+- [x] Verify desktop keyboard focus and main landmark targeting on orientation.
+- [x] Verify desktop skip-link focus and main landmark targeting on the no-data member workspace preview.
+- [x] Verify desktop skip-link focus and main landmark targeting on the learning atlas.
+- [ ] Verify skip-link focus visibility and main landmark targeting at the mobile breakpoint.

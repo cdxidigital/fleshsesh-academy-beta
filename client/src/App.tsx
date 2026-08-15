@@ -12,6 +12,8 @@ import FacilityRoom from "./pages/FacilityRoom";
 import Orientation from "./pages/Orientation";
 import AchievementArchive from "./pages/AchievementArchive";
 import ArenaReadiness from "./pages/ArenaReadiness";
+import { useEffect } from "react";
+import { useLocation } from "wouter";
 
 /**
  * Rose Lacquer Learning House — dark editorial stage, restrained rose-gold detail,
@@ -36,6 +38,14 @@ function Router() {
   );
 }
 
+function SkipToMainContent() {
+  const [location] = useLocation();
+  useEffect(() => {
+    document.querySelector("main")?.setAttribute("id", "main-content");
+  }, [location]);
+  return <a href="#main-content" className="sr-only fixed left-4 top-4 z-[100] border border-[#e6c887] bg-[#061018] px-4 py-3 text-[10px] font-bold uppercase tracking-[.14em] text-[#f1dca4] shadow-[0_16px_36px_rgba(0,0,0,.5)] outline-none focus:not-sr-only focus:ring-2 focus:ring-[#e49aa9] focus:ring-offset-2 focus:ring-offset-[#061018]">Skip to main content</a>;
+}
+
 // NOTE: About Theme
 // - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
 //   to keep consistent foreground/background color across components
@@ -49,6 +59,7 @@ function App() {
         // switchable
       >
         <TooltipProvider>
+          <SkipToMainContent />
           <Toaster />
           <Router />
         </TooltipProvider>

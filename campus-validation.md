@@ -82,6 +82,14 @@ The shared shelf’s external browser-storage contract now has automated coverag
 
 A DOM-backed hook-level test now mounts the shared shelf hook, dispatches a real browser `StorageEvent`, and confirms that a designated shelf-key event updates rendered hook state with validated course codes. A matching negative test confirms unrelated keys do not update that state. This is automated browser-listener coverage; true multi-window acceptance remains a separate interaction check.
 
+The global skip-to-main-content control was checked on the desktop orientation route. It is first in the keyboard order, becomes visibly focused on the first Tab keypress, and targets the current page’s assigned `main-content` landmark. The control adds no learner, shelf, payment, or disclosure data. Remaining route and mobile focus checks are retained separately.
+
+The learning atlas was also checked on desktop. Its skip control is present before the private shelf and all unit controls, and the first Tab keypress visibly reveals it. This preserves a direct keyboard route to the active main landmark without changing browser-local shelf content, enrolment state, or learning records.
+
+The no-data member workspace preview was checked on desktop as well. Its keyboard order starts with the visible-on-focus skip control before the eCampus return, member sign-in, and unit filters. The preview retains its no-identity, no-progress, no-enrolment, no-reward, and no-completion data boundary throughout this check.
+
+Mobile rendered checks at 390px confirm that the global accessibility shell does not displace the orientation’s privacy-first hero or the learning atlas’s private shelf panel. The skip control remains intentionally hidden until keyboard focus, so true mobile focus interaction remains separately pending rather than inferred from these layout screenshots.
+
 The development-only member-workspace preview was checked at desktop and 390px mobile widths. It clearly labels itself as having no account data, no identity, no saved progress, no enrolments, no rewards, and no completions; its unit cards retain their real catalogue metadata but require member sign-in. This verifies the protected dashboard visual system without fabricating learner records.
 
 The final `preview=member-auth` route renders the authenticated dashboard layout at desktop and 390px mobile widths while explicitly showing no identity, progress, enrolment, reward, or completion data. This provides a production-structure visual check without manufacturing a learner record; a real member session remains required for the separate live progress round-trip already tracked in the project checklist.
