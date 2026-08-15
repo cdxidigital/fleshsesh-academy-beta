@@ -24,7 +24,7 @@ export default function FacilityRoom() {
   const homePath = previewMode ? "/?preview=academy" : "/";
   const campusPath = previewMode ? "/campus?preview=academy" : "/campus";
   const pathwayPath = `/learn?facility=${facility.id}${previewMode ? "&preview=academy" : ""}`;
-  const facultyPath = `${homePath}#faculty`;
+  const facultyPath = `/?faculty=${facility.room.faculty.id}${previewMode ? "&preview=academy" : ""}#faculty`;
   const nearbyRooms = campusFacilities.filter((item) => item.id !== facility.id);
 
   useEffect(() => {

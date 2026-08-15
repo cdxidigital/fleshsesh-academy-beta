@@ -62,4 +62,5 @@
 - [x] Refine cross-facility wayfinding so learners can move between rooms, the campus hub, and the mapped catalogue without dead ends.
 - [x] Validate the new room-level journeys across desktop and mobile rendered states before checkpointing.
 - [x] Link each facility-room course card directly to its mapped unit detail while preserving the facility-pathway return route.
+- [x] Make each facility-room faculty handoff open the assigned AI lecturer directly in the academy faculty studio.
 - [x] Restore visible cinematic media across all eCampus homepage hero spaces, with resilient delivery and responsive fallbacks.

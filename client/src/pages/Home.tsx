@@ -151,6 +151,13 @@ export default function Home() {
   const { user, isAuthenticated } = useAuth();
   const activeLecturer = faculty.find((person) => person.id === selectedLecturerId) ?? faculty[0];
   const activeCurriculumLevel = curriculumLevels[catalogueLevel];
+  useEffect(() => {
+    const requestedFaculty = new URLSearchParams(window.location.search).get("faculty");
+    if (faculty.some((person) => person.id === requestedFaculty)) {
+      setSelectedLecturerId(requestedFaculty as (typeof faculty)[number]["id"]);
+      setActiveSection("faculty");
+    }
+  }, []);
   const lecturerMutation = trpc.lecturer.respond.useMutation({
     onSuccess: (data) => {
       setLecturerSafeguarded(data.safeguarded);

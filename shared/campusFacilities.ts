@@ -13,7 +13,7 @@ export type FacilityRoom = {
   studioName: string;
   studioIntroduction: string;
   learningModes: Array<{ title: string; copy: string }>;
-  faculty: { name: string; role: string; handoff: string; prompt: string };
+  faculty: { id: "mira" | "linh" | "amara" | "sam"; name: string; role: string; handoff: string; prompt: string };
   reflectionPrompts: string[];
 };
 
@@ -45,7 +45,7 @@ export const campusFacilities: Array<{
         { title: "Question builder", copy: "Turn a general learning point into a clear, non-diagnostic question for a clinician or service." },
         { title: "Care map", copy: "Recognise when education ends and qualified, local support should take over." },
       ],
-      faculty: { name: "Dr. Mira Sen", role: "Clinical Professor", handoff: "Offers anatomy, health-literacy, and evidence-checking guidance with explicit clinical boundaries.", prompt: "How should I assess health information online?" },
+      faculty: { id: "mira", name: "Dr. Mira Sen", role: "Clinical Professor", handoff: "Offers anatomy, health-literacy, and evidence-checking guidance with explicit clinical boundaries.", prompt: "How should I assess health information online?" },
       reflectionPrompts: ["What makes a source feel credible?", "What question would clarify the next learning step?", "Where does education end and professional care begin?"],
     },
   },
@@ -66,7 +66,7 @@ export const campusFacilities: Array<{
         { title: "Evidence lens", copy: "Distinguish policy claims, lived experience, and robust supporting evidence." },
         { title: "Language lab", copy: "Rehearse clear, respectful phrases for opting in, pausing, or changing a mind." },
       ],
-      faculty: { name: "Professor Linh Patel", role: "Assessment Coach", handoff: "Helps learners appraise evidence and structure practical, non-disclosive reflections.", prompt: "What makes a reflection task useful without personal disclosure?" },
+      faculty: { id: "linh", name: "Professor Linh Patel", role: "Assessment Coach", handoff: "Helps learners appraise evidence and structure practical, non-disclosive reflections.", prompt: "What makes a reflection task useful without personal disclosure?" },
       reflectionPrompts: ["Which detail changes the ethical question?", "What information would strengthen this claim?", "How could a boundary be expressed more clearly?"],
     },
   },
@@ -87,7 +87,7 @@ export const campusFacilities: Array<{
         { title: "Repair table", copy: "Study the building blocks of respectful repair without re-living a personal conflict." },
         { title: "Belonging notes", copy: "Consider how inclusion, access, and body-neutral language shape a shared space." },
       ],
-      faculty: { name: "Amara Williams", role: "Relationship Systems Lecturer", handoff: "Guides reflective, inclusive learning about dynamics, repair, and clear expectations.", prompt: "What does respectful repair after a misunderstanding involve?" },
+      faculty: { id: "amara", name: "Amara Williams", role: "Relationship Systems Lecturer", handoff: "Guides reflective, inclusive learning about dynamics, repair, and clear expectations.", prompt: "What does respectful repair after a misunderstanding involve?" },
       reflectionPrompts: ["What makes a check-in feel non-pressured?", "Which part of repair can be made more specific?", "What does inclusion look like in this exchange?"],
     },
   },
@@ -108,7 +108,7 @@ export const campusFacilities: Array<{
         { title: "Consent protocol", copy: "Work through clear opt-in, pause, stop, and disconnect expectations for shared play." },
         { title: "Response drill", copy: "Build a general, non-personal incident-response plan for a changing situation." },
       ],
-      faculty: { name: "Sam Chen", role: "Digital Safety Lecturer", handoff: "Teaches practical privacy, consent, and general incident-response planning without requesting private details.", prompt: "What are the principles of digital consent?" },
+      faculty: { id: "sam", name: "Sam Chen", role: "Digital Safety Lecturer", handoff: "Teaches practical privacy, consent, and general incident-response planning without requesting private details.", prompt: "What are the principles of digital consent?" },
       reflectionPrompts: ["What makes an opt-in meaningful?", "Where should pause and stop controls be visible?", "What data does a system truly need to retain?"],
     },
   },
