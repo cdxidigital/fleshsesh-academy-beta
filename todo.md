@@ -147,3 +147,6 @@
 - [x] Define a browser-local recently viewed course contract that stores only validated course codes and no learner, account, enrolment, or progress data.
 - [x] Add a private recently viewed course thread to the learning experience with an explicit local-data boundary.
 - [x] Add automated coverage and validate the recently viewed thread at desktop and mobile breakpoints.
+- [x] Define safe lazy-loading boundaries for public, learning, member, and non-live Arena routes without disturbing the accessibility shell.
+- [x] Convert route-level academy page modules to lazy-loaded bundles with a non-disclosive accessible loading fallback.
+- [x] Verify route rendering, automated regressions, and improved production bundle output after route-level code splitting.
