@@ -93,10 +93,12 @@
 - [x] Add save/remove syllabus-shelf toggles to every learning-catalogue course card.
 - [x] Add a browser-local privacy note and shelf count/management link to the learning-catalogue header.
 - [ ] Validate the full syllabus-shelf journey between orientation and learning catalogue at desktop and mobile breakpoints.
-- [ ] Interactively verify that saving or removing a catalogue course updates its shelf count and persists to orientation on desktop.
-- [ ] Interactively verify the reverse shelf flow from orientation to the learning catalogue on desktop.
+- [x] Interactively verify that saving or removing a catalogue course updates its shelf count and persists to orientation on desktop.
+- [x] Interactively verify the reverse shelf flow from orientation to the learning catalogue on desktop.
+- [x] Interactively remove a catalogue-saved course on desktop and confirm the orientation shelf updates accordingly.
+- [x] Interactively save and remove a course from desktop orientation, then confirm the learning atlas reflects both transitions.
 - [ ] Repeat cross-page shelf persistence validation at an interactive mobile width when that environment is available.
-- [ ] Validate the remaining interactive syllabus-shelf persistence behavior before checkpointing.
+- [x] Validate the remaining interactive syllabus-shelf persistence behavior on desktop before checkpointing.
 - [x] Define a certificate-readiness model that derives status only from existing enrolment and lesson-completion records.
 - [x] Add a safeguarded certificate-readiness panel to the member learning surface without fabricating learner data or issuing credentials prematurely.
 - [x] Provide clear certificate boundary language distinguishing course-completion recognition from clinical, legal, professional, or accredited qualifications.
@@ -157,3 +159,6 @@
 - [x] Define a clear browser-local reset boundary for private shelf and recently viewed course codes.
 - [x] Add explicit local-only clear controls without changing member, enrolment, progress, reward, payment, or device data.
 - [x] Add automated coverage and validate the privacy-reset controls at desktop and mobile breakpoints.
+- [ ] Define a safe deferred-loading boundary for the faculty chat renderer without changing lecturer safeguards or conversation state. (Deferred after the production build renderer was terminated repeatedly during the experiment.)
+- [ ] Load the faculty chat renderer only when the learner reaches the faculty studio, with an accessible non-disclosive fallback. (Deferred pending a stable bundle-analysis path.)
+- [ ] Verify faculty rendering, regressions, and production bundle output after deferring the chat renderer. (TypeScript and tests passed after rollback; full production build was not accepted after repeated build-stage termination.)
