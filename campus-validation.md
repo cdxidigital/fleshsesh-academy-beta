@@ -23,3 +23,5 @@ The responsive pass used 390×844 full-page captures for both the Campus route a
 ## Dedicated Facility Rooms
 
 The Law Library room validated at desktop size as a complete editorial learning journey: its cinematic library hero, three learning modes, private prompt selector, four mapped courses, Professor Linh Patel handoff, and three adjacent-room cards are all visible and readable. The Residence Life room validated at 390px wide as a single-column experience: its room note, communication/reparation/belonging studio cards, prompt lens, four-course list, faculty handoff, and onward room navigation remain legible and have no clipped controls. All room copy retains adult-only, non-explicit, non-disclosive safeguards.
+
+Each mapped course card now opens its precise unit detail while preserving the facility filter in the learning route. The Law Library’s FSH 102 deep link was verified at desktop size: it opens the correct enrolment-gated unit and its return control remains labelled “Law Library pathway.”
