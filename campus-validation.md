@@ -54,6 +54,10 @@ The rendered FSH 206 save action was then exercised in the development browser. 
 
 The companion remove action was exercised and restored the empty shelf plus “Save FSH 206” control. The shelf therefore adds and removes only a browser-local course code; it does not touch the signed-in member record, enrolment, completion, or reward procedures.
 
+The selected-unit learning view now carries a fixed “Save/Remove [course code] · private shelf” control. It shares the same browser-local code-only helper as orientation and is visibly available at the 390px mobile breakpoint. This unit-view affordance is intentionally distinct from enrolment and checkout actions. Dedicated catalogue-card controls and catalogue-level privacy messaging remain tracked separately.
+
+The full learning catalogue now includes a compact Save/Remove control on every unit card, a browser-local shelf count, a visible no-account/no-enrolment/no-progress/no-reward/no-disclosure notice, and a direct manage-shelf handoff to orientation. Desktop and 390px mobile rendering confirm that the controls remain visible while leaving enrolment and unit-view actions distinct. The shared shelf helper rejects non-course values and deduplicates codes before any browser-local write.
+
 The development-only member-workspace preview was checked at desktop and 390px mobile widths. It clearly labels itself as having no account data, no identity, no saved progress, no enrolments, no rewards, and no completions; its unit cards retain their real catalogue metadata but require member sign-in. This verifies the protected dashboard visual system without fabricating learner records.
 
 The final `preview=member-auth` route renders the authenticated dashboard layout at desktop and 390px mobile widths while explicitly showing no identity, progress, enrolment, reward, or completion data. This provides a production-structure visual check without manufacturing a learner record; a real member session remains required for the separate live progress round-trip already tracked in the project checklist.

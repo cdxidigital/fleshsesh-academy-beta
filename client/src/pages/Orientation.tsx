@@ -3,11 +3,11 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocation } from "wouter";
 import { academyCourses } from "@shared/courseCatalog";
 import { campusFacilities, type FacilityId } from "@shared/campusFacilities";
+import { normalizeSyllabusShelf, syllabusShelfStorageKey, toggleSyllabusCourse } from "@/lib/syllabusShelf";
 
 const emblem = "/manus-storage/fleshsesh-academy-emblem_79c8c72e.png";
 const wordmark = "/manus-storage/fleshsesh-academy-wordmark_f79fa930.png";
 const ageStorageKey = "fleshsesh_academy_age_confirmed_v2";
-const shelfStorageKey = "fleshsesh_academy_syllabus_shelf_v1";
 
 const orientationChoices: { id: FacilityId; number: string; prompt: string; title: string; copy: string }[] = [
   { id: "eclinic", number: "01", prompt: "I want a steady start", title: "Evidence & care navigation", copy: "Build a grounded base for body literacy, credible information, and knowing when education should hand over to qualified care." },
@@ -32,8 +32,7 @@ export default function Orientation() {
   useEffect(() => {
     if (!previewMode) setAgeConfirmed(window.localStorage.getItem(ageStorageKey) === "true");
     try {
-      const stored = JSON.parse(window.localStorage.getItem(shelfStorageKey) ?? "[]");
-      if (Array.isArray(stored) && stored.every((item) => typeof item === "string")) setShelfCodes(stored);
+      setShelfCodes(normalizeSyllabusShelf(JSON.parse(window.localStorage.getItem(syllabusShelfStorageKey) ?? "[]")));
     } catch { setShelfCodes([]); }
     setAgeReady(true);
   }, [previewMode]);
@@ -50,8 +49,8 @@ export default function Orientation() {
     window.setTimeout(() => document.getElementById("selected-route")?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
   };
   const toggleShelf = (courseCode: string) => setShelfCodes((current) => {
-    const next = current.includes(courseCode) ? current.filter((code) => code !== courseCode) : [...current, courseCode];
-    window.localStorage.setItem(shelfStorageKey, JSON.stringify(next));
+    const next = toggleSyllabusCourse(current, courseCode);
+    window.localStorage.setItem(syllabusShelfStorageKey, JSON.stringify(next));
     return next;
   });
 

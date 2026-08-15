@@ -88,5 +88,12 @@
 - [ ] Validate the orientation selection and mapped-units handoff on a true interactive mobile viewport.
 - [x] Make orientation-route selection URL-addressable so direct UI clicks retain the chosen visual route without relying on transient client state.
 - [x] Add a browser-local syllabus shelf that saves only course codes on the current device and never creates an account, profile, or disclosure record.
-- [ ] Add clear save and remove controls in the course-discovery and learning views with visible privacy messaging.
+- [x] Add clear save and remove controls in the course-discovery and learning views with visible privacy messaging.
+- [x] Add a selected-unit private-shelf control that remains separate from enrolment and checkout actions.
+- [x] Add save/remove syllabus-shelf toggles to every learning-catalogue course card.
+- [x] Add a browser-local privacy note and shelf count/management link to the learning-catalogue header.
+- [ ] Validate the full syllabus-shelf journey between orientation and learning catalogue at desktop and mobile breakpoints.
+- [ ] Interactively verify that saving or removing a catalogue course updates its shelf count and persists to orientation on desktop.
+- [ ] Interactively verify the reverse shelf flow from orientation to the learning catalogue on desktop.
+- [ ] Repeat cross-page shelf persistence validation at an interactive mobile width when that environment is available.
 - [ ] Validate syllabus-shelf behavior and responsive presentation before checkpointing.
