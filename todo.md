@@ -80,3 +80,4 @@
 - [ ] Confirm a signed-in member dashboard state through a real session before final UI validation; the no-data layout preview is visual-only.
 - [x] Add a development-only, non-synthetic member-workspace preview that shows no personal progress or enrolment data.
 - [x] Add an explicitly authenticated-layout development preview that uses no learner identity, progress, enrolment, reward, or completion data.
+- [ ] Verify that the published production domain serves the latest visual-overhaul checkpoint rather than the previous homepage implementation.
