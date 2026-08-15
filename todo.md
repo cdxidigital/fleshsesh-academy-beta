@@ -57,4 +57,8 @@
 - [x] Exercise the campus navigation, facility selection, pathway routing, and device-consent/emergency-stop UI states through development-only browser checks.
 - [x] Add a non-live Esports Arena tournament lobby with pause, stop, and disconnect session controls that never imply active hardware control.
 - [ ] Complete a true mobile-width click-through from homepage to campus, facility, and filtered course pathway when an interactive mobile viewport is available.
+- [x] Build dedicated immersive facility-room routes for eClinic, Law Library, Residence Life, and Esports Arena with direct course-pathway access.
+- [x] Add facility-specific studio prompts, faculty handoffs, and learning-mode content without collecting personal disclosures.
+- [x] Refine cross-facility wayfinding so learners can move between rooms, the campus hub, and the mapped catalogue without dead ends.
+- [x] Validate the new room-level journeys across desktop and mobile rendered states before checkpointing.
 - [x] Restore visible cinematic media across all eCampus homepage hero spaces, with resilient delivery and responsive fallbacks.
