@@ -121,3 +121,9 @@
 - [ ] Interactively verify the Esports Arena-to-readiness handoff on a mobile-width viewport when available.
 - [x] Add automated coverage for the non-live connector readiness rules.
 - [x] Validate the connector readiness presentation at desktop and mobile breakpoints.
+- [x] Define a shared browser-local syllabus shelf state contract that stores only validated course codes and reacts to storage changes.
+- [x] Use the shared syllabus shelf state contract in both orientation and learning catalogue surfaces.
+- [ ] Add automated coverage for storage payload normalization and external browser-storage synchronization.
+- [x] Add automated coverage for storage payload normalization and malformed values.
+- [ ] Add an automated browser-storage event synchronization check for the shared shelf hook.
+- [x] Validate shared shelf rendering at desktop and mobile breakpoints without account, enrolment, progress, reward, or disclosure data.

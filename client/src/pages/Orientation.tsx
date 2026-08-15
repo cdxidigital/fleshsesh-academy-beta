@@ -4,6 +4,7 @@ import { useLocation } from "wouter";
 import { academyCourses } from "@shared/courseCatalog";
 import { campusFacilities, type FacilityId } from "@shared/campusFacilities";
 import { normalizeSyllabusShelf, syllabusShelfStorageKey, toggleSyllabusCourse } from "@/lib/syllabusShelf";
+import { useSyllabusShelf } from "@/hooks/useSyllabusShelf";
 
 const emblem = "/manus-storage/fleshsesh-academy-emblem_79c8c72e.png";
 const wordmark = "/manus-storage/fleshsesh-academy-wordmark_f79fa930.png";
@@ -27,13 +28,10 @@ export default function Orientation() {
   const [ageReady, setAgeReady] = useState(false);
   const [ageConfirmed, setAgeConfirmed] = useState(previewMode);
   const [selectedId, setSelectedId] = useState<FacilityId | null>(() => routeFromSearch());
-  const [shelfCodes, setShelfCodes] = useState<string[]>([]);
+  const [shelfCodes, toggleShelf] = useSyllabusShelf();
 
   useEffect(() => {
     if (!previewMode) setAgeConfirmed(window.localStorage.getItem(ageStorageKey) === "true");
-    try {
-      setShelfCodes(normalizeSyllabusShelf(JSON.parse(window.localStorage.getItem(syllabusShelfStorageKey) ?? "[]")));
-    } catch { setShelfCodes([]); }
     setAgeReady(true);
   }, [previewMode]);
 
@@ -48,11 +46,6 @@ export default function Orientation() {
     window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
     window.setTimeout(() => document.getElementById("selected-route")?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
   };
-  const toggleShelf = (courseCode: string) => setShelfCodes((current) => {
-    const next = toggleSyllabusCourse(current, courseCode);
-    window.localStorage.setItem(syllabusShelfStorageKey, JSON.stringify(next));
-    return next;
-  });
 
   if (!ageReady) return <div className="min-h-screen bg-[#061018]" />;
   if (!ageConfirmed) return <main className="grid min-h-screen place-items-center bg-[#061018] px-5 text-[#eff4f1]"><section className="max-w-xl border border-white/15 bg-[#0b1c26] p-8 sm:p-12"><img src={wordmark} alt="fleshsesh | academy" className="h-12 w-[210px] object-contain object-left" /><p className="mt-10 text-[10px] font-bold uppercase tracking-[.22em] text-[#e6c887]">Route discovery</p><h1 className="mt-4 font-display text-6xl leading-[.78] tracking-[-.05em]">Start after the<br /><em className="text-[#e49aa9]">adult gateway.</em></h1><p className="mt-6 text-sm leading-6 text-[#c3d3cf]">Choose a visual learning route after confirming the academy’s adult-only entry boundary.</p><button onClick={() => setLocation("/")} className="mt-9 inline-flex items-center gap-2 bg-[#e49aa9] px-5 py-4 text-xs font-bold uppercase tracking-[.14em] text-[#061018]">Return to entry <ArrowUpRight className="h-4 w-4" /></button></section></main>;

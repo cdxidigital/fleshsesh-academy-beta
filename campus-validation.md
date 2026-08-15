@@ -74,6 +74,10 @@ The Esports Arena access panel now exposes an explicit “Review connector readi
 
 The Esports Arena-to-readiness handoff was checked across desktop and 390px mobile rendered states. The compact mobile access panel retains both the existing lobby boundary and the separate readiness reference action without requiring a device connection or collecting participant data.
 
+Orientation and the learning atlas now share one browser-local syllabus shelf hook. The hook validates the stored payload as course codes before rendering, writes only normalized course-code arrays, and listens for browser storage events without introducing account, enrolment, progress, reward, or disclosure data. Desktop rendered checks confirm both surfaces remain stable with the learning atlas explicitly showing an empty code-only shelf. Cross-tab storage-event behavior and true interactive-mobile persistence remain pending rather than simulated.
+
+The shared-shelf presentation was also checked at 390px on both orientation and the learning atlas. The privacy-first orientation copy remains readable, and the atlas retains its visible “Private syllabus shelf · 0” summary, code-only storage explanation, and management handoff in the mobile hierarchy.
+
 The development-only member-workspace preview was checked at desktop and 390px mobile widths. It clearly labels itself as having no account data, no identity, no saved progress, no enrolments, no rewards, and no completions; its unit cards retain their real catalogue metadata but require member sign-in. This verifies the protected dashboard visual system without fabricating learner records.
 
 The final `preview=member-auth` route renders the authenticated dashboard layout at desktop and 390px mobile widths while explicitly showing no identity, progress, enrolment, reward, or completion data. This provides a production-structure visual check without manufacturing a learner record; a real member session remains required for the separate live progress round-trip already tracked in the project checklist.

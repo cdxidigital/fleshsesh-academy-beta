@@ -1,6 +1,7 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { startLogin } from "@/const";
 import { normalizeSyllabusShelf, syllabusShelfStorageKey, toggleSyllabusCourse } from "@/lib/syllabusShelf";
+import { useSyllabusShelf } from "@/hooks/useSyllabusShelf";
 import { trpc } from "@/lib/trpc";
 import { ArrowLeft, ArrowUpRight, BookOpen, CheckCircle2, ChevronLeft, CirclePlay, LockKeyhole, ShieldCheck, Sparkles, Trophy } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
@@ -62,7 +63,7 @@ export default function Learning() {
   const activeFacility = campusFacilities.find((facility) => facility.id === requestedFacility) ?? null;
   const [selectedCourseCode, setSelectedCourseCode] = useState<string | null>(null);
   const [selectedModuleId, setSelectedModuleId] = useState<string | null>(null);
-  const [shelfCodes, setShelfCodes] = useState<string[]>([]);
+  const [shelfCodes, toggleShelf] = useSyllabusShelf();
   const ageVerified = previewMode || (typeof window !== "undefined" && window.localStorage.getItem(ageStorageKey) === "true");
   const courses = (catalogue.data ?? []) as Course[];
   const displayedCourses = activeFacility ? courses.filter((course) => activeFacility.courseCodes.includes(course.code)) : courses;
@@ -82,21 +83,8 @@ export default function Learning() {
     if (requestedCourse) setSelectedCourseCode(requestedCourse);
   }, []);
 
-  useEffect(() => {
-    try {
-      setShelfCodes(normalizeSyllabusShelf(JSON.parse(window.localStorage.getItem(syllabusShelfStorageKey) ?? "[]")));
-    } catch {
-      setShelfCodes([]);
-    }
-  }, []);
 
-  const updateShelf = (courseCode: string) => {
-    setShelfCodes((current) => {
-      const next = toggleSyllabusCourse(current, courseCode);
-      window.localStorage.setItem(syllabusShelfStorageKey, JSON.stringify(next));
-      return next;
-    });
-  };
+  const updateShelf = (courseCode: string) => toggleShelf(courseCode);
 
   const cataloguePath = activeFacility
     ? `/learn?facility=${encodeURIComponent(activeFacility.id)}${previewMode ? "&preview=academy" : ""}`
