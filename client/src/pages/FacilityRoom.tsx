@@ -31,6 +31,20 @@ export default function FacilityRoom() {
     setAgeReady(true);
   }, [previewMode]);
 
+  useEffect(() => {
+    if (!ageReady || !ageConfirmed || facility.id !== "esports") return;
+    const lobbyButton = Array.from(document.querySelectorAll("button")).find((button) => button.textContent?.toLowerCase().includes("open non-live lobby"));
+    if (!lobbyButton || document.getElementById("arena-readiness-link")) return;
+    const readinessLink = document.createElement("button");
+    readinessLink.id = "arena-readiness-link";
+    readinessLink.type = "button";
+    readinessLink.textContent = "Review connector readiness";
+    readinessLink.className = "mt-4 block text-[10px] font-bold uppercase tracking-[.14em] text-[#f1dca4] underline decoration-[#e6c887]/60 underline-offset-4 transition hover:text-[#e49aa9]";
+    readinessLink.addEventListener("click", () => setLocation(`/campus/esports/readiness${previewMode ? "?preview=academy" : ""}`));
+    lobbyButton.parentElement?.append(readinessLink);
+    return () => readinessLink.remove();
+  }, [ageReady, ageConfirmed, facility.id, previewMode, setLocation]);
+
   if (!ageReady) return <div className="min-h-screen bg-[#061018]" />;
   if (!ageConfirmed) return <main className="grid min-h-screen place-items-center bg-[#061018] px-5 text-[#eff4f1]"><section className="max-w-xl border border-white/15 bg-[#0b1c26] p-8 sm:p-12"><img src={wordmark} alt="fleshsesh | academy" className="h-12 w-[210px] object-contain object-left" /><p className="mt-10 text-[10px] font-bold uppercase tracking-[.22em] text-[#e6c887]">Room entry</p><h1 className="mt-4 font-display text-6xl leading-[.78]">Confirm the<br /><em className="text-[#e49aa9]">adult gateway.</em></h1><p className="mt-6 text-sm leading-6 text-[#c8d6d2]">Each visual room shares the eCampus adult-access boundary.</p><button onClick={() => setLocation(homePath)} className="mt-9 inline-flex items-center gap-2 bg-[#e49aa9] px-5 py-4 text-xs font-bold uppercase tracking-[.14em] text-[#061018]">Return to entry <ArrowUpRight className="h-4 w-4" /></button></section></main>;
 

@@ -11,6 +11,7 @@ import Campus from "./pages/Campus";
 import FacilityRoom from "./pages/FacilityRoom";
 import Orientation from "./pages/Orientation";
 import AchievementArchive from "./pages/AchievementArchive";
+import ArenaReadiness from "./pages/ArenaReadiness";
 
 /**
  * Rose Lacquer Learning House — dark editorial stage, restrained rose-gold detail,
@@ -23,6 +24,7 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/member"} component={Member} />
       <Route path={"/member/achievements"} component={AchievementArchive} />
+      <Route path={"/campus/esports/readiness"} component={ArenaReadiness} />
       <Route path={"/orientation"} component={Orientation} />
       <Route path={"/learn"} component={Learning} />
       <Route path={"/campus/:facility"} component={FacilityRoom} />

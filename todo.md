@@ -113,3 +113,11 @@
 - [ ] Verify the authenticated member entry point with a consenting real member session.
 - [x] Add automated coverage for the achievement archive’s badge-to-course mapping and recognition boundaries.
 - [x] Validate achievement archive rendering at desktop and mobile breakpoints without synthetic learner data.
+- [x] Define a provider-neutral device-connector readiness specification that permits no live device discovery, pairing, telemetry, or control.
+- [x] Surface the non-live connector readiness requirements within the Arena learning experience with privacy, consent, and emergency-stop boundaries.
+- [x] Add a direct Esports Arena handoff to the non-live connector readiness reference.
+- [ ] Validate the Esports Arena-to-readiness handoff at desktop and mobile breakpoints.
+- [x] Validate the Esports Arena-to-readiness handoff at desktop.
+- [ ] Interactively verify the Esports Arena-to-readiness handoff on a mobile-width viewport when available.
+- [x] Add automated coverage for the non-live connector readiness rules.
+- [x] Validate the connector readiness presentation at desktop and mobile breakpoints.

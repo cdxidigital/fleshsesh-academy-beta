@@ -68,6 +68,12 @@ The member-header archive entry point is gated to an authenticated, non-preview 
 
 The published production domain remains reachable and presents the adult-only access gateway as its first surface. The live gateway visibly retains its explicit age-confirmation checkbox, Enter eCampus action, exit route, educational-purpose framing, and browser-local—not identity-document—boundary before any protected campus content can be accessed.
 
+The new Arena connector readiness reference was rendered at desktop and 390px mobile widths. Its visual split clearly distinguishes educational material that can be covered—consent, privacy, session-boundary, and emergency-stop rehearsal—from unavailable operations: discovery, pairing, provider authentication, telemetry collection, device control, and remote commands. The page explicitly retains no identifier, token, telemetry, or intimate activity data, and no live provider or hardware control is enabled.
+
+The Esports Arena access panel now exposes an explicit “Review connector readiness” handoff directly beside its existing non-live lobby action. The development browser confirmed the rendered handoff element and its direct readiness route, with no changes to the local consent state machine and no device, pairing, telemetry, or provider action initiated.
+
+The Esports Arena-to-readiness handoff was checked across desktop and 390px mobile rendered states. The compact mobile access panel retains both the existing lobby boundary and the separate readiness reference action without requiring a device connection or collecting participant data.
+
 The development-only member-workspace preview was checked at desktop and 390px mobile widths. It clearly labels itself as having no account data, no identity, no saved progress, no enrolments, no rewards, and no completions; its unit cards retain their real catalogue metadata but require member sign-in. This verifies the protected dashboard visual system without fabricating learner records.
 
 The final `preview=member-auth` route renders the authenticated dashboard layout at desktop and 390px mobile widths while explicitly showing no identity, progress, enrolment, reward, or completion data. This provides a production-structure visual check without manufacturing a learner record; a real member session remains required for the separate live progress round-trip already tracked in the project checklist.
