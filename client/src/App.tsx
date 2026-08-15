@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Member from "./pages/Member";
 import Learning from "./pages/Learning";
+import Campus from "./pages/Campus";
 
 /**
  * Rose Lacquer Learning House — dark editorial stage, restrained rose-gold detail,
@@ -19,6 +20,7 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/member"} component={Member} />
       <Route path={"/learn"} component={Learning} />
+      <Route path={"/campus"} component={Campus} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

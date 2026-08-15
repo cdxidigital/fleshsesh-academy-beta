@@ -258,6 +258,10 @@ export default function Home() {
         </button>
         <div className="mt-8 h-28 w-px bg-gradient-to-b from-[#e4bd78] via-[#e4bd78]/30 to-transparent" />
         <nav className="mt-6 flex flex-1 flex-col items-center gap-7" aria-label="Primary navigation">
+          <button onClick={() => setLocation(previewMode ? "/campus?preview=academy" : "/campus")} className="group relative text-[#a79b92] transition hover:text-[#f2c684] focus:outline-none focus:text-[#f2c684]" aria-label="Campus facilities">
+            <Compass className="h-[18px] w-[18px]" strokeWidth={1.6} />
+            <span className="pointer-events-none absolute left-9 top-1/2 hidden -translate-y-1/2 whitespace-nowrap border border-[#e4bd78]/20 bg-[#171115] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#f5e8d4] shadow-xl group-hover:block">Campus facilities</span>
+          </button>
           {navigation.slice(1).map(({ label, id, icon: Icon }) => (
             <button key={label} onClick={() => jumpToSection(id)} className={`group relative transition focus:outline-none ${activeSection === id ? "text-[#f2c684]" : "text-[#a79b92] hover:text-[#f2c684] focus:text-[#f2c684]"}`} aria-label={label}>
               <Icon className="h-[18px] w-[18px]" strokeWidth={1.6} />
@@ -280,6 +284,7 @@ export default function Home() {
             <img src={wordmark} alt="fleshsesh | academy" className="h-11 w-[185px] object-contain object-left" />
           </div>
           <nav className="hidden items-center gap-7 md:flex" aria-label="Main links">
+            <button onClick={() => setLocation(previewMode ? "/campus?preview=academy" : "/campus")} className="relative py-2 text-xs font-medium text-[#cbbfb6] transition hover:text-white">Campus</button>
             {navigation.slice(1).map(({ id, label }) => <button key={id} onClick={() => jumpToSection(id)} className={`relative py-2 text-xs font-medium transition ${activeSection === id ? "text-[#f3d39a]" : "text-[#cbbfb6] hover:text-white"}`}>{label}{activeSection === id && <span className="absolute inset-x-0 -bottom-1 h-px bg-[#ee7e9f]" />}</button>)}
           </nav>
           <div className="hidden items-center gap-4 md:flex">
@@ -291,7 +296,8 @@ export default function Home() {
           </button>
           {menuOpen && (
             <div className="absolute left-0 right-0 top-[71px] border-b border-white/10 bg-[#100c10] p-5 shadow-2xl md:hidden">
-              <div className="grid gap-3 text-sm">
+            <div className="grid gap-3 text-sm">
+                <button onClick={() => { setLocation(previewMode ? "/campus?preview=academy" : "/campus"); setMenuOpen(false); }} className="flex items-center justify-between border-b border-white/10 py-3 text-left text-[#f6eee2]">Campus facilities<ChevronRight className="h-4 w-4 text-[#e4bd78]" /></button>
                 {navigation.slice(1).map(({ label, id }) => (
                   <button key={label} onClick={() => { jumpToSection(id); setMenuOpen(false); }} className="flex items-center justify-between border-b border-white/10 py-3 text-left text-[#f6eee2]">{label}<ChevronRight className="h-4 w-4 text-[#e4bd78]" /></button>
                 ))}

@@ -47,9 +47,14 @@
 - [x] Add a Stripe webhook fulfilment test that verifies completed checkout activation of the linked enrolment without duplicating payment data.
 - [x] Add reward and badge fulfilment tests covering repeat lesson completion and full-unit competency issuance.
 - [x] Explicitly set and verify page/document metadata and accessibility brand references to "fleshsesh | academy".
-- [ ] Define the adults-only eCampus facility worlds for the eClinic, law library, residence life, and esports arena, with distinct course and safety roles.
-- [ ] Create a cohesive set of non-explicit cinematic media assets for each facility and integrate them into facility navigation.
-- [ ] Build the eClinic, law library, residence-life, and esports facility experiences with relevant class/course pathways.
-- [ ] Add an opt-in device-connectivity architecture for compatible personal devices with privacy, consent, emergency-stop, and tournament-control boundaries.
-- [ ] Validate facility navigation, device-consent controls, and responsive media treatment before checkpointing.
+- [x] Define the adults-only eCampus facility worlds for the eClinic, law library, residence life, and esports arena, with distinct course and safety roles.
+- [x] Create a cohesive set of non-explicit cinematic media assets for each facility and integrate them into facility navigation.
+- [x] Build the eClinic, law library, residence-life, and esports facility experiences with relevant class/course pathways.
+- [x] Add an opt-in device-connectivity architecture for compatible personal devices with privacy, consent, emergency-stop, and tournament-control boundaries.
+- [x] Validate facility navigation, device-consent controls, and responsive media treatment before checkpointing.
+- [x] Add facility-specific pathway navigation so each campus world opens its mapped courses in the learning catalogue.
+- [ ] Re-validate the homepage-to-campus-to-facility-course pathway flow across desktop and mobile before checkpointing.
+- [x] Exercise the campus navigation, facility selection, pathway routing, and device-consent/emergency-stop UI states through development-only browser checks.
+- [x] Add a non-live Esports Arena tournament lobby with pause, stop, and disconnect session controls that never imply active hardware control.
+- [ ] Complete a true mobile-width click-through from homepage to campus, facility, and filtered course pathway when an interactive mobile viewport is available.
 - [x] Restore visible cinematic media across all eCampus homepage hero spaces, with resilient delivery and responsive fallbacks.
