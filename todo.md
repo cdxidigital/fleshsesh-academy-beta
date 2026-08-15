@@ -150,3 +150,6 @@
 - [x] Define safe lazy-loading boundaries for public, learning, member, and non-live Arena routes without disturbing the accessibility shell.
 - [x] Convert route-level academy page modules to lazy-loaded bundles with a non-disclosive accessible loading fallback.
 - [x] Verify route rendering, automated regressions, and improved production bundle output after route-level code splitting.
+- [x] Define privacy-safe, topic-based faculty conversation starters that do not solicit learner disclosures.
+- [x] Add contextual conversation-starter controls to the AI faculty studio.
+- [x] Add automated coverage and validate the enhanced faculty studio at desktop and mobile breakpoints.
