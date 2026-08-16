@@ -17,6 +17,38 @@ export const curriculumEndGoal = {
     "Completing units recognises course learning only. It is not a clinical, legal, professional, regulated, or accredited qualification, and it does not authorise diagnosis, treatment, or practice beyond your competence.",
 };
 
+export type CurriculumPathway = {
+  id: "personal-agency" | "education-practice";
+  entryLevel: CurriculumLevel;
+  label: string;
+  title: string;
+  description: string;
+  boundary: string;
+};
+
+export const curriculumPathways: CurriculumPathway[] = [
+  {
+    id: "personal-agency",
+    entryLevel: "101",
+    label: "Personal agency path",
+    title: "Navigate your own life with clarity",
+    description:
+      "Use 101 foundations and the 201 units most relevant to you to strengthen your language, consent communication, critical judgement, and confidence finding qualified support.",
+    boundary:
+      "This is a complete and valuable outcome in itself. You do not need to continue into 301 or 401 for your learning to matter.",
+  },
+  {
+    id: "education-practice",
+    entryLevel: "301",
+    label: "Optional education & advocacy path",
+    title: "Develop a bounded learning or advocacy practice",
+    description:
+      "Use 301 and 401 after relevant foundations to integrate evidence, inclusion, safeguarding, facilitation, design, and evaluation in a scoped portfolio or project.",
+    boundary:
+      "This pathway documents educational learning and a bounded portfolio. It is not a licence, accreditation, or authority to provide clinical, legal, or regulated services.",
+  },
+];
+
 export const journeyStages: JourneyStage[] = [
   {
     level: "101",

@@ -184,6 +184,9 @@
 - [x] Make each curriculum-stage explanation directly open its corresponding level of units in the learning atlas.
 - [x] Add accessible active-stage feedback and a clear route back to the full curriculum.
 - [x] Add coverage and validate the stage-to-level handoff at desktop and mobile breakpoints.
+- [x] Define distinct personal-agency and optional education/advocacy outcomes without implying a professional credential.
+- [x] Add a visible pathway choice that explains what each curriculum route is working toward.
+- [x] Add coverage and validate the dual-outcome curriculum explanation at desktop and mobile breakpoints.
 - [x] Define a browser-local recently viewed course contract that stores only validated course codes and no learner, account, enrolment, or progress data.
 - [x] Add a private recently viewed course thread to the learning experience with an explicit local-data boundary.
 - [x] Add automated coverage and validate the recently viewed thread at desktop and mobile breakpoints.

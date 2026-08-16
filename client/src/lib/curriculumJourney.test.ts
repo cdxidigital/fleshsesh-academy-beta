@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { curriculumEndGoal, getJourneyStage, getUnitContribution, journeyStages } from "./curriculumJourney";
+import { curriculumEndGoal, curriculumPathways, getJourneyStage, getUnitContribution, journeyStages } from "./curriculumJourney";
 
 describe("curriculum journey", () => {
   it("defines the four complete curriculum stages in order", () => {
@@ -11,5 +11,11 @@ describe("curriculum journey", () => {
     expect(getJourneyStage("301").title).toBe("Connect evidence, ethics, and action");
     expect(getUnitContribution("201")).toContain("Applied practice");
     expect(curriculumEndGoal.boundary).toMatch(/not a clinical, legal, professional, regulated, or accredited qualification/i);
+  });
+
+  it("offers distinct personal and education-practice outcomes without credential claims", () => {
+    expect(curriculumPathways.map((pathway) => pathway.id)).toEqual(["personal-agency", "education-practice"]);
+    expect(curriculumPathways[0].boundary).toMatch(/do not need to continue into 301 or 401/i);
+    expect(curriculumPathways[1].boundary).toMatch(/not a licence, accreditation/i);
   });
 });
