@@ -53,7 +53,8 @@
 - [x] Add an opt-in device-connectivity architecture for compatible personal devices with privacy, consent, emergency-stop, and tournament-control boundaries.
 - [x] Validate facility navigation, device-consent controls, and responsive media treatment before checkpointing.
 - [x] Add facility-specific pathway navigation so each campus world opens its mapped courses in the learning catalogue.
-- [ ] Re-validate the homepage-to-campus-to-facility-course pathway flow across desktop and mobile before checkpointing.
+- [ ] Re-validate the homepage-to-campus-to-facility-course pathway flow across desktop and mobile before checkpointing. (Desktop complete; true interactive mobile click-through remains deferred.)
+- [x] Re-verify the homepage-to-campus-to-eClinic-to-mapped-course pathway on desktop.
 - [x] Exercise the campus navigation, facility selection, pathway routing, and device-consent/emergency-stop UI states through development-only browser checks.
 - [x] Add a non-live Esports Arena tournament lobby with pause, stop, and disconnect session controls that never imply active hardware control.
 - [ ] Complete a true mobile-width click-through from homepage to campus, facility, and filtered course pathway when an interactive mobile viewport is available.
