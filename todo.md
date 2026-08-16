@@ -176,6 +176,11 @@
 - [x] Add tests and validate the care-navigation route at desktop and mobile breakpoints.
 - [x] Add the supplied primary fleshsesh | academy lockup to the care-navigation header at a high-visibility scale.
 - [x] Validate the branded care-navigation header at desktop and mobile breakpoints.
+- [x] Define a plain-language curriculum end goal and non-credential boundary for the complete fleshsesh | academy journey.
+- [x] Map every learning level and unit to a clear learner capability and next-step contribution.
+- [x] Add a visible curriculum journey and end-goal explanation to the learning atlas.
+- [x] Add selected-unit context that explains what the unit unlocks within the wider learning journey.
+- [x] Add automated coverage and validate the clarified curriculum journey at desktop and mobile breakpoints.
 - [x] Define a browser-local recently viewed course contract that stores only validated course codes and no learner, account, enrolment, or progress data.
 - [x] Add a private recently viewed course thread to the learning experience with an explicit local-data boundary.
 - [x] Add automated coverage and validate the recently viewed thread at desktop and mobile breakpoints.
