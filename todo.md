@@ -166,6 +166,8 @@
 - [ ] Validate focus visibility on public, learning, member-preview, and Arena controls at desktop and mobile layouts.
 - [x] Verify desktop skip-link focus visibility and main landmark targeting on dedicated facility, achievement archive, and Arena readiness routes.
 - [x] Verify desktop skip-link focus visibility and main landmark targeting on the public eCampus homepage.
+- [x] Create a privacy-safe launch acceptance runbook for Stripe, authenticated learner, and true-mobile validation.
+- [x] Cross-check the runbook against deferred checklist items and platform data/safety boundaries.
 - [x] Define a browser-local recently viewed course contract that stores only validated course codes and no learner, account, enrolment, or progress data.
 - [x] Add a private recently viewed course thread to the learning experience with an explicit local-data boundary.
 - [x] Add automated coverage and validate the recently viewed thread at desktop and mobile breakpoints.
