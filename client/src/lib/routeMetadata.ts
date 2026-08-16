@@ -6,7 +6,7 @@ export type RouteMetadata = {
 const baseTitle = "fleshsesh | academy";
 
 export function getRouteMetadata(location: string): RouteMetadata {
-  if (location === "/") return { announcement: "eCampus home", title: `${baseTitle} — eCampus` };
+  if (location === "/") return { announcement: "eCampus home", title: `${baseTitle} — adult learning for agency` };
   if (location === "/orientation") return { announcement: "course orientation", title: `${baseTitle} — course orientation` };
   if (location === "/learn") return { announcement: "learning atlas", title: `${baseTitle} — learning atlas` };
   if (location === "/member") return { announcement: "member workspace", title: `${baseTitle} — member workspace` };

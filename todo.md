@@ -187,6 +187,11 @@
 - [x] Define distinct personal-agency and optional education/advocacy outcomes without implying a professional credential.
 - [x] Add a visible pathway choice that explains what each curriculum route is working toward.
 - [x] Add coverage and validate the dual-outcome curriculum explanation at desktop and mobile breakpoints.
+- [x] Add exactly 3–8 focused homepage meta keywords.
+- [x] Add one descriptive homepage H2 of 80 characters or fewer.
+- [x] Set the homepage document title to 30–60 characters.
+- [x] Add descriptive alt text to every homepage image missing it.
+- [x] Verify all strict homepage SEO limits and publish the correction.
 - [x] Define a browser-local recently viewed course contract that stores only validated course codes and no learner, account, enrolment, or progress data.
 - [x] Add a private recently viewed course thread to the learning experience with an explicit local-data boundary.
 - [x] Add automated coverage and validate the recently viewed thread at desktop and mobile breakpoints.
