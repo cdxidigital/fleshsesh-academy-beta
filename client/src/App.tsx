@@ -16,6 +16,7 @@ const FacilityRoom = lazy(() => import("./pages/FacilityRoom"));
 const Orientation = lazy(() => import("./pages/Orientation"));
 const AchievementArchive = lazy(() => import("./pages/AchievementArchive"));
 const ArenaReadiness = lazy(() => import("./pages/ArenaReadiness"));
+const CareDirectory = lazy(() => import("./pages/CareDirectory"));
 
 /**
  * Rose Lacquer Learning House — dark editorial stage, restrained rose-gold detail,
@@ -29,6 +30,7 @@ function Router() {
         <Route path={"/"} component={Home} />
         <Route path={"/member"} component={Member} />
         <Route path={"/member/achievements"} component={AchievementArchive} />
+        <Route path={"/care"} component={CareDirectory} />
         <Route path={"/campus/esports/readiness"} component={ArenaReadiness} />
         <Route path={"/orientation"} component={Orientation} />
         <Route path={"/learn"} component={Learning} />

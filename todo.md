@@ -171,6 +171,9 @@
 - [x] Define static non-disclosive document titles for public, learning, member, and non-live Arena routes.
 - [x] Apply route-aware document titles without surfacing learner, enrolment, progress, payment, device, or participation data.
 - [x] Add coverage and validate document titles across representative routes.
+- [x] Define a non-clinical Australian care-navigation directory using verified public resources and no learner-data collection.
+- [x] Add a public care-navigation route with urgent-support, health-service, and violence-support boundaries.
+- [x] Add tests and validate the care-navigation route at desktop and mobile breakpoints.
 - [x] Define a browser-local recently viewed course contract that stores only validated course codes and no learner, account, enrolment, or progress data.
 - [x] Add a private recently viewed course thread to the learning experience with an explicit local-data boundary.
 - [x] Add automated coverage and validate the recently viewed thread at desktop and mobile breakpoints.

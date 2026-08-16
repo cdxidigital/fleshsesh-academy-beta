@@ -11,6 +11,7 @@ export function getRouteMetadata(location: string): RouteMetadata {
   if (location === "/learn") return { announcement: "learning atlas", title: `${baseTitle} — learning atlas` };
   if (location === "/member") return { announcement: "member workspace", title: `${baseTitle} — member workspace` };
   if (location === "/member/achievements") return { announcement: "achievement archive", title: `${baseTitle} — achievement archive` };
+  if (location === "/care") return { announcement: "care navigation", title: `${baseTitle} — care navigation` };
   if (location === "/campus/esports/readiness") return { announcement: "Arena connector readiness", title: `${baseTitle} — Arena connector readiness` };
   if (location === "/campus") return { announcement: "campus hub", title: `${baseTitle} — campus` };
   if (location.startsWith("/campus/")) return { announcement: "campus facility room", title: `${baseTitle} — campus facility` };

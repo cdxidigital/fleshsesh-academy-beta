@@ -10,6 +10,7 @@ describe("getRouteMetadata", () => {
 
   it("uses non-disclosive static titles for private and Arena routes", () => {
     expect(getRouteMetadata("/member").title).toBe("fleshsesh | academy — member workspace");
+    expect(getRouteMetadata("/care").title).toBe("fleshsesh | academy — care navigation");
     expect(getRouteMetadata("/campus/esports/readiness").title).toBe("fleshsesh | academy — Arena connector readiness");
     expect(getRouteMetadata("/campus/eclinic").title).toBe("fleshsesh | academy — campus facility");
   });
