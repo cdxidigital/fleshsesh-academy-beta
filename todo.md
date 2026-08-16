@@ -55,9 +55,9 @@
 - [x] Add facility-specific pathway navigation so each campus world opens its mapped courses in the learning catalogue.
 - [ ] Re-validate the homepage-to-campus-to-facility-course pathway flow across desktop and mobile before checkpointing. (Desktop complete; true interactive mobile click-through remains deferred.)
 - [x] Re-verify the homepage-to-campus-to-eClinic-to-mapped-course pathway on desktop.
-- [ ] Define context-preserving previous and next unit navigation for selected course views without creating learner data.
-- [ ] Add accessible previous and next unit controls that retain the active facility pathway when present.
-- [ ] Add automated coverage and validate selected-unit navigation at desktop and mobile breakpoints.
+- [x] Define context-preserving previous and next unit navigation for selected course views without creating learner data.
+- [x] Add accessible previous and next unit controls that retain the active facility pathway when present.
+- [x] Add automated coverage and validate selected-unit navigation at desktop and mobile breakpoints.
 - [x] Upload the supplied transparent fleshsesh | academy lockup as the primary brand asset for the platform.
 - [x] Increase logo scale across all headers so the lockup reads clearly at desktop and mobile widths.
 - [x] Increase logo presence on the adult gateway, homepage hero, and closing/footer surfaces.
@@ -180,3 +180,6 @@
 - [ ] Define a safe deferred-loading boundary for the faculty chat renderer without changing lecturer safeguards or conversation state. (Deferred after the production build renderer was terminated repeatedly during the experiment.)
 - [ ] Load the faculty chat renderer only when the learner reaches the faculty studio, with an accessible non-disclosive fallback. (Deferred pending a stable bundle-analysis path.)
 - [ ] Verify faculty rendering, regressions, and production bundle output after deferring the chat renderer. (TypeScript and tests passed after rollback; full production build was not accepted after repeated build-stage termination.)
+- [x] Replace JavaScript-only orientation card selection with native URL links that preserve preview and selected-route state.
+- [x] Make orientation mapped-unit handoffs native links so course discovery remains reliable without click-dispatch assistance.
+- [x] Add regression coverage and validate desktop/mobile direct orientation-route handoffs.
