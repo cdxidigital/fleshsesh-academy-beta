@@ -177,9 +177,9 @@
 - [x] Define a clear browser-local reset boundary for private shelf and recently viewed course codes.
 - [x] Add explicit local-only clear controls without changing member, enrolment, progress, reward, payment, or device data.
 - [x] Add automated coverage and validate the privacy-reset controls at desktop and mobile breakpoints.
-- [ ] Define a safe deferred-loading boundary for the faculty chat renderer without changing lecturer safeguards or conversation state. (Deferred after the production build renderer was terminated repeatedly during the experiment.)
-- [ ] Load the faculty chat renderer only when the learner reaches the faculty studio, with an accessible non-disclosive fallback. (Deferred pending a stable bundle-analysis path.)
-- [ ] Verify faculty rendering, regressions, and production bundle output after deferring the chat renderer. (TypeScript and tests passed after rollback; full production build was not accepted after repeated build-stage termination.)
+- [x] Define a safe deferred-loading boundary for the faculty chat renderer without changing lecturer safeguards or conversation state.
+- [x] Load the faculty chat renderer only when the learner reaches the faculty studio, with an accessible non-disclosive fallback.
+- [x] Verify faculty rendering, regressions, and production bundle output after deferring the chat renderer.
 - [x] Replace JavaScript-only orientation card selection with native URL links that preserve preview and selected-route state.
 - [x] Make orientation mapped-unit handoffs native links so course discovery remains reliable without click-dispatch assistance.
 - [x] Add regression coverage and validate desktop/mobile direct orientation-route handoffs.
