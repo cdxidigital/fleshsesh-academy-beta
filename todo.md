@@ -136,7 +136,7 @@
 - [x] Define a provider-neutral device-connector readiness specification that permits no live device discovery, pairing, telemetry, or control.
 - [x] Surface the non-live connector readiness requirements within the Arena learning experience with privacy, consent, and emergency-stop boundaries.
 - [x] Add a direct Esports Arena handoff to the non-live connector readiness reference.
-- [ ] Validate the remaining interactive Esports Arena-to-readiness handoff acceptance checks.
+- [x] Validate the remaining interactive Esports Arena-to-readiness handoff acceptance checks on desktop.
 - [x] Validate the Esports Arena-to-readiness handoff at desktop.
 - [ ] Interactively verify the Esports Arena-to-readiness handoff on a mobile-width viewport when available.
 - [x] Add automated coverage for the non-live connector readiness rules.
@@ -165,6 +165,7 @@
 - [x] Apply the focus-visible treatment to interactive controls without changing learner, payment, shelf, or device data.
 - [ ] Validate focus visibility on public, learning, member-preview, and Arena controls at desktop and mobile layouts.
 - [x] Verify desktop skip-link focus visibility and main landmark targeting on dedicated facility, achievement archive, and Arena readiness routes.
+- [x] Verify desktop skip-link focus visibility and main landmark targeting on the public eCampus homepage.
 - [x] Define a browser-local recently viewed course contract that stores only validated course codes and no learner, account, enrolment, or progress data.
 - [x] Add a private recently viewed course thread to the learning experience with an explicit local-data boundary.
 - [x] Add automated coverage and validate the recently viewed thread at desktop and mobile breakpoints.
