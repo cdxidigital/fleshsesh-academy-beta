@@ -6,6 +6,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { lazy, Suspense, useEffect } from "react";
 import { useLocation } from "wouter";
+import { getRouteMetadata } from "./lib/routeMetadata";
 
 const Home = lazy(() => import("./pages/Home"));
 const Member = lazy(() => import("./pages/Member"));
@@ -59,8 +60,11 @@ function SkipToMainContent() {
 
 function RouteAnnouncement() {
   const [location] = useLocation();
-  const label = location === "/" ? "eCampus home" : location === "/orientation" ? "course orientation" : location === "/learn" ? "learning atlas" : location === "/member" ? "member workspace" : location === "/member/achievements" ? "achievement archive" : location === "/campus/esports/readiness" ? "Arena connector readiness" : location === "/campus" ? "campus hub" : location.startsWith("/campus/") ? "campus facility room" : "fleshsesh academy";
-  return <p className="sr-only" aria-live="polite" aria-atomic="true">Navigated to {label}</p>;
+  const { announcement, title } = getRouteMetadata(location);
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+  return <p className="sr-only" aria-live="polite" aria-atomic="true">Navigated to {announcement}</p>;
 }
 
 // NOTE: About Theme

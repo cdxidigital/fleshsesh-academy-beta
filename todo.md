@@ -168,6 +168,9 @@
 - [x] Verify desktop skip-link focus visibility and main landmark targeting on the public eCampus homepage.
 - [x] Create a privacy-safe launch acceptance runbook for Stripe, authenticated learner, and true-mobile validation.
 - [x] Cross-check the runbook against deferred checklist items and platform data/safety boundaries.
+- [x] Define static non-disclosive document titles for public, learning, member, and non-live Arena routes.
+- [x] Apply route-aware document titles without surfacing learner, enrolment, progress, payment, device, or participation data.
+- [x] Add coverage and validate document titles across representative routes.
 - [x] Define a browser-local recently viewed course contract that stores only validated course codes and no learner, account, enrolment, or progress data.
 - [x] Add a private recently viewed course thread to the learning experience with an explicit local-data boundary.
 - [x] Add automated coverage and validate the recently viewed thread at desktop and mobile breakpoints.
