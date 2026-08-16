@@ -55,6 +55,16 @@
 - [x] Add facility-specific pathway navigation so each campus world opens its mapped courses in the learning catalogue.
 - [ ] Re-validate the homepage-to-campus-to-facility-course pathway flow across desktop and mobile before checkpointing. (Desktop complete; true interactive mobile click-through remains deferred.)
 - [x] Re-verify the homepage-to-campus-to-eClinic-to-mapped-course pathway on desktop.
+- [ ] Define context-preserving previous and next unit navigation for selected course views without creating learner data.
+- [ ] Add accessible previous and next unit controls that retain the active facility pathway when present.
+- [ ] Add automated coverage and validate selected-unit navigation at desktop and mobile breakpoints.
+- [x] Upload the supplied transparent fleshsesh | academy lockup as the primary brand asset for the platform.
+- [x] Increase logo scale across all headers so the lockup reads clearly at desktop and mobile widths.
+- [x] Increase logo presence on the adult gateway, homepage hero, and closing/footer surfaces.
+- [x] Validate enlarged logo visibility and layout stability across primary routes at desktop and mobile.
+- [x] Remove redundant emblem icons positioned beside the primary fleshsesh | academy lockup in navigation surfaces.
+- [x] Re-validate the streamlined logo treatment and create the requested release checkpoint.
+- [x] Save the final checkpoint for the enlarged fleshsesh | academy lockup release after completed validation and regression checks.
 - [x] Exercise the campus navigation, facility selection, pathway routing, and device-consent/emergency-stop UI states through development-only browser checks.
 - [x] Add a non-live Esports Arena tournament lobby with pause, stop, and disconnect session controls that never imply active hardware control.
 - [ ] Complete a true mobile-width click-through from homepage to campus, facility, and filtered course pathway when an interactive mobile viewport is available.
