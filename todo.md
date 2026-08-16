@@ -97,6 +97,13 @@
 - [x] Interactively verify the reverse shelf flow from orientation to the learning catalogue on desktop.
 - [x] Interactively remove a catalogue-saved course on desktop and confirm the orientation shelf updates accordingly.
 - [x] Interactively save and remove a course from desktop orientation, then confirm the learning atlas reflects both transitions.
+- [x] Define non-personal course filtering for the learning atlas that remains local to the rendered session and creates no learner record.
+- [x] Add accessible level and explicit topic filters with a clear no-results state to the learning atlas.
+- [x] Add automated coverage and validate level and explicit topic filters at desktop and mobile breakpoints.
+- [x] Replace the transient empty filter state during catalogue loading with a clear non-disclosive atlas-loading presentation.
+- [x] Define explicit session-local topic filter categories for the learning atlas without personal profiling.
+- [x] Add explicit topic filter controls for care navigation, consent, relationships, and digital privacy.
+- [x] Add tests and desktop/mobile validation for explicit topic-filter combinations and no-results recovery.
 - [ ] Repeat cross-page shelf persistence validation at an interactive mobile width when that environment is available.
 - [x] Validate the remaining interactive syllabus-shelf persistence behavior on desktop before checkpointing.
 - [x] Define a certificate-readiness model that derives status only from existing enrolment and lesson-completion records.
