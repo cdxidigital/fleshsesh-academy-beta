@@ -197,6 +197,9 @@
 - [x] Create an ABC-simple AI guidance hub that routes learners to the right role in one choice.
 - [x] Add role-specific prompts and handoffs without soliciting personal disclosures or creating learner data.
 - [x] Add automated coverage and validate the simplified AI guidance experience at desktop and mobile breakpoints.
+- [x] Reduce public navigation to clear Explore, Learn, and Get Help actions.
+- [x] Preserve direct access to campus, curriculum, AI guidance, care support, and member sign-in through the simplified paths.
+- [x] Validate the simplified public navigation at desktop and mobile breakpoints.
 - [x] Define a browser-local recently viewed course contract that stores only validated course codes and no learner, account, enrolment, or progress data.
 - [x] Add a private recently viewed course thread to the learning experience with an explicit local-data boundary.
 - [x] Add automated coverage and validate the recently viewed thread at desktop and mobile breakpoints.
