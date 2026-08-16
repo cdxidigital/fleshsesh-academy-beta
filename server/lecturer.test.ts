@@ -14,7 +14,8 @@ describe("lecturer safety routing", () => {
   it("keeps faculty scopes explicit and offers guided prompts", () => {
     expect(lecturers.mira.scope).toContain("STI prevention");
     expect(lecturers.alex.suggestedPrompts).toHaveLength(3);
-    expect(Object.keys(lecturers)).toHaveLength(9);
+    expect(Object.keys(lecturers)).toHaveLength(10);
     expect(lecturers.niko.scope).toContain("non-explicit");
+    expect(lecturers.aria.scope).toContain("Does not access accounts");
   });
 });

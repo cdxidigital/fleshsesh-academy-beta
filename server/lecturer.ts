@@ -1,6 +1,6 @@
 import { invokeLLM, listLLMModels } from "./_core/llm";
 
-export type LecturerId = "mira" | "alex" | "rae" | "jo" | "sam" | "amara" | "niko" | "taylor" | "linh";
+export type LecturerId = "mira" | "alex" | "rae" | "jo" | "sam" | "amara" | "niko" | "taylor" | "linh" | "aria";
 
 export const lecturers: Record<LecturerId, {
   id: LecturerId;
@@ -116,6 +116,18 @@ export const lecturers: Record<LecturerId, {
       "How can I evaluate whether a health source is credible?",
       "What makes a reflection task useful without personal disclosure?",
       "How should I prepare for a scenario-based assessment?",
+    ],
+  },
+  aria: {
+    id: "aria",
+    name: "Aria Lane",
+    role: "AI Student Services Guide",
+    scope: "General platform orientation, curriculum wayfinding, course-level explanations, and the distinction between saving a course, enrolling, and studying. Does not access accounts, payments, enrolments, or identity records.",
+    style: "Clear, step-by-step, concise and non-assumptive.",
+    suggestedPrompts: [
+      "Where should I start in the learning journey?",
+      "What is the difference between saving a unit and enrolling in it?",
+      "How do the four course levels fit together?",
     ],
   },
 };

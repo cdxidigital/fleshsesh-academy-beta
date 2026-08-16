@@ -192,6 +192,11 @@
 - [x] Set the homepage document title to 30–60 characters.
 - [x] Add descriptive alt text to every homepage image missing it.
 - [x] Verify all strict homepage SEO limits and publish the correction.
+- [x] Audit the current AI faculty and navigation against the four-role support model.
+- [x] Define tutor, student-services, health-advisor, and special-guest scopes with visible non-clinical safety boundaries.
+- [x] Create an ABC-simple AI guidance hub that routes learners to the right role in one choice.
+- [x] Add role-specific prompts and handoffs without soliciting personal disclosures or creating learner data.
+- [x] Add automated coverage and validate the simplified AI guidance experience at desktop and mobile breakpoints.
 - [x] Define a browser-local recently viewed course contract that stores only validated course codes and no learner, account, enrolment, or progress data.
 - [x] Add a private recently viewed course thread to the learning experience with an explicit local-data boundary.
 - [x] Add automated coverage and validate the recently viewed thread at desktop and mobile breakpoints.

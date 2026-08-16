@@ -27,7 +27,7 @@ export const appRouter = router({
     roster: publicProcedure.query(() => Object.values(lecturers)),
     respond: publicProcedure
       .input(z.object({
-        lecturerId: z.enum(["mira", "alex", "rae", "jo", "sam", "amara", "niko", "taylor", "linh"]),
+        lecturerId: z.enum(["mira", "alex", "rae", "jo", "sam", "amara", "niko", "taylor", "linh", "aria"]),
         message: z.string().trim().min(2).max(900),
         ageConfirmed: z.literal(true),
       }))
