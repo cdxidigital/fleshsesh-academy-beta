@@ -1,13 +1,16 @@
 import { ArrowLeft, ArrowUpRight, ExternalLink, ShieldCheck } from "lucide-react";
 import { careResources } from "@/lib/careNavigation";
 
+const primaryLockup = "/manus-storage/fleshsesh-academy-lockup-primary_c4730d25.png";
+
 export default function CareDirectory() {
   return (
     <main className="min-h-screen bg-[#061018] text-[#edf3f0]">
       <header className="border-b border-white/10 bg-[#061018]/95 px-5 py-5 backdrop-blur sm:px-8 lg:px-12">
-        <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-4">
+        <div className="mx-auto grid max-w-[1500px] grid-cols-[1fr_auto_1fr] items-center gap-3">
           <a href="/" className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[.18em] text-[#e6c887] transition-colors hover:text-[#f1dca4]"><ArrowLeft className="h-3.5 w-3.5" /> eCampus home</a>
-          <p className="text-[10px] font-bold uppercase tracking-[.18em] text-[#b9cac6]">Care navigation</p>
+          <img src={primaryLockup} alt="fleshsesh | academy" className="h-[48px] w-[150px] object-contain sm:h-[58px] sm:w-[185px]" />
+          <p className="justify-self-end text-right text-[9px] font-bold uppercase tracking-[.16em] text-[#b9cac6] sm:text-[10px] sm:tracking-[.18em]">Care navigation</p>
         </div>
       </header>
 
