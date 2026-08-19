@@ -1,4 +1,4 @@
-export type FacilityId = "eclinic" | "law-library" | "residence-life" | "esports";
+export type FacilityId = "classroom" | "student-services" | "auditorium";
 
 export type DeviceConsentState = {
   adultConfirmed: boolean;
@@ -9,15 +9,17 @@ export type DeviceConsentState = {
 
 export type TournamentSessionStatus = "idle" | "ready" | "paused" | "stopped" | "disconnected";
 
+type GuideId = "mira" | "linh" | "amara" | "sam" | "aria";
+
 export type FacilityRoom = {
   studioName: string;
   studioIntroduction: string;
   learningModes: Array<{ title: string; copy: string }>;
-  faculty: { id: "mira" | "linh" | "amara" | "sam"; name: string; role: string; handoff: string; prompt: string };
+  faculty: { id: GuideId; name: string; role: string; handoff: string; prompt: string };
   reflectionPrompts: string[];
 };
 
-export const campusFacilities: Array<{
+export type CampusPlace = {
   id: FacilityId;
   label: string;
   eyebrow: string;
@@ -26,109 +28,90 @@ export const campusFacilities: Array<{
   courseCodes: string[];
   courseLabel: string;
   note: string;
+  pathway: { step: string; when: string; action: string; next: FacilityId | "atlas" | "care" };
   room: FacilityRoom;
-}> = [
+};
+
+export const campusFacilities: CampusPlace[] = [
   {
-    id: "eclinic",
-    label: "eClinic",
-    eyebrow: "Evidence with warmth",
-    description: "A calm education and care-navigation space for health literacy, questions to take to a clinician, and clear pathways for support.",
+    id: "classroom",
+    label: "Classroom",
+    eyebrow: "Start here",
+    description: "The only place a new learner needs to understand: one five-minute mission, one idea, one action, and one clear next step.",
     image: "/manus-storage/fleshsesh-eclinic-editorial_f01115b8.jpg",
-    courseCodes: ["FSH 103", "FSH 105", "FSH 202", "FSH 301"],
-    courseLabel: "Health & care navigation",
-    note: "Education, not diagnosis. Urgent, clinical, or crisis needs are directed to qualified support.",
+    courseCodes: ["FSH 101", "FSH 102", "FSH 103", "FSH 104", "FSH 105"],
+    courseLabel: "Foundation missions",
+    note: "Begin with a single mission. There is no personal disclosure, streak pressure, or need to choose a full pathway first.",
+    pathway: { step: "01", when: "When you are ready to begin", action: "Start one five-minute mission", next: "student-services" },
     room: {
-      studioName: "The Evidence Desk",
-      studioIntroduction: "A calm, self-paced briefing room for turning credible information into questions you can take to an appropriate professional. Nothing here replaces care or asks for your history.",
+      studioName: "One clear step",
+      studioIntroduction: "The Classroom turns a large topic into a short mission. See the essential idea, try a general scenario, ask your tutor if needed, then decide what comes next.",
       learningModes: [
-        { title: "Source check", copy: "Compare the evidence signals that make an education source worth trusting." },
-        { title: "Question builder", copy: "Turn a general learning point into a clear, non-diagnostic question for a clinician or service." },
-        { title: "Care map", copy: "Recognise when education ends and qualified, local support should take over." },
+        { title: "See", copy: "Start with the one essential idea, in plain language and without a wall of text." },
+        { title: "Try", copy: "Make one choice in a general scenario; no personal experience is requested." },
+        { title: "Next", copy: "Continue, pause, or ask for a simple explanation before you move on." },
       ],
-      faculty: { id: "mira", name: "Dr. Mira Sen", role: "Clinical Professor", handoff: "Offers anatomy, health-literacy, and evidence-checking guidance with explicit clinical boundaries.", prompt: "How should I assess health information online?" },
-      reflectionPrompts: ["What makes a source feel credible?", "What question would clarify the next learning step?", "Where does education end and professional care begin?"],
+      faculty: { id: "mira", name: "Dr. Mira Sen", role: "AI Tutor", handoff: "Explains general educational concepts simply and identifies when qualified support should take over.", prompt: "Explain this mission simply." },
+      reflectionPrompts: ["What is the one idea to remember?", "What would I like explained more simply?", "Do I want to continue or pause?"],
     },
   },
   {
-    id: "law-library",
-    label: "Law Library",
-    eyebrow: "Rights, ethics & digital life",
-    description: "A dark-academia reading room for consent, privacy, policy, evidence appraisal, and clear, informed communication.",
-    image: "/manus-storage/fleshsesh-law-library-editorial_d61126d2.jpg",
-    courseCodes: ["FSH 102", "FSH 206", "FSH 304", "FSH 403"],
-    courseLabel: "Consent, rights & evidence",
-    note: "Explore principles and scenarios without being asked for personal disclosures.",
-    room: {
-      studioName: "The Consent Reading Room",
-      studioIntroduction: "A quiet, dark-academia study room for practising clear communication, privacy, and evidence. Scenarios stay general; no personal disclosure is required.",
-      learningModes: [
-        { title: "Case notes", copy: "Read general situations through consent, rights, and boundary-setting principles." },
-        { title: "Evidence lens", copy: "Distinguish policy claims, lived experience, and robust supporting evidence." },
-        { title: "Language lab", copy: "Rehearse clear, respectful phrases for opting in, pausing, or changing a mind." },
-      ],
-      faculty: { id: "linh", name: "Professor Linh Patel", role: "Assessment Coach", handoff: "Helps learners appraise evidence and structure practical, non-disclosive reflections.", prompt: "What makes a reflection task useful without personal disclosure?" },
-      reflectionPrompts: ["Which detail changes the ethical question?", "What information would strengthen this claim?", "How could a boundary be expressed more clearly?"],
-    },
-  },
-  {
-    id: "residence-life",
-    label: "Residence Life",
-    eyebrow: "The candid social wing",
-    description: "The campus’s most candid social space: a warm, playful setting for relationships, communication, repair, and body-neutral self-knowledge.",
+    id: "student-services",
+    label: "Student Services",
+    eyebrow: "Only when you need it",
+    description: "Background support for finding a next unit, understanding how the eCampus works, or opening a public care-support route—without sharing a personal story.",
     image: "/manus-storage/fleshsesh-residence-life-editorial_70ee9870.jpg",
-    courseCodes: ["FSH 104", "FSH 203", "FSH 204", "FSH 207"],
-    courseLabel: "Relationships & communication",
-    note: "Playful atmosphere, adult-only boundaries. No explicit material and no pressure to disclose.",
+    courseCodes: ["FSH 201", "FSH 202", "FSH 203", "FSH 204", "FSH 205", "FSH 206", "FSH 207"],
+    courseLabel: "Applied missions & support navigation",
+    note: "Student Services provides general orientation only. It cannot access your account, payment, enrolment, identity, or personal history.",
+    pathway: { step: "02", when: "When the next step is not obvious", action: "Ask for a simple next-step map", next: "auditorium" },
     room: {
-      studioName: "The Common Room",
-      studioIntroduction: "The warm social wing holds low-stakes practice for communication, repair, and body-neutral self-knowledge. Its tone is candid, never explicit, and always optional.",
+      studioName: "Next-step help",
+      studioIntroduction: "Use this room only when you need practical eCampus orientation, a general learning route, or a handoff to public care navigation.",
       learningModes: [
-        { title: "Conversation rehearsal", copy: "Explore plain-language check-ins, requests, and responses to a changed mind." },
-        { title: "Repair table", copy: "Study the building blocks of respectful repair without re-living a personal conflict." },
-        { title: "Belonging notes", copy: "Consider how inclusion, access, and body-neutral language shape a shared space." },
+        { title: "Choose", copy: "Find a general next unit without building a profile." },
+        { title: "Understand", copy: "Get plain-language information about one-time enrolment and learning tools." },
+        { title: "Support", copy: "Open public care navigation when education should hand over to an external service." },
       ],
-      faculty: { id: "amara", name: "Amara Williams", role: "Relationship Systems Lecturer", handoff: "Guides reflective, inclusive learning about dynamics, repair, and clear expectations.", prompt: "What does respectful repair after a misunderstanding involve?" },
-      reflectionPrompts: ["What makes a check-in feel non-pressured?", "Which part of repair can be made more specific?", "What does inclusion look like in this exchange?"],
+      faculty: { id: "aria", name: "Aria Lane", role: "AI Student Services Guide", handoff: "Provides general orientation only and cannot access accounts, payments, enrolments, identity, or personal records.", prompt: "What is my simplest next step?" },
+      reflectionPrompts: ["Do I need a next unit or a pause?", "What eCampus question can be answered generally?", "When should I open a support service instead?"],
     },
   },
   {
-    id: "esports",
-    label: "Esports Arena",
-    eyebrow: "Play, digital confidence & consent",
-    description: "A neon-accented arena for games, digital safety, tournament design, and an opt-in personal-device connection framework.",
-    image: "/manus-storage/fleshsesh-esports-editorial_7a22e23b.jpg",
-    courseCodes: ["FSH 206", "FSH 302", "FSH 403"],
-    courseLabel: "Digital safety & adult consent",
-    note: "Any future device connection is voluntary, session-only, reversible, and governed by an always-on stop control.",
+    id: "auditorium",
+    label: "Auditorium",
+    eyebrow: "Optional deeper context",
+    description: "A background space for special guests, wider perspectives, evidence, digital life, and deeper study after the basics make sense.",
+    image: "/manus-storage/fleshsesh-law-library-editorial_d61126d2.jpg",
+    courseCodes: ["FSH 301", "FSH 302", "FSH 303", "FSH 304", "FSH 305", "FSH 401", "FSH 402", "FSH 403", "FSH 404"],
+    courseLabel: "Deeper-study missions & special guests",
+    note: "The Auditorium is optional. It offers perspective and depth, never professional authority, diagnosis, or a credential claim.",
+    pathway: { step: "03", when: "When you want more depth or another perspective", action: "Choose one deeper mission or guest viewpoint", next: "atlas" },
     room: {
-      studioName: "The Arena Control Deck",
-      studioIntroduction: "A neon study deck for digital consent, privacy, and game culture. Any future personal-device integration remains separate, opt-in, reversible, and inactive here.",
+      studioName: "The perspective stage",
+      studioIntroduction: "The Auditorium holds special perspectives and deeper study for learners who want it. You can always return to a shorter Classroom mission.",
       learningModes: [
-        { title: "Privacy loadout", copy: "Identify the decisions that reduce exposure before a digital interaction begins." },
-        { title: "Consent protocol", copy: "Work through clear opt-in, pause, stop, and disconnect expectations for shared play." },
-        { title: "Response drill", copy: "Build a general, non-personal incident-response plan for a changing situation." },
+        { title: "Hear", copy: "Take in one evidence-led perspective before reading more." },
+        { title: "Compare", copy: "Notice the difference between evidence, interpretation, and a personal value." },
+        { title: "Explore", copy: "Choose an advanced mission only when you want more depth." },
       ],
-      faculty: { id: "sam", name: "Sam Chen", role: "Digital Safety Lecturer", handoff: "Teaches practical privacy, consent, and general incident-response planning without requesting private details.", prompt: "What are the principles of digital consent?" },
-      reflectionPrompts: ["What makes an opt-in meaningful?", "Where should pause and stop controls be visible?", "What data does a system truly need to retain?"],
+      faculty: { id: "amara", name: "Amara Williams", role: "Special Guest Host", handoff: "Introduces inclusive educational perspectives and directs specialised health, legal, or crisis needs to qualified support.", prompt: "Show me another perspective on this topic." },
+      reflectionPrompts: ["What new perspective changes the question?", "What is evidence and what is interpretation?", "Would a simpler mission help before I continue?"],
     },
   },
 ];
+
+export const campusPathway = campusFacilities.map((place) => ({ id: place.id, label: place.label, ...place.pathway }));
 
 export function canStartDeviceSession(consent: DeviceConsentState): boolean {
   return consent.adultConfirmed && consent.ownerConfirmed && consent.voluntaryConfirmed && consent.privacyConfirmed;
 }
 
 export function emergencyStopMessage(hasLiveConnection: boolean): string {
-  return hasLiveConnection
-    ? "Emergency stop requested. The connection must be stopped and disconnected immediately."
-    : "Emergency stop is armed. No personal device is connected in this preview.";
+  return hasLiveConnection ? "Emergency stop requested. The connection must be stopped and disconnected immediately." : "Emergency stop is armed. No personal device is connected in this preview.";
 }
 
-export function transitionTournamentSession(
-  status: TournamentSessionStatus,
-  action: "start" | "pause" | "stop" | "disconnect",
-  consentComplete: boolean,
-): TournamentSessionStatus {
+export function transitionTournamentSession(status: TournamentSessionStatus, action: "start" | "pause" | "stop" | "disconnect", consentComplete: boolean): TournamentSessionStatus {
   if (action === "disconnect") return "disconnected";
   if (action === "stop") return "stopped";
   if (action === "pause" && status === "ready") return "paused";
@@ -137,12 +120,11 @@ export function transitionTournamentSession(
 }
 
 export function tournamentSessionMessage(status: TournamentSessionStatus): string {
-  const messages: Record<TournamentSessionStatus, string> = {
-    idle: "Session preview is idle. Complete the four consent statements before beginning a local lobby preview.",
+  return {
+    idle: "Session preview is idle.",
     ready: "Preview session ready. No provider bridge or personal hardware is connected.",
-    paused: "Preview session paused. No activity can resume unless the participant chooses to resume the local preview.",
-    stopped: "Preview session stopped. The local preview has no active connection.",
+    paused: "Preview session paused.",
+    stopped: "Preview session stopped.",
     disconnected: "Session disconnected. Pairing data is not retained in this preview.",
-  };
-  return messages[status];
+  }[status];
 }

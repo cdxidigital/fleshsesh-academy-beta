@@ -4,13 +4,13 @@ import { courseByCode } from "@shared/courseCatalog";
 
 describe("campus facility rooms", () => {
   it("gives every facility a non-disclosive studio, faculty handoff, and mapped learning path", () => {
-    expect(campusFacilities).toHaveLength(4);
+    expect(campusFacilities).toHaveLength(3);
 
     for (const facility of campusFacilities) {
       expect(facility.room.studioName.length).toBeGreaterThan(3);
       expect(facility.room.learningModes).toHaveLength(3);
       expect(facility.room.reflectionPrompts).toHaveLength(3);
-      expect(["mira", "linh", "amara", "sam"]).toContain(facility.room.faculty.id);
+      expect(["mira", "linh", "amara", "sam", "aria"]).toContain(facility.room.faculty.id);
       expect(facility.room.faculty.name.length).toBeGreaterThan(3);
       expect(facility.room.faculty.handoff.length).toBeGreaterThan(24);
       expect(facility.courseCodes.every((code) => courseByCode.has(code))).toBe(true);

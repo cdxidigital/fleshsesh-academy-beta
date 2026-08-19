@@ -211,6 +211,34 @@
 - [x] Add a no-account, no-record first-look teaching preview that demonstrates one microlearning step before purchase.
 - [x] Clarify the launch payment model as transparent one-time AUD unit enrolment with no active subscription claim.
 - [x] Add microlearning objective and estimated-duration labels to every protected teaching step.
+- [x] Map current campus content into Classroom, Student Services, and Auditorium places.
+- [x] Define clear purpose, AI handoff, and privacy/safety boundary for each new campus place.
+- [x] Implement Classroom, Student Services, and Auditorium routes and update campus navigation.
+- [x] Map an explicit learner pathway from onboarding choice through first microlearning step to the appropriate room.
+- [x] Define Classroom, Student Services, and Auditorium milestones that explain when and why a learner enters each place.
+- [x] Add guided onward actions after the first step, a unit milestone, and a support need without requiring disclosure.
+- [x] Validate the complete guided learner-to-campus pathway at desktop and mobile breakpoints.
+- [x] Map current campus content into Classroom, Student Services, and Auditorium places.
+- [x] Define clear purpose, AI handoff, and privacy/safety boundary for each new campus place.
+- [x] Implement Classroom, Student Services, and Auditorium routes and update campus navigation.
+- [x] Validate the reorganized campus places at desktop and mobile breakpoints.
+- [x] Map an explicit learner pathway from onboarding choice through first microlearning step to the appropriate room.
+- [x] Define Classroom, Student Services, and Auditorium milestones that explain when and why a learner enters each place.
+- [x] Add guided onward actions after the first step, a unit milestone, and a support need without requiring disclosure.
+- [x] Validate the complete guided learner-to-campus pathway at desktop and mobile breakpoints.
+- [x] Reframe protected microlearning steps as missions with a clear focus, single action, supportive check, and next-room cue.
+- [x] Add a voluntary five-minute mission route with no streak pressure, leaderboard, token economy, or credential claim.
+- [x] Give Classroom, Student Services, and Auditorium explicit mission milestones and non-disclosive AI handoffs.
+- [x] Validate mission-to-room progression and ethical gamification boundaries at desktop and mobile breakpoints.
+- [x] Replace multi-room learner entry choices with one obvious five-minute mission start.
+- [x] Present one primary action and one clear next step per learner screen.
+- [x] Move Classroom, Student Services, and Auditorium into contextual background support rather than navigation decisions.
+- [x] Validate the radically simplified mission flow at desktop and mobile breakpoints.
+- [x] Add one public free starter mission that demonstrates the full watch, try, coach, and next-step rhythm without recording learner data.
+- [ ] Embed Explain, Show me, Quiz me, and Make it clearer coach actions inside mission learning rather than treating AI as a separate destination.
+- [ ] Present personal progress as optional private learning recognition without rankings, pressure, regulated credential, or certification claims.
+- [ ] Present a clear free starter → one-time unit → future academy pass payment ladder without activating unclaimed Stripe products.
+- [ ] Validate the simplified mission, coach, recognition, and payment-ladder surfaces at desktop and mobile breakpoints.
 - [x] Define a browser-local recently viewed course contract that stores only validated course codes and no learner, account, enrolment, or progress data.
 - [x] Add a private recently viewed course thread to the learning experience with an explicit local-data boundary.
 - [x] Add automated coverage and validate the recently viewed thread at desktop and mobile breakpoints.
