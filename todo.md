@@ -283,3 +283,5 @@
 - [x] Create an initial branded media set for the first course mission, with accessible fallbacks and no personal-data collection.
 - [x] Integrate the first course-media set with explicit playback, mute, transcript, and reduced-motion controls.
 - [x] Validate the multimedia course experience at desktop and mobile widths for accessibility, performance, and privacy boundaries.
+- [x] Extend the reusable non-explicit media treatment to FSH 102 Consent, Boundaries & Communication with a distinct image, short video, and optional audio.
+- [x] Validate the second course media card and shared accessibility/privacy controls at desktop and mobile widths.
