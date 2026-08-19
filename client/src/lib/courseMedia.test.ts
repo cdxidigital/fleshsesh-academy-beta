@@ -9,7 +9,9 @@ describe("courseMediaManifest", () => {
       expect(courseCode).toMatch(/^FSH 10[1-4]$/);
       expect(media.video).toMatch(/^\/manus-storage\/.*\.mp4$/);
       expect(media.poster).toMatch(/^\/manus-storage\/.*\.png$/);
-      expect(media.audio).toMatch(/^\/manus-storage\/.*\.mp3$/);
+      expect(media.walkthroughAudio).toMatch(/^\/manus-storage\/.*\.wav$/);
+      expect(media.walkthroughTranscript.length).toBeGreaterThan(180);
+      expect(media.walkthroughTranscript).toMatch(/(Nothing|You do not|not personal advice|not asked)/);
       expect(media.title).toMatch(/\.$/);
       expect(media.alt).not.toMatch(/nudity|sexual activity|explicit|body parts/i);
       expect(media.description).toMatch(/No people appear\.$/);

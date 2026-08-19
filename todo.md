@@ -293,3 +293,6 @@
 - [x] Validate the fourth foundation-course media card and shared accessibility/privacy controls at desktop and mobile widths.
 - [x] Extract the supported course-media metadata into a typed, reusable manifest for FSH 101–104.
 - [x] Add regression coverage that verifies every supported media entry remains optional, transition-only, non-explicit, and asset-complete.
+- [x] Replace optional ambient tracks with learner-triggered narrated walkthroughs for FSH 101–104, each with a readable transcript and no autoplay.
+- [x] Define concise non-explicit walkthrough scripts covering unit purpose, first mission, privacy boundary, and one calm next step.
+- [x] Validate narrated walkthrough controls, transcripts, reduced-motion boundaries, and responsive presentation without recording listener data.
