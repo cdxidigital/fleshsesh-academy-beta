@@ -267,3 +267,5 @@
 - [x] Replace JavaScript-only orientation card selection with native URL links that preserve preview and selected-route state.
 - [x] Make orientation mapped-unit handoffs native links so course discovery remains reliable without click-dispatch assistance.
 - [x] Add regression coverage and validate desktop/mobile direct orientation-route handoffs.
+- [x] Strengthen the public first-mission entry with one clear free-start promise and a single primary action.
+- [x] Validate the refined public mission entry at desktop and mobile breakpoints without weakening the age gateway.
