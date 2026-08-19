@@ -272,3 +272,6 @@
 - [x] Add a private next-mission handoff in the member workspace using only existing active enrolment and completion records.
 - [x] Validate the next-mission handoff in no-data previews, responsive layouts, and automated regressions without fabricating learner data.
 - [x] Include the private next-mission selector in the automated regression suite.
+- [x] Add one non-disclosive practical scenario action to the free first mission without creating a learner record.
+- [x] Validate the scenario action, coach boundary, and responsive mission hierarchy without adding pressure or extra required steps.
+- [x] Add a development-only open-mission preview state for narrow-width acceptance checks without changing production mission behaviour.
