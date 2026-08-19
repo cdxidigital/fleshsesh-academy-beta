@@ -277,3 +277,5 @@
 - [x] Add a development-only open-mission preview state for narrow-width acceptance checks without changing production mission behaviour.
 - [x] Add a voluntary, session-only completion acknowledgement to the free first mission without recording learner progress or rewards.
 - [x] Validate the completion acknowledgement and one calm next-step handoff at desktop and mobile widths without pressure, streak, ranking, or payment claims.
+- [x] Add a polite, non-disclosive accessibility announcement for the session-only free-mission completion acknowledgement.
+- [x] Validate the mission acknowledgement accessibility feedback without exposing learner, payment, or participation data.
