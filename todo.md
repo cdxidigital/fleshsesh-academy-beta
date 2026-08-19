@@ -239,7 +239,7 @@
 - [x] Present personal progress as optional private learning recognition without rankings, pressure, regulated credential, or certification claims.
 - [x] Remove streak-focused language from learner progress and retain only private step-completion context.
 - [x] Present a clear free starter → one-time unit → future academy pass payment ladder without activating unclaimed Stripe products.
-- [ ] Validate the simplified mission, coach, recognition, and payment-ladder surfaces at desktop and mobile breakpoints.
+- [x] Validate the simplified mission, coach, recognition, and payment-ladder surfaces at desktop and mobile breakpoints.
 - [x] Add an optional concise “Need help?” layer to missions rather than exposing a separate AI destination.
 - [x] Apply a one-screen, one-idea, one-action mission rhythm with optional deeper context.
 - [x] Explicitly exclude streak pressure, public rankings, token economies, and certification claims from the mission model.
