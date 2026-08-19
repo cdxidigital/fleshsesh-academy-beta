@@ -285,7 +285,7 @@
 - [x] Validate the multimedia course experience at desktop and mobile widths for accessibility, performance, and privacy boundaries.
 - [x] Extend the reusable non-explicit media treatment to FSH 102 Consent, Boundaries & Communication with a distinct image, short video, and optional audio.
 - [x] Validate the second course media card and shared accessibility/privacy controls at desktop and mobile widths.
-- [ ] Extend the reusable non-explicit media treatment to FSH 103 Sexual Health, Hygiene & Self-Care with a distinct image, short video, and optional audio.
-- [ ] Validate the third course media card and shared accessibility/privacy controls at desktop and mobile widths.
+- [x] Extend the reusable non-explicit media treatment to FSH 103 Sexual Health, Hygiene & Self-Care with a distinct image, short video, and optional audio.
+- [x] Validate the third course media card and shared accessibility/privacy controls at desktop and mobile widths.
 - [x] Reframe course videos as optional silent visual transitions, not tutorial content, while retaining pause, captions, and reduced-motion support.
 - [x] Validate the transition-video treatment at desktop and mobile widths without autoplay or required playback.
