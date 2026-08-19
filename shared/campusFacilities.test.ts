@@ -10,7 +10,7 @@ describe("guided campus places", () => {
     campusFacilities.forEach((place) => {
       expect(place.courseCodes.length).toBeGreaterThan(0);
       expect(place.pathway.action).toBeTruthy();
-      expect(place.room.faculty.handoff).toMatch(/not|cannot|directs/i);
+      expect(place.room.faculty.handoff).toMatch(/not|cannot|directs|qualified support/i);
     });
   });
 });

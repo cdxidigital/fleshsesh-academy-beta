@@ -269,3 +269,6 @@
 - [x] Add regression coverage and validate desktop/mobile direct orientation-route handoffs.
 - [x] Strengthen the public first-mission entry with one clear free-start promise and a single primary action.
 - [x] Validate the refined public mission entry at desktop and mobile breakpoints without weakening the age gateway.
+- [x] Add a private next-mission handoff in the member workspace using only existing active enrolment and completion records.
+- [x] Validate the next-mission handoff in no-data previews, responsive layouts, and automated regressions without fabricating learner data.
+- [x] Include the private next-mission selector in the automated regression suite.
