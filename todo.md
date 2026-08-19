@@ -289,3 +289,5 @@
 - [x] Validate the third course media card and shared accessibility/privacy controls at desktop and mobile widths.
 - [x] Reframe course videos as optional silent visual transitions, not tutorial content, while retaining pause, captions, and reduced-motion support.
 - [x] Validate the transition-video treatment at desktop and mobile widths without autoplay or required playback.
+- [x] Extend the reusable transition-only media treatment to FSH 104 Relationships, Identity & Respect with a distinct image, short visual transition, and optional audio.
+- [x] Validate the fourth foundation-course media card and shared accessibility/privacy controls at desktop and mobile widths.
