@@ -200,6 +200,10 @@
 - [x] Reduce public navigation to clear Explore, Learn, and Get Help actions.
 - [x] Preserve direct access to campus, curriculum, AI guidance, care support, and member sign-in through the simplified paths.
 - [x] Validate the simplified public navigation at desktop and mobile breakpoints.
+- [x] Audit and remove agency-framed learner positioning from public, curriculum, metadata, and AI guidance copy.
+- [x] Define individual-focused outcomes for learners exploring bodies, sex, sexuality, relationships, consent, and wellbeing.
+- [x] Preserve explicit non-clinical, non-diagnostic, and non-credential boundaries in the corrected positioning.
+- [x] Validate the corrected eCampus narrative at desktop and mobile breakpoints.
 - [x] Define a browser-local recently viewed course contract that stores only validated course codes and no learner, account, enrolment, or progress data.
 - [x] Add a private recently viewed course thread to the learning experience with an explicit local-data boundary.
 - [x] Add automated coverage and validate the recently viewed thread at desktop and mobile breakpoints.

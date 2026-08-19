@@ -3,7 +3,7 @@ import { getRouteMetadata } from "./routeMetadata";
 
 describe("getRouteMetadata", () => {
   it("returns static titles for public learning routes", () => {
-    expect(getRouteMetadata("/").title).toBe("fleshsesh | academy — adult learning for agency");
+    expect(getRouteMetadata("/").title).toBe("fleshsesh | academy — adult learning about bodies, sex & sexuality");
     expect(getRouteMetadata("/orientation").title).toBe("fleshsesh | academy — course orientation");
     expect(getRouteMetadata("/learn").title).toBe("fleshsesh | academy — learning atlas");
   });

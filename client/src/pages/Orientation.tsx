@@ -14,7 +14,7 @@ const orientationChoices: { id: FacilityId; number: string; prompt: string; titl
   { id: "eclinic", number: "01", prompt: "I want a steady start", title: "Evidence & care navigation", copy: "Build a grounded base for body literacy, credible information, and knowing when education should hand over to qualified care." },
   { id: "law-library", number: "02", prompt: "I want clearer language", title: "Consent, rights & boundaries", copy: "Explore the practical language of consent, privacy, ethics, and respectful decision-making in a dark-academia study room." },
   { id: "residence-life", number: "03", prompt: "I want to understand connection", title: "Relationships & repair", copy: "Learn communication, reciprocity, body-neutral self-knowledge, and relationship repair without a performance demand." },
-  { id: "esports", number: "04", prompt: "I want digital confidence", title: "Privacy & digital agency", copy: "Start with digital consent, privacy, incident-response thinking, and the consent-first culture of the Arena." },
+  { id: "esports", number: "04", prompt: "I want digital confidence", title: "Privacy & digital confidence", copy: "Start with digital consent, privacy, incident-response thinking, and the consent-first culture of the Arena." },
 ];
 
 function routeFromSearch() {

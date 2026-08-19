@@ -18,7 +18,7 @@ export const curriculumEndGoal = {
 };
 
 export type CurriculumPathway = {
-  id: "personal-agency" | "education-practice";
+  id: "personal-learning" | "deeper-study";
   entryLevel: CurriculumLevel;
   label: string;
   title: string;
@@ -28,24 +28,24 @@ export type CurriculumPathway = {
 
 export const curriculumPathways: CurriculumPathway[] = [
   {
-    id: "personal-agency",
+    id: "personal-learning",
     entryLevel: "101",
-    label: "Personal agency path",
-    title: "Navigate your own life with clarity",
+    label: "Personal learning path",
+    title: "Understand your body, sexuality, and relationships with clarity",
     description:
-      "Use 101 foundations and the 201 units most relevant to you to strengthen your language, consent communication, critical judgement, and confidence finding qualified support.",
+      "Use 101 foundations and the 201 units that interest you to build a clearer understanding of bodies, sex, sexuality, consent, relationships, digital life, and ways to find qualified support when useful.",
     boundary:
       "This is a complete and valuable outcome in itself. You do not need to continue into 301 or 401 for your learning to matter.",
   },
   {
-    id: "education-practice",
+    id: "deeper-study",
     entryLevel: "301",
-    label: "Optional education & advocacy path",
-    title: "Develop a bounded learning or advocacy practice",
+    label: "Optional deeper-study path",
+    title: "Go deeper into evidence, inclusion, and respectful educational practice",
     description:
-      "Use 301 and 401 after relevant foundations to integrate evidence, inclusion, safeguarding, facilitation, design, and evaluation in a scoped portfolio or project.",
+      "Continue through 301 and 401 after relevant foundations if you want deeper study of evidence, inclusion, safeguarding, facilitation, design, and evaluation.",
     boundary:
-      "This pathway documents educational learning and a bounded portfolio. It is not a licence, accreditation, or authority to provide clinical, legal, or regulated services.",
+      "This pathway records advanced course learning only. It is not a licence, accreditation, or authority to provide clinical, legal, or regulated services.",
   },
 ];
 
@@ -64,7 +64,7 @@ export const journeyStages: JourneyStage[] = [
     title: "Use the tools in context",
     purpose: "Turn foundations into clear communication, inclusive reasoning, safer digital habits, and informed service navigation.",
     capability: "You can compare options, use respectful scripts, and plan an appropriate referral or support step without giving individual advice.",
-    nextStep: "Move into 301 when you want to connect multiple topics and work with bounded education, ethics, or design practice.",
+    nextStep: "Move into 301 when you want to connect multiple topics through deeper study of education, ethics, or design.",
   },
   {
     level: "301",
@@ -77,9 +77,9 @@ export const journeyStages: JourneyStage[] = [
   {
     level: "401",
     shortLabel: "Advanced practice",
-    title: "Synthesize a bounded practice",
+    title: "Synthesize deeper learning",
     purpose: "Bring evidence, inclusion, safeguarding, evaluation, and referral awareness together in a structured advanced project.",
-    capability: "You can produce an ethical, evidence-aware learning or advocacy artefact with clear escalation and competence boundaries.",
+    capability: "You can produce an ethical, evidence-aware learning artefact with clear escalation and competence boundaries.",
     nextStep: "Use the portfolio as a record of learning and continue to seek supervised, accredited, or professional pathways where they are required.",
   },
 ];

@@ -53,14 +53,14 @@ export const campusFacilities: Array<{
     id: "law-library",
     label: "Law Library",
     eyebrow: "Rights, ethics & digital life",
-    description: "A dark-academia reading room for consent, privacy, policy, evidence appraisal, and the practical language of agency.",
+    description: "A dark-academia reading room for consent, privacy, policy, evidence appraisal, and clear, informed communication.",
     image: "/manus-storage/fleshsesh-law-library-editorial_d61126d2.jpg",
     courseCodes: ["FSH 102", "FSH 206", "FSH 304", "FSH 403"],
     courseLabel: "Consent, rights & evidence",
     note: "Explore principles and scenarios without being asked for personal disclosures.",
     room: {
       studioName: "The Consent Reading Room",
-      studioIntroduction: "A quiet, dark-academia study room for practising the language of agency, privacy, and evidence. Scenarios stay general; no personal disclosure is required.",
+      studioIntroduction: "A quiet, dark-academia study room for practising clear communication, privacy, and evidence. Scenarios stay general; no personal disclosure is required.",
       learningModes: [
         { title: "Case notes", copy: "Read general situations through consent, rights, and boundary-setting principles." },
         { title: "Evidence lens", copy: "Distinguish policy claims, lived experience, and robust supporting evidence." },
@@ -94,7 +94,7 @@ export const campusFacilities: Array<{
   {
     id: "esports",
     label: "Esports Arena",
-    eyebrow: "Play, agency & digital consent",
+    eyebrow: "Play, digital confidence & consent",
     description: "A neon-accented arena for games, digital safety, tournament design, and an opt-in personal-device connection framework.",
     image: "/manus-storage/fleshsesh-esports-editorial_7a22e23b.jpg",
     courseCodes: ["FSH 206", "FSH 302", "FSH 403"],

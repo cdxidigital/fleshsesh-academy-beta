@@ -13,8 +13,8 @@ describe("curriculum journey", () => {
     expect(curriculumEndGoal.boundary).toMatch(/not a clinical, legal, professional, regulated, or accredited qualification/i);
   });
 
-  it("offers distinct personal and education-practice outcomes without credential claims", () => {
-    expect(curriculumPathways.map((pathway) => pathway.id)).toEqual(["personal-agency", "education-practice"]);
+  it("offers distinct individual learning and deeper-study outcomes without credential claims", () => {
+    expect(curriculumPathways.map((pathway) => pathway.id)).toEqual(["personal-learning", "deeper-study"]);
     expect(curriculumPathways[0].boundary).toMatch(/do not need to continue into 301 or 401/i);
     expect(curriculumPathways[1].boundary).toMatch(/not a licence, accreditation/i);
   });
