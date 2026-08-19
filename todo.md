@@ -238,7 +238,7 @@
 - [x] Embed Explain, Show me, Quiz me, and Make it clearer coach actions inside mission learning rather than treating AI as a separate destination.
 - [x] Present personal progress as optional private learning recognition without rankings, pressure, regulated credential, or certification claims.
 - [x] Remove streak-focused language from learner progress and retain only private step-completion context.
-- [ ] Present a clear free starter → one-time unit → future academy pass payment ladder without activating unclaimed Stripe products.
+- [x] Present a clear free starter → one-time unit → future academy pass payment ladder without activating unclaimed Stripe products.
 - [ ] Validate the simplified mission, coach, recognition, and payment-ladder surfaces at desktop and mobile breakpoints.
 - [x] Add an optional concise “Need help?” layer to missions rather than exposing a separate AI destination.
 - [x] Apply a one-screen, one-idea, one-action mission rhythm with optional deeper context.
@@ -246,6 +246,9 @@
 - [x] Validate the refined mission template at desktop and mobile breakpoints.
 - [x] Correct inline mission coach prompts so they provide the selected module title and learning objective rather than an unexplained course code.
 - [x] Constrain inline mission coach replies to one concise, mission-focused explanation with no long lesson dump.
+- [x] Keep the first mission as the only required proof-point loop before expanding curriculum or game mechanics.
+- [x] Document a future Free Starter → Unit Pass → Academy Pass path without activating unclaimed Stripe products.
+- [x] Exclude certification, leaderboard, streak, and token-economy claims from the phased mission-first roadmap.
 - [x] Define a browser-local recently viewed course contract that stores only validated course codes and no learner, account, enrolment, or progress data.
 - [x] Add a private recently viewed course thread to the learning experience with an explicit local-data boundary.
 - [x] Add automated coverage and validate the recently viewed thread at desktop and mobile breakpoints.

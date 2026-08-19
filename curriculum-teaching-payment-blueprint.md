@@ -43,10 +43,9 @@ The research supports flexible payment options. For the current, individually fo
 
 | Product | Access | Launch status | Payment rule |
 |---|---|---|---|
-| First look | A non-recorded public orientation and selected free teaching preview. | To implement next. | No payment, account, progress, or personal data required. |
+| Free Starter | A non-recorded public first mission inside a selected unit. | Available. | No payment, account, progress, or personal data required. |
 | Individual unit | One protected course with all microlearning steps and private progress record. | Existing payment product. | One-time AUD payment at the displayed level-based price after authenticated checkout. |
-| Foundations collection | A transparent discounted collection of 101 units for learners who want a broad starting point. | Product definition only; no checkout until implemented and Stripe tested. | One payment should create the relevant individual course enrolments only after fulfilment. |
-| All-access subscription | Library access billed monthly or annually. | Deferred. | Requires an explicit Stripe subscription implementation, cancellation terms, and sandbox validation before it can be offered. |
+| Academy Pass | A possible future multi-unit access option. | Deferred and inactive. | It must not be displayed as purchasable, create a Stripe product, or create enrolments until product scope, fulfilment, cancellation terms, and sandbox validation are complete. |
 
 Existing individual-unit price bands already sit within the report’s suggested broad range for one-time course purchases:
 
@@ -72,5 +71,6 @@ The following report recommendations are intentionally **not** adopted at launch
 
 1. Add consistent short-step duration and objective labels to existing teaching modules.
 2. Add a public, non-recorded first-look preview of the teaching rhythm.
-3. Keep one-time individual-unit checkout live as the only transactional product until the Stripe test sandbox is claimed and real-session validation is complete.
-4. Define Foundations collection enrolment rules and price only after a schema, fulfilment, and cancellation review.
+3. Keep the learner-facing payment story as **Free Starter → one-time Individual Unit → future Academy Pass**. Only the individual unit remains transactional; the Academy Pass is an inactive explanatory note, not an offer.
+4. Do not create, activate, advertise, or connect a Stripe product for the Academy Pass until the Stripe test sandbox is claimed and a scope, fulfilment, cancellation, and real-session validation review is complete.
+5. Prove that the first free mission is understandable and useful before expanding paid options, curriculum scale, or game mechanics.
