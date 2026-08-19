@@ -204,6 +204,13 @@
 - [x] Define individual-focused outcomes for learners exploring bodies, sex, sexuality, relationships, consent, and wellbeing.
 - [x] Preserve explicit non-clinical, non-diagnostic, and non-credential boundaries in the corrected positioning.
 - [x] Validate the corrected eCampus narrative at desktop and mobile breakpoints.
+- [x] Analyze the uploaded research report and pasted content for curriculum, teaching, and payment requirements.
+- [x] Establish a source-grounded curriculum and teaching blueprint for individual adult learners.
+- [x] Align course products, AUD pricing, and enrolment terms with the source-grounded learning model.
+- [x] Implement and validate the revised curriculum, teaching, and payment presentation.
+- [x] Add a no-account, no-record first-look teaching preview that demonstrates one microlearning step before purchase.
+- [x] Clarify the launch payment model as transparent one-time AUD unit enrolment with no active subscription claim.
+- [x] Add microlearning objective and estimated-duration labels to every protected teaching step.
 - [x] Define a browser-local recently viewed course contract that stores only validated course codes and no learner, account, enrolment, or progress data.
 - [x] Add a private recently viewed course thread to the learning experience with an explicit local-data boundary.
 - [x] Add automated coverage and validate the recently viewed thread at desktop and mobile breakpoints.

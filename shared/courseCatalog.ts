@@ -3,6 +3,8 @@ export type CourseLevel = "101" | "201" | "301" | "401";
 export type TeachingModule = {
   id: string;
   title: string;
+  objective: string;
+  minutes: number;
   summary: string;
   practice: string;
   check: string;
@@ -29,6 +31,8 @@ type CourseInput = Omit<AcademyCourse, "modules"> & { modules: [string, string, 
 const module = (courseCode: string, position: number, title: string, courseTitle: string): TeachingModule => ({
   id: `${courseCode.toLowerCase().replace(/\s/g, "-")}-m${position}`,
   title,
+  objective: `Explain ${title.toLowerCase()} in clear, evidence-aware language.`,
+  minutes: 7,
   summary: `${title} places ${courseTitle.toLowerCase()} in an inclusive, evidence-aware learning context. Work through the plain-language explanation, identify uncertainty, and distinguish general education from individual clinical or legal advice.`,
   practice: `Use the guided scenario to apply ${title.toLowerCase()} to a fictional learner case. You may choose the non-disclosure alternative; personal sexual, health, or relationship details are never required.`,
   check: `Complete the short knowledge check, then explain one safe next step or referral boundary in your own words.`,

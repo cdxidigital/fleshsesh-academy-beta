@@ -12,7 +12,7 @@ describe("academy course catalogue", () => {
       expect(course.priceCents).toBeGreaterThan(0);
       expect(course.badgeCode).toBeTruthy();
       expect(course.modules.length).toBeGreaterThanOrEqual(6);
-      expect(course.modules.every(module => module.summary && module.practice && module.check && module.xp > 0)).toBe(true);
+      expect(course.modules.every(module => module.objective && module.minutes >= 5 && module.minutes <= 10 && module.summary && module.practice && module.check && module.xp > 0)).toBe(true);
     });
   });
 
