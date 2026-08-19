@@ -279,3 +279,7 @@
 - [x] Validate the completion acknowledgement and one calm next-step handoff at desktop and mobile widths without pressure, streak, ranking, or payment claims.
 - [x] Add a polite, non-disclosive accessibility announcement for the session-only free-mission completion acknowledgement.
 - [x] Validate the mission acknowledgement accessibility feedback without exposing learner, payment, or participation data.
+- [x] Define a non-explicit course-media system with purpose-based imagery, optional short video, learner-controlled audio, captions/transcripts, and no autoplay.
+- [x] Create an initial branded media set for the first course mission, with accessible fallbacks and no personal-data collection.
+- [x] Integrate the first course-media set with explicit playback, mute, transcript, and reduced-motion controls.
+- [x] Validate the multimedia course experience at desktop and mobile widths for accessibility, performance, and privacy boundaries.
