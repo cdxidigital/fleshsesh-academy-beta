@@ -6,6 +6,7 @@ import { useRecentlyViewedCourses } from "@/hooks/useRecentlyViewedCourses";
 import { atlasTopicLabels, atlasTopics, type AtlasTopic, filterAtlasCourses } from "@/lib/courseFilter";
 import { getAdjacentCourses } from "@/lib/courseNavigation";
 import { createMissionScenario } from "@/lib/missionScenario";
+import { courseMediaManifest } from "@/lib/courseMedia";
 import { curriculumEndGoal, curriculumPathways, getJourneyStage, getUnitContribution, journeyStages } from "@/lib/curriculumJourney";
 import { trpc } from "@/lib/trpc";
 import { ArrowLeft, ArrowUpRight, BookOpen, CheckCircle2, ChevronLeft, CirclePlay, LockKeyhole, ShieldCheck, Sparkles, Trophy } from "lucide-react";
@@ -94,15 +95,7 @@ export default function Learning() {
   const selectedJourneyStage = selectedCourse ? getJourneyStage(selectedCourse.level) : null;
   const selectedModule = selectedCourse?.modules.find((module) => module.id === selectedModuleId) ?? selectedCourse?.modules[0] ?? null;
   const missionScenario = selectedModule ? createMissionScenario(selectedModule) : null;
-  const missionMedia = selectedCourse?.code === "FSH 101"
-    ? { video: "/manus-storage/fleshsesh-body-literacy-first-mission-arrival_cb0255f6.mp4", poster: "/manus-storage/fleshsesh-body-literacy-media-reference_876f5fc1.png", audio: "/manus-storage/fleshsesh-body-literacy-focus-ambient_dd164cba.mp3", title: "Arrive with the idea.", alt: "A dark-teal adult-learning desk with closed reference materials, textured paper, a gold bookmark, and warm lamplight.", description: "A warm lamp illuminates a dark-teal study desk with closed neutral reference books, textured paper, and a gold bookmark as the camera slowly moves closer. No people appear." }
-    : selectedCourse?.code === "FSH 102"
-      ? { video: "/manus-storage/fleshsesh-consent-first-mission-arrival_b11534f9.mp4", poster: "/manus-storage/fleshsesh-consent-media-reference_04deb87d.png", audio: "/manus-storage/fleshsesh-consent-focus-ambient_01690600.mp3", title: "Make room to listen.", alt: "A dark-teal seminar table with two empty chairs, an unopened notebook, gold pen, coral divider card, and warm lamplight.", description: "A warm-lit dark-teal seminar table holds an unopened notebook, gold pen, and blush divider card between two empty chairs as the camera slowly moves across the space. No people appear." }
-      : selectedCourse?.code === "FSH 103"
-        ? { video: "/manus-storage/fleshsesh-sexual-health-first-mission-transition_4151d0d3.mp4", poster: "/manus-storage/fleshsesh-sexual-health-media-reference_4af9199d.png", audio: "/manus-storage/fleshsesh-sexual-health-focus-ambient_526d2261.mp3", title: "Take a quiet pause.", alt: "A dark-teal wellbeing study counter with a folded linen towel, ceramic bowl, closed reference book, gold clasp, coral glass object, and warm light.", description: "Warm light moves across a dark-teal wellbeing study counter with folded linen, a ceramic bowl, a closed reference book, and a gold clasp as the camera glides slowly forward. No people appear." }
-        : selectedCourse?.code === "FSH 104"
-          ? { video: "/manus-storage/fleshsesh-relationships-first-mission-transition_3de26372.mp4", poster: "/manus-storage/fleshsesh-relationships-media-reference_bc62d022.png", audio: "/manus-storage/fleshsesh-relationships-focus-ambient_30927c5e.mp3", title: "Leave room for respect.", alt: "A dark-teal shared study table with two empty chairs, closed notebooks, a gold paperclip, coral ribbon bookmark, and warm lamp light.", description: "A warm lamp softly illuminates a dark-teal shared study table with two empty chairs, closed notebooks, a gold paperclip, and coral ribbon as the camera glides around the table corner. No people appear." }
-          : null;
+  const missionMedia = selectedCourse ? courseMediaManifest[selectedCourse.code] ?? null : null;
   const activeEnrollment = Boolean(selectedCourse && (lessonPreview || myLearning.data?.enrollments.some((enrolment) => enrolment.courseCode === selectedCourse.code && enrolment.status === "active")));
   const completedIds = useMemo(() => new Set(myLearning.data?.completions.map((completion) => completion.lessonId) ?? []), [myLearning.data?.completions]);
   const selectedImage = courseImages[Math.max(0, courses.findIndex((course) => course.code === selectedCourse?.code)) % courseImages.length] ?? courseImages[0];

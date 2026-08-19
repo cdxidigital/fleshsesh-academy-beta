@@ -291,3 +291,5 @@
 - [x] Validate the transition-video treatment at desktop and mobile widths without autoplay or required playback.
 - [x] Extend the reusable transition-only media treatment to FSH 104 Relationships, Identity & Respect with a distinct image, short visual transition, and optional audio.
 - [x] Validate the fourth foundation-course media card and shared accessibility/privacy controls at desktop and mobile widths.
+- [x] Extract the supported course-media metadata into a typed, reusable manifest for FSH 101–104.
+- [x] Add regression coverage that verifies every supported media entry remains optional, transition-only, non-explicit, and asset-complete.
