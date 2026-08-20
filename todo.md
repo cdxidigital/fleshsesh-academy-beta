@@ -298,6 +298,6 @@
 - [x] Validate narrated walkthrough controls, transcripts, reduced-motion boundaries, and responsive presentation without recording listener data.
 - [ ] Extend the narrated walkthrough and silent-transition media treatment beyond FSH 101–104 through the remaining published curriculum units.
 - [ ] Validate the expanded curriculum media manifest for asset completeness, non-explicit transition descriptions, transcript availability, learner control, and no autoplay.
-- [ ] Correct the homepage document.title to a 30–60 character SEO title while preserving existing keywords, H2, and alt-text fixes.
+- [x] Correct the homepage document.title to a 30–60 character SEO title while preserving existing keywords, H2, and alt-text fixes; verified at 47 characters.
 - [x] Shift course surfaces toward visual-first learning with shorter text, stronger imagery, optional narrated walkthroughs, and supplied external-service brief assessment.
 - [x] Determine whether an external service and API key are necessary before requesting secrets or changing integrations; current media uses project-hosted assets and requires no new external API key.
