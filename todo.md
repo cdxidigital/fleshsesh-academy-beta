@@ -308,3 +308,5 @@
 - [x] Validate the extracted mission sections and atlas-to-mission route split at desktop and mobile widths.
 - [x] Integrate available FSH 105 and FSH 201–204 transition media and narrated walkthroughs into the typed manifest with course-specific transcripts.
 - [x] Validate the next curriculum-media cohort for complete assets, correct labels, responsive controls, and no autoplay or listener history.
+- [x] Extend the narrated walkthrough and silent visual-transition media treatment to the next advanced cohort: FSH 301–304.
+- [x] Validate FSH 301–304 course-specific posters, transitions, narrated walkthroughs, transcripts, learner controls, and no-autoplay boundaries.

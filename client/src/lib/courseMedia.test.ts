@@ -3,10 +3,10 @@ import { courseMediaManifest } from "./courseMedia";
 
 describe("courseMediaManifest", () => {
   it("keeps every supported course media entry asset-complete and transition-only", () => {
-    expect(Object.keys(courseMediaManifest)).toEqual(["FSH 101", "FSH 102", "FSH 103", "FSH 104", "FSH 105", "FSH 201", "FSH 202", "FSH 203", "FSH 204", "FSH 205", "FSH 206", "FSH 207"]);
+    expect(Object.keys(courseMediaManifest)).toEqual(["FSH 101", "FSH 102", "FSH 103", "FSH 104", "FSH 105", "FSH 201", "FSH 202", "FSH 203", "FSH 204", "FSH 205", "FSH 206", "FSH 207", "FSH 301", "FSH 302", "FSH 303", "FSH 304"]);
 
     for (const [courseCode, media] of Object.entries(courseMediaManifest)) {
-      expect(courseCode).toMatch(/^FSH (10[1-5]|20[1-7])$/);
+      expect(courseCode).toMatch(/^FSH (10[1-5]|20[1-7]|30[1-4])$/);
       expect(media.video).toMatch(/^\/manus-storage\/.*\.mp4$/);
       expect(media.poster).toMatch(/^\/manus-storage\/.*\.png$/);
       expect(media.walkthroughAudio).toMatch(/^\/manus-storage\/.*\.mp3$/);
