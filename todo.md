@@ -310,3 +310,7 @@
 - [x] Validate the next curriculum-media cohort for complete assets, correct labels, responsive controls, and no autoplay or listener history.
 - [x] Extend the narrated walkthrough and silent visual-transition media treatment to the next advanced cohort: FSH 301–304.
 - [x] Validate FSH 301–304 course-specific posters, transitions, narrated walkthroughs, transcripts, learner controls, and no-autoplay boundaries.
+- [x] Extend the narrated walkthrough and silent visual-transition treatment to FSH 305 and FSH 401–404.
+- [x] Validate the final five course-media entries for distinct visuals, transitions, walkthroughs, transcripts, learner control, and no autoplay.
+- [x] Align the media manifest regression expectation with the newly integrated FSH 305 and FSH 401–402 entries, then rerun all checks.
+- [x] Align final-cohort walkthrough titles and transcripts with the exact FSH 305 and FSH 401–404 catalogue titles and objectives before final acceptance.
