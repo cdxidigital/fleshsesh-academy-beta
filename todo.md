@@ -304,3 +304,5 @@
 - [x] Audit overloaded learning pages and define a focused choose → mission → support → next-step route sequence.
 - [x] Split secondary course detail, media, practice, coach, recognition, and payment information into clearer focused surfaces without removing safeguards.
 - [x] Validate the new learning sequence at desktop and mobile widths with accessible navigation and no dead ends.
+- [x] Extract the selected public mission media, practice, coach, acknowledgement, and payment sections into focused reusable components without changing behavior.
+- [x] Validate the extracted mission sections and atlas-to-mission route split at desktop and mobile widths.
