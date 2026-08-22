@@ -306,3 +306,5 @@
 - [x] Validate the new learning sequence at desktop and mobile widths with accessible navigation and no dead ends.
 - [x] Extract the selected public mission media, practice, coach, acknowledgement, and payment sections into focused reusable components without changing behavior.
 - [x] Validate the extracted mission sections and atlas-to-mission route split at desktop and mobile widths.
+- [ ] Integrate available FSH 105 and FSH 201–204 transition media and narrated walkthroughs into the typed manifest with course-specific transcripts.
+- [ ] Validate the next curriculum-media cohort for complete assets, correct labels, responsive controls, and no autoplay or listener history.
