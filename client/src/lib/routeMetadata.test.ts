@@ -6,6 +6,7 @@ describe("getRouteMetadata", () => {
     expect(getRouteMetadata("/").title).toBe("fleshsesh | academy — adult learning for bodies");
     expect(getRouteMetadata("/orientation").title).toBe("fleshsesh | academy — course orientation");
     expect(getRouteMetadata("/learn").title).toBe("fleshsesh | academy — learning atlas");
+    expect(getRouteMetadata("/learn/mission").title).toBe("fleshsesh | academy — first mission");
   });
 
   it("uses non-disclosive static titles for private and Arena routes", () => {

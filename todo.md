@@ -301,3 +301,6 @@
 - [x] Correct the homepage document.title to a 30–60 character SEO title while preserving existing keywords, H2, and alt-text fixes; verified at 47 characters.
 - [x] Shift course surfaces toward visual-first learning with shorter text, stronger imagery, optional narrated walkthroughs, and supplied external-service brief assessment.
 - [x] Determine whether an external service and API key are necessary before requesting secrets or changing integrations; current media uses project-hosted assets and requires no new external API key.
+- [x] Audit overloaded learning pages and define a focused choose → mission → support → next-step route sequence.
+- [x] Split secondary course detail, media, practice, coach, recognition, and payment information into clearer focused surfaces without removing safeguards.
+- [x] Validate the new learning sequence at desktop and mobile widths with accessible navigation and no dead ends.

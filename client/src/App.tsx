@@ -11,6 +11,7 @@ import { getRouteMetadata } from "./lib/routeMetadata";
 const Home = lazy(() => import("./pages/Home"));
 const Member = lazy(() => import("./pages/Member"));
 const Learning = lazy(() => import("./pages/Learning"));
+const Mission = lazy(() => import("./pages/Mission"));
 const Campus = lazy(() => import("./pages/Campus"));
 const FacilityRoom = lazy(() => import("./pages/FacilityRoom"));
 const Orientation = lazy(() => import("./pages/Orientation"));
@@ -33,6 +34,7 @@ function Router() {
         <Route path={"/care"} component={CareDirectory} />
         <Route path={"/campus/esports/readiness"} component={ArenaReadiness} />
         <Route path={"/orientation"} component={Orientation} />
+        <Route path={"/learn/mission"} component={Mission} />
         <Route path={"/learn"} component={Learning} />
         <Route path={"/campus/:facility"} component={FacilityRoom} />
         <Route path={"/campus"} component={Campus} />

@@ -9,6 +9,7 @@ export function getRouteMetadata(location: string): RouteMetadata {
   if (location === "/") return { announcement: "eCampus home", title: `${baseTitle} — adult learning for bodies` };
   if (location === "/orientation") return { announcement: "course orientation", title: `${baseTitle} — course orientation` };
   if (location === "/learn") return { announcement: "learning atlas", title: `${baseTitle} — learning atlas` };
+  if (location === "/learn/mission") return { announcement: "first mission", title: `${baseTitle} — first mission` };
   if (location === "/member") return { announcement: "member workspace", title: `${baseTitle} — member workspace` };
   if (location === "/member/achievements") return { announcement: "achievement archive", title: `${baseTitle} — achievement archive` };
   if (location === "/care") return { announcement: "care navigation", title: `${baseTitle} — care navigation` };
