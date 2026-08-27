@@ -322,3 +322,7 @@
 - [x] Separate learning-atlas pathway choice, filters, and course selection into a clearer progressive discovery sequence.
 - [x] Keep browser-local private shelf controls visible but secondary during atlas discovery.
 - [x] Validate the progressive atlas at desktop and mobile widths with filters, facility context, and focused mission handoffs intact.
+- [x] Reframe Orientation as a concise learning-preparation page with a single handoff into the pathway-first atlas.
+- [x] Keep Orientation free of duplicated shelf, course-grid, and payment content while its focused mission handoff stays route-correct.
+- [x] Validate orientation-to-atlas and shelf handoffs at desktop and mobile widths with no learner-record creation.
+- [x] Correct the Orientation first-mission link so it reaches the focused FSH 101 mission route after the atlas/mission split.
