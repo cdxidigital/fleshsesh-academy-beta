@@ -14,3 +14,20 @@ export function isMissionStageId(value: string | null): value is MissionStageId 
 export function getMissionStagePosition(stageId: MissionStageId) {
   return missionStages.findIndex((stage) => stage.id === stageId) + 1;
 }
+
+export function buildMissionStagePath({
+  courseCode,
+  stage,
+  facility,
+  preview,
+}: {
+  courseCode: string;
+  stage: MissionStageId;
+  facility?: string | null;
+  preview?: boolean;
+}) {
+  const params = new URLSearchParams({ course: courseCode, step: stage });
+  if (facility) params.set("facility", facility);
+  if (preview) params.set("preview", "academy");
+  return `/learn/mission?${params.toString()}`;
+}

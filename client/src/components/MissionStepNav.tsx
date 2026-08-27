@@ -2,10 +2,10 @@ import { missionStages, type MissionStageId } from "@/lib/missionFlow";
 
 type MissionStepNavProps = {
   current: MissionStageId;
-  onChange: (stage: MissionStageId) => void;
+  hrefForStage: (stage: MissionStageId) => string;
 };
 
-export default function MissionStepNav({ current, onChange }: MissionStepNavProps) {
+export default function MissionStepNav({ current, hrefForStage }: MissionStepNavProps) {
   return (
     <nav aria-label="First mission steps" className="mt-5 border-y border-white/10 py-4">
       <ol className="grid gap-2 sm:grid-cols-4">
@@ -13,9 +13,8 @@ export default function MissionStepNav({ current, onChange }: MissionStepNavProp
           const active = stage.id === current;
           return (
             <li key={stage.id}>
-              <button
-                type="button"
-                onClick={() => onChange(stage.id)}
+              <a
+                href={hrefForStage(stage.id)}
                 aria-current={active ? "step" : undefined}
                 className={`w-full border px-3 py-3 text-left transition ${
                   active
@@ -28,7 +27,7 @@ export default function MissionStepNav({ current, onChange }: MissionStepNavProp
                 </span>
                 <span className="mt-1 block text-[10px] font-bold uppercase tracking-[.11em]">{stage.label}</span>
                 <span className="mt-1 block text-[9px] leading-4 opacity-80">{stage.hint}</span>
-              </button>
+              </a>
             </li>
           );
         })}

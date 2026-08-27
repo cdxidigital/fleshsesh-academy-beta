@@ -317,3 +317,8 @@
 - [x] Convert the focused first mission into a one-step-at-a-time guided sequence for orientation, media, practice/support, and next choice.
 - [x] Preserve transcripts, coach help, non-disclosure boundaries, unsaved acknowledgement, and secondary payment information through deliberate progressive disclosure.
 - [x] Validate guided mission keyboard navigation, responsive hierarchy, privacy boundaries, regressions, and production build.
+- [x] Make every guided mission stage a stable native URL link that preserves course, facility, and preview context.
+- [x] Validate direct Orient, Media, Practice, and Next navigation without console assistance at desktop and mobile layouts.
+- [x] Separate learning-atlas pathway choice, filters, and course selection into a clearer progressive discovery sequence.
+- [x] Keep browser-local private shelf controls visible but secondary during atlas discovery.
+- [x] Validate the progressive atlas at desktop and mobile widths with filters, facility context, and focused mission handoffs intact.
