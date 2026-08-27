@@ -7,7 +7,8 @@ const ageStorageKey = "fleshsesh_academy_age_confirmed_v2";
 
 export default function Orientation() {
   const [, setLocation] = useLocation();
-  const previewMode = import.meta.env.DEV && new URLSearchParams(window.location.search).get("preview") === "academy";
+  const locationSearch = typeof window !== "undefined" ? window.location.search : "";
+  const previewMode = import.meta.env.DEV && new URLSearchParams(locationSearch).get("preview") === "academy";
   const [ageReady, setAgeReady] = useState(false);
   const [ageConfirmed, setAgeConfirmed] = useState(previewMode);
   const withPreview = (path: string) => previewMode ? path + (path.includes("?") ? "&" : "?") + "preview=academy" : path;

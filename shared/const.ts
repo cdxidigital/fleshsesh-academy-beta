@@ -9,6 +9,15 @@ export const NOT_ADMIN_ERR_MSG = 'You do not have required permission (10002)';
 // Domain), so a sibling *.manus.space site cannot plant a matching value in a
 // victim's browser.
 export const OAUTH_STATE_COOKIE = "__Host-oauth_state";
+export const OAUTH_STATE_COOKIE_DEV = "oauth_state";
+
+/**
+ * `__Host-` cookies are reserved for HTTPS contexts. Local HTTP development
+ * uses a separate host-only fallback so the browser retains the OAuth nonce.
+ */
+export function getOAuthStateCookieName(isSecureContext: boolean) {
+  return isSecureContext ? OAUTH_STATE_COOKIE : OAUTH_STATE_COOKIE_DEV;
+}
 
 // `state` carries the callback redirect URI (used at token exchange) plus the
 // CSRF nonce. Defined here so the client encoder and server decoder never drift.

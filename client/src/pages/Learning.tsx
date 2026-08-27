@@ -72,18 +72,20 @@ export default function Learning({ mode = "atlas" }: LearningProps) {
     onError: (error) => toast.error(error.message),
   });
 
+  const locationSearch = typeof window !== "undefined" ? window.location.search : "";
+  const requestParams = useMemo(() => new URLSearchParams(locationSearch), [locationSearch]);
   const previewHost = typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname.endsWith(".manus.computer"));
-  const previewValue = new URLSearchParams(window.location.search).get("preview");
+  const previewValue = requestParams.get("preview");
   const previewMode = previewHost && (previewValue === "academy" || previewValue === "lesson");
   const missionRoute = mode === "mission";
   const lessonPreview = previewHost && previewValue === "lesson";
-  const previewMissionOpen = previewMode && new URLSearchParams(window.location.search).get("mission") === "open";
-  const previewScenarioOpen = previewMissionOpen && new URLSearchParams(window.location.search).get("scenario") === "open";
-  const previewCompletionAcknowledged = previewMissionOpen && new URLSearchParams(window.location.search).get("completion") === "open";
-  const requestedMissionStage = new URLSearchParams(window.location.search).get("step");
-  const requestedFacility = new URLSearchParams(window.location.search).get("facility") as FacilityId | null;
-  const requestedAtlasView = new URLSearchParams(window.location.search).get("view");
-  const requestedAtlasLevel = new URLSearchParams(window.location.search).get("level");
+  const previewMissionOpen = previewMode && requestParams.get("mission") === "open";
+  const previewScenarioOpen = previewMissionOpen && requestParams.get("scenario") === "open";
+  const previewCompletionAcknowledged = previewMissionOpen && requestParams.get("completion") === "open";
+  const requestedMissionStage = requestParams.get("step");
+  const requestedFacility = requestParams.get("facility") as FacilityId | null;
+  const requestedAtlasView = requestParams.get("view");
+  const requestedAtlasLevel = requestParams.get("level");
   const activeFacility = campusFacilities.find((facility) => facility.id === requestedFacility) ?? null;
   const showAtlasBrowse = Boolean(activeFacility) || requestedAtlasView === "browse";
   const showAtlasPathways = !activeFacility && !showAtlasBrowse;
@@ -120,11 +122,12 @@ export default function Learning({ mode = "atlas" }: LearningProps) {
     if (!ageVerified) setLocation("/");
   }, [ageVerified, setLocation]);
 
+  const requestedCourse = requestParams.get("course");
+
   useEffect(() => {
-    const requestedCourse = new URLSearchParams(window.location.search).get("course");
     if (missionRoute && requestedCourse) setSelectedCourseCode(requestedCourse);
     if (!missionRoute) setSelectedCourseCode(null);
-  }, [missionRoute]);
+  }, [missionRoute, requestedCourse]);
 
   useEffect(() => {
     if (selectedCourseCode) recordRecentCourse(selectedCourseCode);

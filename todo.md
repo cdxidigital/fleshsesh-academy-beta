@@ -326,3 +326,16 @@
 - [x] Keep Orientation free of duplicated shelf, course-grid, and payment content while its focused mission handoff stays route-correct.
 - [x] Validate orientation-to-atlas and shelf handoffs at desktop and mobile widths with no learner-record creation.
 - [x] Correct the Orientation first-mission link so it reaches the focused FSH 101 mission route after the atlas/mission split.
+- [x] Audit build health, source contracts, route reachability, media delivery, and client/server safety boundaries across the platform.
+- [x] Fix every verified non-session-dependent defect discovered during the audit and add targeted automated coverage where needed.
+- [x] Validate representative public, learning, member-preview, care, and support routes at desktop and mobile layouts.
+- [x] Document external-session, payment, and true interactive-mobile validations that remain intentionally deferred rather than simulated.
+- [x] Reduce the verified oversized initial production bundle through safe vendor chunking while retaining route-level lazy loading.
+- [x] Standardize the care-navigation header lockup so its scale and placement match the wider eCampus visual system.
+- [x] Harden OAuth state-cookie behavior for secure production and non-secure local development without weakening callback validation.
+- [x] Remove brittle render-time browser-global access from public learning and orientation routes.
+- [x] Remove remaining render-time browser-global query parsing from Home, Campus, Facility, Member, Archive, and Arena routes.
+- [x] Harden skip-link main-target assignment so route changes retain a deterministic focus destination.
+- [x] Add noopener protection to care-directory external links and audit icon-only control labels.
+- [x] Review and remediate production dependency audit advisories where safe upgrades are available without destabilizing the platform.
+- [x] Refine the care-navigation mobile header so the eCampus return, lockup, and care label remain legible without crowded wrapping.

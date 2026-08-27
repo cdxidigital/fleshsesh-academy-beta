@@ -6,11 +6,11 @@ const primaryLockup = "/manus-storage/fleshsesh-academy-lockup-primary_c4730d25.
 export default function CareDirectory() {
   return (
     <main className="min-h-screen bg-[#061018] text-[#edf3f0]">
-      <header className="border-b border-white/10 bg-[#061018]/95 px-5 py-5 backdrop-blur sm:px-8 lg:px-12">
-        <div className="mx-auto grid max-w-[1500px] grid-cols-[1fr_auto_1fr] items-center gap-3">
-          <a href="/" className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[.18em] text-[#e6c887] transition-colors hover:text-[#f1dca4]"><ArrowLeft className="h-3.5 w-3.5" /> eCampus home</a>
-          <img src={primaryLockup} alt="fleshsesh | academy" className="h-[48px] w-[150px] object-contain sm:h-[58px] sm:w-[185px]" />
-          <p className="justify-self-end text-right text-[9px] font-bold uppercase tracking-[.16em] text-[#b9cac6] sm:text-[10px] sm:tracking-[.18em]">Care navigation</p>
+      <header className="border-b border-white/10 bg-[#061018]/95 px-5 py-2 backdrop-blur sm:px-8 sm:py-3 lg:px-12">
+        <div className="relative mx-auto flex min-h-[68px] max-w-[1500px] items-center justify-between sm:grid sm:min-h-[96px] sm:grid-cols-[1fr_auto_1fr] sm:gap-3">
+          <a href="/" aria-label="Return to eCampus home" className="relative z-10 inline-flex items-center gap-2 text-[9px] font-bold uppercase tracking-[.14em] text-[#e6c887] transition-colors hover:text-[#f1dca4] sm:text-[10px] sm:tracking-[.18em]"><ArrowLeft className="h-3.5 w-3.5" /><span className="sm:hidden">eCampus</span><span className="hidden sm:inline">eCampus home</span></a>
+          <img src={primaryLockup} alt="fleshsesh | academy" className="pointer-events-none absolute left-1/2 h-[46px] w-[142px] -translate-x-1/2 object-cover object-center sm:static sm:h-[72px] sm:w-[240px] sm:translate-x-0" />
+          <p className="relative z-10 text-right text-[9px] font-bold uppercase tracking-[.14em] text-[#b9cac6] sm:justify-self-end sm:text-[10px] sm:tracking-[.18em]"><span className="sm:hidden">Care</span><span className="hidden sm:inline">Care navigation</span></p>
         </div>
       </header>
 
@@ -37,7 +37,7 @@ export default function CareDirectory() {
                 <h2 className="mt-4 max-w-md font-serif text-3xl leading-[1.02] text-[#f6f1ea]">{resource.title}</h2>
                 <p className="mt-4 max-w-xl text-sm leading-6 text-[#b9cac6]">{resource.description}</p>
                 <div className="mt-auto pt-7">
-                  <a href={resource.href} target={resource.href.startsWith("https") ? "_blank" : undefined} rel={resource.href.startsWith("https") ? "noreferrer" : undefined} className="inline-flex items-center gap-2 border border-[#e6c887] px-4 py-3 text-[10px] font-bold uppercase tracking-[.15em] text-[#f1dca4] transition-colors hover:bg-[#e6c887] hover:text-[#061018]">{resource.action}{resource.href.startsWith("https") ? <ExternalLink className="h-3.5 w-3.5" /> : <ArrowUpRight className="h-3.5 w-3.5" />}</a>
+                  <a href={resource.href} target={resource.href.startsWith("https") ? "_blank" : undefined} rel={resource.href.startsWith("https") ? "noopener noreferrer" : undefined} className="inline-flex items-center gap-2 border border-[#e6c887] px-4 py-3 text-[10px] font-bold uppercase tracking-[.15em] text-[#f1dca4] transition-colors hover:bg-[#e6c887] hover:text-[#061018]">{resource.action}{resource.href.startsWith("https") ? <ExternalLink className="h-3.5 w-3.5" /> : <ArrowUpRight className="h-3.5 w-3.5" />}</a>
                   <p className="mt-4 text-xs leading-5 text-[#829691]">{resource.note}</p>
                 </div>
               </article>

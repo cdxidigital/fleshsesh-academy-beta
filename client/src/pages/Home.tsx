@@ -16,8 +16,10 @@ function withPreview(path: string, previewMode: boolean) {
 export default function Home() {
   const [, setLocation] = useLocation();
   const { isAuthenticated } = useAuth();
-  const previewMode = import.meta.env.DEV && new URLSearchParams(window.location.search).get("preview") === "academy";
-  const forceAgeGate = import.meta.env.DEV && new URLSearchParams(window.location.search).get("preview") === "age-gate";
+  const locationSearch = typeof window !== "undefined" ? window.location.search : "";
+  const previewValue = new URLSearchParams(locationSearch).get("preview");
+  const previewMode = import.meta.env.DEV && previewValue === "academy";
+  const forceAgeGate = import.meta.env.DEV && previewValue === "age-gate";
   const [ready, setReady] = useState(false);
   const [ageConfirmed, setAgeConfirmed] = useState(previewMode && !forceAgeGate);
   const [ageAccepted, setAgeAccepted] = useState(false);

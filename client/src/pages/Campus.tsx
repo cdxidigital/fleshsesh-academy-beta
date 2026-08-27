@@ -7,7 +7,8 @@ const placeIcons: Record<FacilityId, typeof BookOpen> = { classroom: BookOpen, "
 
 export default function Campus() {
   const [, setLocation] = useLocation();
-  const previewMode = import.meta.env.DEV && new URLSearchParams(window.location.search).get("preview") === "academy";
+  const locationSearch = typeof window !== "undefined" ? window.location.search : "";
+  const previewMode = import.meta.env.DEV && new URLSearchParams(locationSearch).get("preview") === "academy";
   const withPreview = (path: string) => previewMode ? path + (path.includes("?") ? "&" : "?") + "preview=academy" : path;
 
   return <main className="min-h-screen overflow-x-hidden bg-[#061018] text-[#eff4f1]"><header className="sticky top-0 z-40 border-b border-white/10 bg-[#061018]/90 backdrop-blur-xl"><div className="mx-auto flex min-h-[88px] max-w-[1500px] items-center justify-between gap-3 px-5 py-2 sm:px-8 lg:px-12"><button onClick={() => setLocation(withPreview("/"))} className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[.14em] text-[#f1dca4]"><ArrowLeft className="h-3.5 w-3.5" /> eCampus</button><img src={wordmark} alt="fleshsesh | academy" className="h-[58px] w-[180px] object-cover object-center sm:h-[72px] sm:w-[240px]" /><button onClick={() => setLocation(withPreview("/orientation"))} className="text-[10px] font-bold uppercase tracking-[.14em] text-[#f1dca4]">Start mission</button></div></header>

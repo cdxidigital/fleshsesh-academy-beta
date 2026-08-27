@@ -8,7 +8,8 @@ const icons: Record<FacilityId, typeof BookOpen> = { classroom: BookOpen, "stude
 export default function FacilityRoom() {
   const [, params] = useRoute("/campus/:facility");
   const [, setLocation] = useLocation();
-  const previewMode = import.meta.env.DEV && new URLSearchParams(window.location.search).get("preview") === "academy";
+  const locationSearch = typeof window !== "undefined" ? window.location.search : "";
+  const previewMode = import.meta.env.DEV && new URLSearchParams(locationSearch).get("preview") === "academy";
   const withPreview = (path: string) => previewMode ? `${path}${path.includes("?") ? "&" : "?"}preview=academy` : path;
   const facility = campusFacilities.find((place) => place.id === params?.facility) ?? campusFacilities[0];
   const Icon = icons[facility.id];

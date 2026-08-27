@@ -53,7 +53,15 @@ function RouteLoadingFallback() {
 function SkipToMainContent() {
   const [location] = useLocation();
   useEffect(() => {
-    const assignMainTarget = () => document.querySelector("main")?.setAttribute("id", "main-content");
+    const assignMainTarget = () => {
+      const routeMain = document.querySelector<HTMLElement>('main:not([aria-busy="true"])') ?? document.querySelector<HTMLElement>("main");
+      if (!routeMain) return;
+      document.querySelectorAll<HTMLElement>('main#main-content').forEach((main) => {
+        if (main !== routeMain) main.removeAttribute("id");
+      });
+      routeMain.id = "main-content";
+      routeMain.tabIndex = -1;
+    };
     assignMainTarget();
     const observer = new MutationObserver(assignMainTarget);
     observer.observe(document.body, { childList: true, subtree: true });

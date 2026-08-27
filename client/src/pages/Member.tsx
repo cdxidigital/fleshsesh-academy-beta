@@ -23,7 +23,8 @@ export default function Member() {
   const { user, loading, isAuthenticated, logout } = useAuth();
   const [courseFilter, setCourseFilter] = useState<CourseFilter>("all");
   const previewHost = typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname.endsWith(".manus.computer"));
-  const previewVariant = new URLSearchParams(window.location.search).get("preview");
+  const locationSearch = typeof window !== "undefined" ? window.location.search : "";
+  const previewVariant = new URLSearchParams(locationSearch).get("preview");
   const previewMode = previewHost && previewVariant === "academy";
   const workspacePreview = previewHost && (previewVariant === "member" || previewVariant === "member-auth");
   const authenticatedLayoutPreview = previewHost && previewVariant === "member-auth";

@@ -14,7 +14,8 @@ export default function AchievementArchive() {
   const [, setLocation] = useLocation();
   const { isAuthenticated } = useAuth();
   const previewHost = typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname.endsWith(".manus.computer"));
-  const preview = previewHost && new URLSearchParams(window.location.search).get("preview") === "member-auth";
+  const locationSearch = typeof window !== "undefined" ? window.location.search : "";
+  const preview = previewHost && new URLSearchParams(locationSearch).get("preview") === "member-auth";
   const ageVerified = preview || (typeof window !== "undefined" && window.localStorage.getItem(ageStorageKey) === "true");
   const learning = trpc.academy.myLearning.useQuery(undefined, { enabled: isAuthenticated && ageVerified });
   const archive = useMemo(() => buildAchievementArchive(learning.data?.badges ?? []), [learning.data?.badges]);
