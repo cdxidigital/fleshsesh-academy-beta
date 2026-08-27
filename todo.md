@@ -314,3 +314,6 @@
 - [x] Validate the final five course-media entries for distinct visuals, transitions, walkthroughs, transcripts, learner control, and no autoplay.
 - [x] Align the media manifest regression expectation with the newly integrated FSH 305 and FSH 401–402 entries, then rerun all checks.
 - [x] Align final-cohort walkthrough titles and transcripts with the exact FSH 305 and FSH 401–404 catalogue titles and objectives before final acceptance.
+- [x] Convert the focused first mission into a one-step-at-a-time guided sequence for orientation, media, practice/support, and next choice.
+- [x] Preserve transcripts, coach help, non-disclosure boundaries, unsaved acknowledgement, and secondary payment information through deliberate progressive disclosure.
+- [x] Validate guided mission keyboard navigation, responsive hierarchy, privacy boundaries, regressions, and production build.

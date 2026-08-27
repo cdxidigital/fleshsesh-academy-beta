@@ -1,0 +1,7 @@
+# Guided Mission Validation
+
+The initial concurrent desktop capture confirmed the final **Choose next** stage renders the mission-step navigator, unsaved acknowledgement boundary, atlas escape path, and secondary unit-unlock card. The Orient, Media, and Practice requests reached the intentional catalogue-loading fallback during the same cold concurrent capture, so they are not yet accepted and must be recaptured after the mission catalogue is warm.
+
+The warmed FSH 101 **Orient** route renders the four ordered stage controls, exposes `aria-current="step"` on Orient, states that stage movement records nothing, and shows only the goal plus one `Continue to media` action. The development browser’s indexed click on that action did not dispatch React state, matching the existing preview click-dispatch limitation; direct stage URLs remain available for non-simulated visual acceptance.
+
+The warmed desktop and 390px captures now validate all four stages. **See or listen** shows only the optional eight-second silent transition, the 29-second narrated walkthrough, transcript disclosure, and back/continue controls. **Try** shows only the concise explanation, non-disclosive fictional scenario, bounded coach actions, and finish control. **Choose next** shows the unsaved acknowledgement and atlas escape path, then discloses the unit price and inactive future-pass note as a separate secondary card. Every mobile stage stacks cleanly, the four step controls keep their active-state treatment, and no payment card appears before the final stage.
