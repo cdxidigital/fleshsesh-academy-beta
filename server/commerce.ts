@@ -2,6 +2,7 @@ import type { Express, Request, Response } from "express";
 import express from "express";
 import Stripe from "stripe";
 import { getCourse } from "@shared/courseCatalog";
+import { getAcademyUnitPriceCents } from "@shared/academyPricing";
 import * as db from "./db";
 
 function stripeClient() {
@@ -14,6 +15,7 @@ export async function createCourseCheckout(input: { userId: number; email?: stri
   const course = getCourse(input.courseCode);
   if (!course) throw new Error("Unknown course");
   const stripe = stripeClient();
+  const unitAmount = getAcademyUnitPriceCents(course.level);
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
     customer_email: input.email ?? undefined,
@@ -29,7 +31,7 @@ export async function createCourseCheckout(input: { userId: number; email?: stri
       quantity: 1,
       price_data: {
         currency: course.currency,
-        unit_amount: course.priceCents,
+        unit_amount: unitAmount,
         product_data: {
           name: `${course.code} — ${course.title}`,
           description: `${course.hours} hour fleshsesh | academy learning unit`,
