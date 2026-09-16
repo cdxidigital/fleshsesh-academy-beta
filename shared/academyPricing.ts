@@ -1,33 +1,50 @@
-import type { CourseLevel } from "./courseCatalog";
+export type AcademySubscriptionId = "free" | "plus" | "pro" | "professional";
 
-export const academyUnitPriceCents: Record<CourseLevel, number> = {
-  "101": 5900,
-  "201": 7900,
-  "301": 9900,
-  "401": 12900,
-};
-
-export const academyPricing = {
+export const academySubscriptions = {
   free: {
-    code: "first-look",
-    name: "First Look",
-    priceCents: 0,
-    description: "One complete sample mission with no account required.",
+    id: "free" as const,
+    name: "Free",
+    priceCentsMonthly: 0,
+    priceCentsAnnual: 0,
+    description: "Explore the academy and start learning without a subscription.",
+    features: ["Selected introductory lessons", "First Look learning missions", "Sample quizzes and scenarios", "Public resources and support directory"],
   },
-  units: [
-    { level: "101" as CourseLevel, name: "Foundations", priceCents: 5900 },
-    { level: "201" as CourseLevel, name: "Everyday Practice", priceCents: 7900 },
-    { level: "301" as CourseLevel, name: "Deeper Study", priceCents: 9900 },
-    { level: "401" as CourseLevel, name: "Advanced Portfolio", priceCents: 12900 },
-  ],
-  futurePasses: [
-    { code: "foundations-pass", name: "Foundations Pass", priceCents: 19900, includes: "All 101 units", status: "coming-soon" },
-    { code: "everyday-pass", name: "Everyday Pass", priceCents: 39900, includes: "All 201 units", status: "coming-soon" },
-    { code: "deep-study-pass", name: "Deep Study Pass", priceCents: 39900, includes: "All 301 units", status: "coming-soon" },
-    { code: "full-academy-pass", name: "Full Academy Pass", priceCents: 89900, includes: "101–401 catalogue", status: "coming-soon" },
-  ],
+  plus: {
+    id: "plus" as const,
+    name: "plus",
+    priceCentsMonthly: 900,
+    priceCentsAnnual: 9000,
+    description: "The affordable everyday learning plan.",
+    features: ["Full 101 Foundations library", "Full 201 Everyday Practice library", "Learner progress and achievements", "XP, badges and learning streaks", "AI faculty access", "New introductory content as released"],
+  },
+  pro: {
+    id: "pro" as const,
+    name: "pro",
+    priceCentsMonthly: 1500,
+    priceCentsAnnual: 15000,
+    description: "The complete self-directed academy experience.",
+    features: ["Everything in plus", "Full 301 Deeper Study library", "Advanced scenarios and assessments", "Certificates of completion", "Expanded AI faculty access", "Early access to new courses"],
+  },
+  professional: {
+    id: "professional" as const,
+    name: "professional",
+    priceCentsMonthly: 2500,
+    priceCentsAnnual: 25000,
+    description: "Advanced learning for educators, advocates and practitioners.",
+    features: ["Everything in pro", "Full 401 Advanced Portfolio library", "Capstone learning pathway", "Educator and advocate resources", "Advanced portfolio tools", "Professional development library"],
+  },
 } as const;
 
-export function getAcademyUnitPriceCents(level: CourseLevel) {
-  return academyUnitPriceCents[level];
+export const academyPricing = {
+  free: academySubscriptions.free,
+  subscriptions: [academySubscriptions.plus, academySubscriptions.pro, academySubscriptions.professional],
+  billing: { monthlyLabel: "Monthly", annualLabel: "Annual", annualSavingsLabel: "2 months free" },
+} as const;
+
+export function getAcademySubscription(id: AcademySubscriptionId) {
+  return academySubscriptions[id];
+}
+
+export function formatAcademyPrice(priceCents: number) {
+  return new Intl.NumberFormat("en-AU", { style: "currency", currency: "AUD", maximumFractionDigits: 0 }).format(priceCents / 100);
 }
