@@ -7,20 +7,18 @@ import * as db from "./db";
 import { getLecturerResponse, lecturers, type LecturerId } from "./lecturer";
 import { learnerProgressStatuses } from "./learningProgress";
 import { academyCourses, getCourse } from "@shared/courseCatalog";
+import { getAcademyUnitPriceCents } from "@shared/academyPricing";
 import { createCourseCheckout } from "./commerce";
 import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
 
 export const appRouter = router({
-    // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
   system: systemRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {
       const cookieOptions = getSessionCookieOptions(ctx.req);
       ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 });
-      return {
-        success: true,
-      } as const;
+      return { success: true } as const;
     }),
   }),
   lecturer: router({
@@ -36,10 +34,7 @@ export const appRouter = router({
           throw new TRPCError({ code: "PRECONDITION_FAILED", message: "Adult access confirmation is required." });
         }
         try {
-          return await getLecturerResponse({
-            lecturerId: input.lecturerId as LecturerId,
-            message: input.message,
-          });
+          return await getLecturerResponse({ lecturerId: input.lecturerId as LecturerId, message: input.message });
         } catch (cause) {
           console.error("[lecturer.respond]", cause);
           throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "The lecturer is unavailable right now. Please try again shortly." });
@@ -59,7 +54,10 @@ export const appRouter = router({
     }),
   }),
   academy: router({
-    catalogue: publicProcedure.query(() => academyCourses),
+    catalogue: publicProcedure.query(() => academyCourses.map(course => ({
+      ...course,
+      priceCents: getAcademyUnitPriceCents(course.level),
+    }))),
     myLearning: protectedProcedure.query(async ({ ctx }) => ({
       enrollments: await db.listCourseEnrollments(ctx.user.id),
       completions: await db.listLessonCompletions(ctx.user.id),
@@ -89,7 +87,6 @@ export const appRouter = router({
       return db.completeLesson({ userId: ctx.user.id, courseCode: course.code, lessonId: lesson.id, xp: lesson.xp });
     }),
   }),
-
 });
 
 export type AppRouter = typeof appRouter;
